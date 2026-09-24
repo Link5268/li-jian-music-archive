@@ -47,6 +47,26 @@
     .hero-copy { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: 110px 12px 100px var(--gutter); }
     .eyebrow, .section-kicker { color: #c5b58f; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; }
     .hero h1 { margin: 30px 0 20px; font: 400 clamp(68px,10vw,148px)/.82 var(--serif); letter-spacing: -.055em; }
+.hero-title-text {
+  display: inline-block;
+}
+
+.shared-motion-ready .hero-title-text {
+  opacity: 0;
+}
+
+.shared-motion-word {
+  position: fixed;
+  z-index: 120;
+  top: 0;
+  left: 0;
+  margin: 0;
+  color: var(--white);
+  white-space: nowrap;
+  pointer-events: none;
+  transform-origin: top left;
+  will-change: transform;
+}
     .hero-subtitle { margin: 0; color: #d2d8d7; font: 300 clamp(15px,1.5vw,19px)/1.7 var(--serif); letter-spacing: .11em; }
     .hero-cn { max-width: 390px; margin: 54px 0 0; color: rgba(248,246,240,.76); font: 300 16px/2 var(--serif); letter-spacing: .1em; }
     .hero-date { position: absolute; bottom: 42px; left: var(--gutter); color: #aeb9bd; font-size: 10px; letter-spacing: .2em; }
@@ -515,7 +535,7 @@
 
   <a class="skip-link" href="#about">跳到档案内容</a>
   <header class="topline">
-    <a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark" aria-hidden="true"></span><span>LI JIAN ARCHIVE</span></a>
+    <a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-name">LI JIAN</span> ARCHIVE</span></a>
     <nav aria-label="档案导航">
       <a href="#home">序</a><a href="#about">人物</a><a href="#music">音乐</a><a href="#tour">巡演</a><a href="#time">时间</a><a href="#stage">荧屏</a><a href="#notebook">札记</a><a href="#moments">影像</a><a href="#words">文字</a><a href="#archive">档案</a>
     </nav>
@@ -524,7 +544,7 @@
     <section class="hero" id="home" aria-label="李健音乐与时间档案馆首页">
       <div class="hero-copy">
         <span class="eyebrow">A FAN-MADE ARCHIVE · 非官方网站</span>
-        <h1>LI JIAN</h1>
+        <h1><span class="hero-title-text">LI JIAN</span></h1>
         <p class="hero-subtitle">as everything is all right</p>
         <p class="hero-cn">让声音经过时间，<br>也让时间留下回声。</p>
         <span class="hero-date">1974 — PRESENT&nbsp;&nbsp; / &nbsp;&nbsp;哈尔滨 · 中国</span>
@@ -1007,6 +1027,75 @@
 
   <script>
     document.documentElement.classList.add("js");
+const title = document.querySelector(".hero-title-text");
+const brand = document.querySelector(".brand-name");
+const hero = document.querySelector(".hero");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (title && brand && hero && !reduceMotion.matches) {
+  const movingWord = document.createElement("span");
+  movingWord.className = "shared-motion-word";
+  movingWord.textContent = title.textContent;
+  movingWord.setAttribute("aria-hidden", "true");
+
+  const style = getComputedStyle(title);
+  movingWord.style.fontFamily = style.fontFamily;
+  movingWord.style.fontSize = style.fontSize;
+  movingWord.style.fontWeight = style.fontWeight;
+  movingWord.style.lineHeight = style.lineHeight;
+  movingWord.style.letterSpacing = style.letterSpacing;
+  document.body.append(movingWord);
+  document.documentElement.classList.add("shared-motion-ready");
+
+  let startLeft, startTop, startWidth, endLeft, endTop, endWidth;
+  let endScroll = 1;
+  let framePending = false;
+
+  function update() {
+    const progress = Math.min(1, Math.max(0, window.scrollY / endScroll));
+    const x = (endLeft - startLeft) * progress;
+    const y = (endTop - startTop) * progress;
+    const scale = 1 + (endWidth / startWidth - 1) * progress;
+
+    movingWord.style.transform =
+      `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+
+const cover = Math.min(1, Math.max(0, (progress - 0.92) / 0.06));
+const release = Math.min(1, Math.max(0, (progress - 0.98) / 0.02));
+
+brand.style.opacity = String(1 - cover + release);
+movingWord.style.opacity = String(1 - release);
+  }
+
+  function measure() {
+    const from = title.getBoundingClientRect();
+    const to = brand.getBoundingClientRect();
+
+    startLeft = from.left;
+    startTop = from.top + window.scrollY;
+    startWidth = Math.max(1, from.width);
+    endLeft = to.left;
+    endTop = to.top;
+    endWidth = Math.max(1, to.width);
+    endScroll = Math.max(hero.offsetHeight * 0.82, window.innerHeight * 0.82);
+
+    movingWord.style.left = `${startLeft}px`;
+    movingWord.style.top = `${startTop}px`;
+    update();
+  }
+
+  window.addEventListener("scroll", () => {
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(() => {
+      framePending = false;
+      update();
+    });
+  }, { passive: true });
+
+  window.addEventListener("resize", measure, { passive: true });
+  measure();
+}
     const revealItems = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
       const revealObserver = new IntersectionObserver((entries, observer) => {

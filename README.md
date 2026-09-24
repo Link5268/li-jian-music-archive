@@ -6,17 +6,21 @@
 
 - 人物履历、时间线、公开访谈与人物札记
 - 专辑曲目、单曲、合作作品、节目与荣誉记录
+- 粉丝整理的演出歌单与歌曲用于影视、舞台、机构项目的记录，可按类型和关键词检索
 - 巡演主题、城市地图、场次筛选、同城多场及歌单
 - 摄影档案与逐条资料来源
 
 ## 技术与目录
 
-当前版本是 **HTML + CSS + 原生 JavaScript 的静态网站**，不需要 Next.js、数据库、API 密钥或安装依赖。
+当前版本是 **HTML + CSS + 原生 JavaScript 的静态网站**，不需要 Next.js 或安装构建依赖。音乐档案数据随网页静态发布；留言功能另由 Supabase 保存和审核。
 
 ```text
 site/
   index.html                 # 页面、样式、交互与档案数据
+  fan-music.js               # 音乐资料筛选与展示
+  guestbook.js               # 留言功能
   assets/                    # 图片、地图、地图原许可证
+    fan-music-data.js        # 水流润万生老师提供的数据整理结果
 .github/workflows/pages.yml  # GitHub Pages 发布
 README.md
 LICENSE                     # 原创代码 MIT 许可
@@ -65,6 +69,8 @@ https://YOUR_USERNAME.github.io/li-jian-music-archive/
 
 在 site/index.html 中搜索章节 id（about、music、tour、time、stage、notebook、moments、archive）。
 巡演数据搜索 tourRecords、tourSetlists；地图点位使用经纬度，与地图的投影计算保持一致，不以目测随意移动城市。
+
+音乐页新增的粉丝统计数据保存在 `site/assets/fan-music-data.js`，展示与筛选逻辑在 `site/fan-music.js`。更新时保留“水流润万生老师 · 数据支持”的署名，并区分粉丝统计与已核实的官方发行资料。修改后通过 GitHub Desktop 提交并推送到 `main`；本仓库的 GitHub Actions 会自动重新发布网站。
 新增条目注明来源、事件日期、发布日期；没有资料的字段留空。不要把推测的新专辑、传闻或节目上传日写成发行事实。
 
 ## 许可

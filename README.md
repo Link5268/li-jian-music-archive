@@ -20,9 +20,11 @@ site/
   fan-music.js               # 音乐资料筛选与展示
   song-links.js              # 曲目检索与 QQ 音乐搜索链接
   guestbook.js               # 留言功能
-  assets/                    # 图片、地图、地图原许可证
+  assets/                    # 网页用的压缩图片、MP3、地图与许可证
     fan-music-data.js        # 水流润万生老师提供的数据整理结果
 .github/workflows/pages.yml  # GitHub Pages 发布
+source-media/                 # 原始图片与 FLAC，不进入 Pages 部署包
+scripts/optimize_images.py    # 从原始图片生成 WebP（需要 Pillow）
 README.md
 LICENSE                     # 原创代码 MIT 许可
 THIRD_PARTY_NOTICES.md       # 内容与素材的独立许可说明
@@ -72,12 +74,13 @@ https://YOUR_USERNAME.github.io/li-jian-music-archive/
 巡演数据搜索 tourRecords、tourSetlists；地图点位使用经纬度，与地图的投影计算保持一致，不以目测随意移动城市。
 
 音乐页新增的粉丝统计数据保存在 `site/assets/fan-music-data.js`，展示与筛选逻辑在 `site/fan-music.js`。更新时保留“水流润万生老师 · 数据支持”的署名，并区分粉丝统计与已核实的官方发行资料。修改后通过 GitHub Desktop 提交并推送到 `main`；本仓库的 GitHub Actions 会自动重新发布网站。
-曲目检索和 QQ 音乐外链由 `site/song-links.js` 生成。外链指向 QQ 音乐的搜索结果，供访客选择版本，不代表本站核实了特定录音的上架或可播放状态。
+曲目检索和 QQ 音乐外链由 `site/song-links.js` 生成。检索结果合并显示歌曲所在的专辑、现场歌单和影视使用记录，可跳到对应资料并继续查看更多曲目。QQ 音乐外链指向搜索结果，供访客选择版本，不代表本站核实了特定录音的上架或可播放状态。
+网页使用 `site/assets/backgroundmusic.mp3` 播放背景音乐；原始 FLAC 留在 `source-media/backgroundmusic.flac`。更换音乐时请替换网页 MP3，并核对页面与 `THIRD_PARTY_NOTICES.md` 中的曲目信息。原图留在 `source-media/images/`，网页显示的 WebP 可用 `scripts/optimize_images.py` 重新生成。
 新增条目注明来源、事件日期、发布日期；没有资料的字段留空。不要把推测的新专辑、传闻或节目上传日写成发行事实。
 
 ## 许可
 
-原创页面代码采用 MIT。**照片、标志、第三方文字与地图数据不因代码开源而统一变为 MIT**，详见 THIRD_PARTY_NOTICES.md。
+原创页面代码采用 MIT。**照片、标志、录音、第三方文字与地图数据不因代码开源而统一变为 MIT**，详见 THIRD_PARTY_NOTICES.md。
 本包包含当前网站图片以便复现页面；未核实公开再分发范围的用户提供素材已单独列出，仓库维护者应按自己的授权范围决定是否保留。可删除对应图片并更新页面引用。
 
 资料快照：2026-09-24。档案不声称穷尽所有公开信息，与李健本人、工作室及唱片公司无官方隶属关系。

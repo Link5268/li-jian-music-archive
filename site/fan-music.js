@@ -57,7 +57,20 @@
     .fan-music-credit { margin: 27px 0 0; color: #aebbc0; font: 11px/1.8 var(--sans, sans-serif); }
     .fan-music-empty { margin: 26px 0; color: #b9c5c8; font: 13px/1.7 var(--sans, sans-serif); }
     @media (max-width: 860px) { .fan-music-head { grid-template-columns: 1fr; gap: 22px; } .fan-music-filters { grid-template-columns: repeat(2, minmax(0,1fr)); } .fan-music-search { grid-column: 1 / -1; } .fan-performance ol { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-    @media (max-width: 600px) { .fan-music-filters { grid-template-columns: 1fr; } .fan-music-search { grid-column: auto; } .fan-performance summary { grid-template-columns: 1fr auto; gap: 7px 12px; } .fan-performance-date { grid-column: 1 / -1; } .fan-performance-body { padding-left: 2px; } .fan-performance ol, .fan-usage-list { grid-template-columns: 1fr; } .fan-music-tabs { gap: 20px; } }
+    @media (max-width: 600px) {
+      .fan-music-filters { grid-template-columns: 1fr; }
+      .fan-music-search { grid-column: auto; }
+      .fan-performance summary { grid-template-columns: 1fr auto; gap: 7px 12px; }
+      .fan-performance-date { grid-column: 1 / -1; }
+      .fan-performance-body { padding-left: 2px; }
+      .fan-performance ol, .fan-usage-list { grid-template-columns: 1fr; }
+      .fan-music-tabs { gap: 20px; }
+      .fan-music-kicker,.fan-music-stats span,.fan-music-filters label,.fan-performance-title small,.fan-performance-total,.fan-song-legend,.fan-record-note,.fan-usage-kind,.fan-music-count,.fan-music-credit { font-size: 12px; line-height: 1.6; }
+      .fan-music-filters select,.fan-music-filters input { font-size: 16px; }
+      .fan-performance li { font-size: 14px; }
+      .fan-song-tag { font-size: 11px; }
+      .fan-usage-card dl { font-size: 12px; }
+    }
   `;
   document.head.append(css);
 
@@ -208,4 +221,10 @@
   query.addEventListener("input", () => { visibleCount = 24; render(); });
   more.addEventListener("click", () => { visibleCount += 24; render(); });
   setMode(mode);
+  window.LI_JIAN_FAN_MUSIC_OPEN = (nextMode, title) => {
+    setMode(nextMode);
+    query.value = title;
+    render();
+    archive.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  };
 })();

@@ -177,6 +177,7 @@
     .tour-poster-feature { display: grid; grid-template-columns: minmax(250px,.72fr) minmax(320px,1.28fr); margin: 0 0 clamp(44px,6vw,76px); color: var(--white); background: var(--night); }
     .tour-poster { display: flex; flex-direction: column; justify-content: center; min-width: 0; margin: 0; padding: clamp(17px,2.5vw,34px); background: #142236; }
     .tour-poster img { display: block; width: 100%; height: clamp(310px,35vw,480px); object-fit: contain; }
+    .tour-poster-enlarge { display: inline-flex; align-items: center; min-height: 38px; margin-top: 5px; color: #d5c49a; font: 12px/1.5 var(--sans); text-underline-offset: 4px; }
     .tour-poster figcaption { margin-top: 13px; color: #b7c2c2; font: 10px/1.6 var(--sans); }
     .tour-poster-copy { display: flex; flex-direction: column; justify-content: center; align-items: start; padding: clamp(30px,5vw,76px); }
     .tour-poster-copy .section-kicker { color: #c7b68c; }
@@ -373,9 +374,9 @@
       .hero h1 { margin: 24px 0 14px; font-size: clamp(58px,16vw,92px); }
       .hero-subtitle { font-size: 14px; }
       .hero-cn { margin-top: 17px; font-size: 13px; line-height: 1.75; }
-      .hero-date { bottom: 25px; left: 27px; font-size: 9px; }
+      .hero-date { bottom: 61px; left: 27px; font-size: 9px; }
       .hero-note { right: 18px; bottom: 28px; font-size: 8px; }
-      .photo-credit { left: 12px; bottom: 12px; max-width: 90%; font-size: 9px; }
+      .photo-credit { left: 12px; bottom: 12px; max-width: 70%; font-size: 9px; }
       .scroll-cue { display: none; }
       .archive-section { padding-block: 76px; }
       .section-head { margin-bottom: 39px; }
@@ -399,9 +400,13 @@
       .tour-themes { grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: -20px; }
       .tour-theme { min-height: 62px; }
       .tour-poster-feature { grid-template-columns: 1fr; }
-      .tour-poster { padding: 20px 20px 0; }
-      .tour-poster img { height: min(105vw,510px); }
-      .tour-poster-copy { padding: 27px 24px 35px; }
+      .tour-poster { padding: 16px 20px 0; }
+      .tour-poster img { height: clamp(190px,55vw,270px); }
+      .tour-poster-copy { padding: 20px 24px 27px; }
+      .tour-poster-copy h3 { margin-top: 8px; font-size: clamp(31px,8vw,42px); }
+      .tour-poster-period { margin: 8px 0 12px; }
+      .tour-poster-stats { margin-top: 17px; padding-top: 15px; }
+      .tour-poster-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 10px; }
       .postmark { padding: 19px 16px; }
       .postmark dl div { grid-template-columns: 85px 1fr; gap: 8px; }
       .postmark-setlist ol { grid-template-columns: 1fr; }
@@ -440,6 +445,13 @@
       .source-list,.archive-credits { grid-template-columns: 1fr; gap: 0; }
       .archive-credits { gap: 16px; margin-top: 31px; }
       .site-footer { flex-direction: column; padding-block: 23px; }
+      .eyebrow,.section-kicker,.hero-date,.photo-credit,.hero-note,.section-index,.album-kind,.album-toggle,.music-fold > summary span,.research-fold > summary span,.tour-theme small,.tour-poster figcaption,.tour-index-summary span,.tour-results,.map-card figcaption,.tour-note,.site-footer { font-size: 12px; line-height: 1.6; }
+      .hero-note { right: 15px; }
+      .about-photo figcaption,.moment figcaption,.vinyl-figure figcaption,.rights-note,.research-note,.postmark dt,.tour-stop-when small,.tour-stop-venue small,.tour-stop-song small,.tour-stop-note,.archive-credits p { font-size: 12px; line-height: 1.65; }
+      .research-fold-content,.postmark-setlist li,.single-show-list p { font-size: 14px; line-height: 1.75; }
+      .tour-filter,.tour-search input,.tour-city-filter select,.tour-clear-filter { min-height: 44px; font-size: 13px; }
+      .tour-search input,.tour-city-filter select { font-size: 16px; }
+      .site-footer { padding-bottom: 88px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -517,9 +529,10 @@
 }
 </style>
 </head>
+<body>
 <div class="music-dock">
   <audio id="background-music" loop preload="none">
-    <source src="assets/backgroundmusic.flac" type="audio/flac">
+    <source src="assets/backgroundmusic.mp3" type="audio/mpeg">
   </audio>
 
   <button
@@ -560,8 +573,6 @@
     }
   });
 </script>
-<body>
-
   <a class="skip-link" href="#about">跳到档案内容</a>
   <header class="topline">
     <a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-name">LI JIAN</span> ARCHIVE</span></a>
@@ -580,7 +591,7 @@
         <span class="hero-date">1974 — PRESENT&nbsp;&nbsp; / &nbsp;&nbsp;哈尔滨 · 中国</span>
       </div>
       <figure class="hero-photo">
-        <img src="assets/lijian-intro-cover.png" alt="黑白巡演封面：李健与唱片意象" width="2048" height="1191" fetchpriority="high">
+        <img src="assets/lijian-intro-cover.webp" alt="黑白巡演封面：李健与唱片意象" width="2048" height="1191" fetchpriority="high" decoding="async">
         <span class="hero-note">MUSIC · TIME · LANDSCAPE</span>
         <figcaption class="photo-credit">序 · 巡演视觉封面 · 用户提供</figcaption>
       </figure>
@@ -689,7 +700,7 @@
               <li><span>01</span>不期而遇</li><li><span>02</span>你从天而降</li><li><span>03</span>梅雨</li><li><span>04</span>Marine</li><li><span>05</span>美丽生灵</li><li><span>06</span>爱咋咋地</li><li><span>07</span>带来风景的女人</li><li><span>08</span>无烟之火</li><li><span>09</span>门</li><li><span>10</span>我唯有的你</li><li><span>11</span>人群中的人</li><li><span>12</span>夜晚眺望金桥</li><li><span>13</span>深町小夜曲</li><li><span>14</span>幻梦花园</li><li><span>15</span>一切刚刚好</li>
             </ol>
           </details>
-          <p class="rights-note">专辑与曲目依据所给资料整理，参考 <a href="https://zh.wikipedia.org/wiki/李健音乐作品列表" target="_blank" rel="noreferrer">中文维基百科《李健音乐作品列表》</a>。本页不提供音频或完整歌词，聆听请前往正规音乐平台。</p>
+          <p class="rights-note">专辑与曲目依据所给资料整理，参考 <a href="https://zh.wikipedia.org/wiki/李健音乐作品列表" target="_blank" rel="noreferrer">中文维基百科《李健音乐作品列表》</a>。本站背景音乐与专辑索引分开；其他曲目的聆听请前往正规音乐平台，完整歌词不在此转载。</p>
         </div>
       </div>
       <div class="music-additions">
@@ -797,7 +808,8 @@
       </div>
       <div class="tour-poster-feature" aria-label="当前巡演主题视觉">
         <figure class="tour-poster">
-          <img id="tour-poster-image" src="assets/tour-poster-wanwu.png" alt="李健《万物安生时》巡演主视觉" width="1067" height="1474" loading="lazy" decoding="async">
+          <img id="tour-poster-image" src="assets/tour-poster-wanwu.webp" alt="李健《万物安生时》巡演主视觉" width="1067" height="1474" loading="lazy" decoding="async">
+          <a class="tour-poster-enlarge" id="tour-poster-enlarge" href="assets/tour-poster-wanwu.webp" target="_blank" rel="noopener noreferrer">查看海报大图 ↗</a>
           <figcaption id="tour-poster-caption">巡演主视觉海报标注 2023—2025；本档案继续收录 2026 年 Encore 场次。</figcaption>
         </figure>
         <div class="tour-poster-copy">
@@ -1007,7 +1019,7 @@
             <figcaption>舞台一瞬 · 用户提供</figcaption>
           </figure>
           <figure class="moment moment-small reveal">
-            <img src="assets/li-jian-tsinghua-2018-detail.png" alt="李健在清华大学校庆演唱会现场，2018 年" width="1500" height="1125" loading="lazy">
+            <img src="assets/li-jian-tsinghua-2018-detail.webp" alt="李健在清华大学校庆演唱会现场，2018 年" width="1500" height="1125" loading="lazy" decoding="async">
             <figcaption>清华 · 校庆演唱会 · 2018<br>摄影：葉又嘉 · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E6%9D%8E%E5%81%A5%E6%A0%A1%E6%85%B6%E6%BC%94%E5%94%B1%E6%9C%83.png" target="_blank" rel="noreferrer">查看原图与许可</a></figcaption>
           </figure>
           <figure class="moment moment-portrait reveal">
@@ -1059,8 +1071,9 @@
         <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供，并按其要求清理指定文字或标记。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
         <p><strong>李健工作室现场相册</strong><br>西安站官方相册以原帖链接呈现，照片在微博原页查看并由工作室发布；本页不复制托管原帖图片。</p>
         <p><strong>现场照片</strong><br>棉花花糖已经下班啦 · Wikimedia Commons · CC BY 2.5。页面对照片进行了裁切与色调处理；署名和许可链接随图标注。</p>
-        <p><strong>清华校庆照片</strong><br>葉又嘉 · Wikimedia Commons · CC BY-SA 4.0。网页直接展示原图，并在图注中署名及链接许可。</p>
+        <p><strong>清华校庆照片</strong><br>葉又嘉 · Wikimedia Commons · CC BY-SA 4.0。网页展示压缩后的原照片，并在图注中署名及链接许可。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
+        <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>
         <p><strong>水流润万生老师 · 数据支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理。原资料标注为不完全统计；页面保留原表曲目记法、用途描述及表格位置，方便后续校订。</p>
         <p><strong>非官方网站</strong><br>本页为听众整理的个人档案，与李健本人、经纪团队、唱片公司或主办方无隶属关系。音乐播放请前往正规平台。</p>
@@ -1328,25 +1341,25 @@ movingWord.style.opacity = String(1 - release);
     let selectedRecordId = null;
     const tourThemeMeta = {
       "万物安生时": {
-        period: "2023—2026", defaultCity: "上海", poster: "assets/tour-poster-wanwu.png", posterWidth: 1067, posterHeight: 1474,
+        period: "2023—2026", defaultCity: "上海", poster: "assets/tour-poster-wanwu.webp", posterWidth: 1067, posterHeight: 1474,
         posterAlt: "李健《万物安生时》巡演主视觉，深色舞台与白色西装人物",
         posterCaption: "巡演主视觉海报标注 2023—2025；本档案继续收录 2026 年 Encore 场次。",
         description: "以城市为序，把日期、场馆、特别曲目和现场歌单收进同一份巡演档案。"
       },
       "不止，是李健": {
-        period: "2018—2020", defaultCity: "上海", poster: "assets/tour-poster-buzhi.png", posterWidth: 1500, posterHeight: 1049,
+        period: "2018—2020", defaultCity: "上海", poster: "assets/tour-poster-buzhi.webp", posterWidth: 1500, posterHeight: 1049,
         posterAlt: "李健《不止，是李健》巡演视觉，蓝灰色人物肖像",
         posterCaption: "主题海报标注 2018—2019；本档案收录的巡演场次延续至 2020 年。",
         description: "沿着巡演路线，查看这一主题已收录的城市、日期与现场记录。"
       },
       "看见李健": {
-        period: "2015—2016", defaultCity: "上海", poster: "assets/tour-poster-kanjian.png", posterWidth: 1144, posterHeight: 1375,
+        period: "2015—2016", defaultCity: "上海", poster: "assets/tour-poster-kanjian.webp", posterWidth: 1144, posterHeight: 1375,
         posterAlt: "李健《看见李健》巡演视觉，蓝色人物肖像与白色主题字",
         posterCaption: "取自 2015 年巡演视觉；海报中的单站日期与地点已从展示图中移除。",
         description: "从国内城市到海外现场，按年份回看《看见李健》的演出足迹。"
       },
       "向往·2011": {
-        period: "2011", defaultCity: "上海", poster: "assets/tour-poster-xiangwang.png", posterWidth: 1149, posterHeight: 1369,
+        period: "2011", defaultCity: "上海", poster: "assets/tour-poster-xiangwang.webp", posterWidth: 1149, posterHeight: 1369,
         posterAlt: "李健弹吉他的《向往》主题视觉，绿色背景",
         posterCaption: "这张《向往》视觉取自 2022 年线上音乐会，并非 2011 年巡演原始海报。",
         description: "以《向往》为线索，查看 2011 年巡演的已收录场次与城市。"
@@ -1574,6 +1587,7 @@ movingWord.style.opacity = String(1 - release);
       poster.alt = meta.posterAlt;
       poster.width = meta.posterWidth;
       poster.height = meta.posterHeight;
+      document.getElementById("tour-poster-enlarge").href = meta.poster;
       document.getElementById("tour-poster-caption").textContent = meta.posterCaption;
       document.getElementById("tour-poster-title").textContent = activeTheme;
       document.getElementById("tour-poster-period").textContent = meta.period;

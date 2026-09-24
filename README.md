@@ -18,6 +18,7 @@
 site/
   index.html                 # 页面、样式、交互与档案数据
   fan-music.js               # 音乐资料筛选与展示
+  song-links.js              # 曲目检索与 QQ 音乐搜索链接
   guestbook.js               # 留言功能
   assets/                    # 图片、地图、地图原许可证
     fan-music-data.js        # 水流润万生老师提供的数据整理结果
@@ -71,6 +72,7 @@ https://YOUR_USERNAME.github.io/li-jian-music-archive/
 巡演数据搜索 tourRecords、tourSetlists；地图点位使用经纬度，与地图的投影计算保持一致，不以目测随意移动城市。
 
 音乐页新增的粉丝统计数据保存在 `site/assets/fan-music-data.js`，展示与筛选逻辑在 `site/fan-music.js`。更新时保留“水流润万生老师 · 数据支持”的署名，并区分粉丝统计与已核实的官方发行资料。修改后通过 GitHub Desktop 提交并推送到 `main`；本仓库的 GitHub Actions 会自动重新发布网站。
+曲目检索和 QQ 音乐外链由 `site/song-links.js` 生成。外链指向 QQ 音乐的搜索结果，供访客选择版本，不代表本站核实了特定录音的上架或可播放状态。
 新增条目注明来源、事件日期、发布日期；没有资料的字段留空。不要把推测的新专辑、传闻或节目上传日写成发行事实。
 
 ## 许可

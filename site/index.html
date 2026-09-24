@@ -166,14 +166,25 @@
     .city-pin:focus-visible { outline: 2px solid var(--night); outline-offset: 5px; }
     .map-card figcaption { display: flex; justify-content: space-between; gap: 15px; margin-top: 15px; color: #68747a; font-size: 10px; line-height: 1.6; }
     .map-card figcaption a { text-underline-offset: 3px; }
-    .tour-heading-lockup { display: flex; align-items: center; gap: 17px; }
-    .tour-heading-lockup .tour-emblem { width: clamp(48px,6vw,74px); height: clamp(48px,6vw,74px); object-fit: contain; mix-blend-mode: multiply; }
-    .tour-themes { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; margin: -28px 0 clamp(40px,6vw,76px); background: rgba(16,28,44,.18); border: 1px solid rgba(16,28,44,.18); }
+    .tour-themes { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; margin: -28px 0 0; background: rgba(16,28,44,.18); border: 1px solid rgba(16,28,44,.18); }
     .tour-theme { min-height: 76px; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 15px 18px; border: 0; color: var(--ink); background: rgba(244,241,234,.68); text-align: left; cursor: pointer; transition: color .2s ease, background .2s ease; }
     .tour-theme strong { font: 400 17px/1.2 var(--serif); }
     .tour-theme small { color: #718084; font-size: 10px; letter-spacing: .08em; }
     .tour-theme[aria-pressed="true"] { color: var(--white); background: var(--night); }
     .tour-theme[aria-pressed="true"] small { color: #c3cdcb; }
+    .tour-poster-feature { display: grid; grid-template-columns: minmax(250px,.72fr) minmax(320px,1.28fr); margin: 0 0 clamp(44px,6vw,76px); color: var(--white); background: var(--night); }
+    .tour-poster { display: flex; flex-direction: column; justify-content: center; min-width: 0; margin: 0; padding: clamp(17px,2.5vw,34px); background: #142236; }
+    .tour-poster img { display: block; width: 100%; height: clamp(310px,35vw,480px); object-fit: contain; }
+    .tour-poster figcaption { margin-top: 13px; color: #b7c2c2; font: 10px/1.6 var(--sans); }
+    .tour-poster-copy { display: flex; flex-direction: column; justify-content: center; align-items: start; padding: clamp(30px,5vw,76px); }
+    .tour-poster-copy .section-kicker { color: #c7b68c; }
+    .tour-poster-copy h3 { margin: 18px 0 0; font: 400 clamp(37px,5vw,69px)/1.08 var(--serif); }
+    .tour-poster-period { margin: 10px 0 22px; color: #d5c49a; font: 13px/1.5 var(--serif); letter-spacing: .12em; }
+    .tour-poster-description { max-width: 510px; margin: 0; color: #c8d1cf; font: 300 15px/1.85 var(--serif); }
+    .tour-poster-stats { display: flex; flex-wrap: wrap; gap: 22px 38px; width: 100%; margin: 29px 0 0; padding-top: 20px; border-top: 1px solid rgba(236,232,223,.2); }
+    .tour-poster-stats span { display: grid; gap: 5px; color: #b7c2c2; font: 11px/1.5 var(--sans); }
+    .tour-poster-stats strong { color: #f4f1e8; font: 400 27px/1 var(--serif); }
+    .tour-poster-link { margin-top: 31px; color: #d5c49a; font: 12px/1.5 var(--sans); letter-spacing: .08em; text-underline-offset: 5px; }
     .tour-side { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
     .tour-side .section-kicker { color: #66787a; }
     .tour-side h3 { margin: 11px 0 0; color: var(--ink); font: 400 clamp(31px,4.3vw,56px)/1.05 var(--serif); }
@@ -236,7 +247,6 @@
     .tour-register-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
     .tour-register-head p { margin: 0; color: #6d777a; font: 10px/1.5 var(--serif); letter-spacing: .12em; text-align: right; }
     .tour-head-side { display: flex; align-items: center; gap: 15px; }
-    .tour-wordmark { width: clamp(60px,7vw,92px); aspect-ratio: 1179/1082; object-fit: contain; opacity: .66; mix-blend-mode: multiply; }
     .tour-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin: 24px 0 13px; }
     .tour-filters { display: flex; flex-wrap: wrap; gap: 7px; margin-right: auto; }
     .tour-filter, .tour-search input, .tour-city-filter select { min-height: 37px; border: 1px solid rgba(16,28,44,.27); border-radius: 0; color: var(--ink); background: rgba(244,241,234,.58); font: 11px/1.4 var(--sans); }
@@ -321,6 +331,8 @@
       .tour-layout { grid-template-columns: 1fr; gap: 34px; }
       .research-grid { gap: 32px; }
       .tour-themes { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .tour-poster-feature { grid-template-columns: minmax(220px,.8fr) minmax(0,1.2fr); }
+      .tour-poster-copy { padding: 30px; }
       .time-line { margin-left: 0; }
       .moments-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); }
       .moment-large { grid-column: 1; grid-row: 1 / span 2; }
@@ -368,10 +380,12 @@
       .music-record ol { columns: 1; }
       .archive-lines li { grid-template-columns: 82px minmax(110px,1fr); gap: 7px 12px; }
       .archive-lines li span { grid-column: 2; }
-      .tour-themes { grid-template-columns: 1fr; margin-top: -20px; }
+      .tour-themes { grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: -20px; }
       .tour-theme { min-height: 62px; }
-      .tour-heading-lockup { gap: 12px; }
-      .tour-heading-lockup .tour-emblem { width: 48px; height: 48px; }
+      .tour-poster-feature { grid-template-columns: 1fr; }
+      .tour-poster { padding: 20px 20px 0; }
+      .tour-poster img { height: min(105vw,510px); }
+      .tour-poster-copy { padding: 27px 24px 35px; }
       .postmark { padding: 19px 16px; }
       .postmark dl div { grid-template-columns: 85px 1fr; gap: 8px; }
       .postmark-setlist ol { grid-template-columns: 1fr; }
@@ -380,7 +394,6 @@
       .tour-register-head { align-items: start; flex-direction: column; gap: 8px; }
       .tour-register-head p { text-align: left; }
       .tour-head-side { gap: 7px; }
-      .tour-wordmark { width: 58px; }
       .tour-toolbar { align-items: stretch; }
       .tour-filters { width: 100%; margin-right: 0; }
       .tour-search { flex: 1 1 55%; }
@@ -754,12 +767,8 @@
 
     <section class="archive-section section-mist" id="tour" aria-labelledby="tour-title">
       <div class="section-head">
-        <div class="tour-heading-lockup">
-          <img class="tour-emblem" src="assets/wanwu-tour-emblem.jpg" alt="" aria-hidden="true" width="1280" height="1280" loading="lazy">
-          <div><span class="section-kicker">04 / TOUR ARCHIVE</span><h2 id="tour-title">万物安生时</h2></div>
-        </div>
+        <div><span class="section-kicker">04 / TOUR ARCHIVE</span><h2 id="tour-title">万物安生时</h2></div>
         <div class="tour-head-side">
-          <img class="tour-wordmark" src="assets/wanwu-tour-wordmark.jpg" alt="" aria-hidden="true" width="1179" height="1082" loading="lazy">
           <span class="section-index" id="tour-count-label">2023—2026 · 35 场档案</span>
         </div>
       </div>
@@ -768,6 +777,20 @@
         <button class="tour-theme" type="button" data-tour-theme="不止，是李健" aria-pressed="false"><strong>不止，是李健</strong><small>2018—2020 · 19 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="看见李健" aria-pressed="false"><strong>看见李健</strong><small>2015—2016 · 18 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="向往·2011" aria-pressed="false"><strong>向往 · 2011</strong><small>2011 · 9 场</small></button>
+      </div>
+      <div class="tour-poster-feature" aria-label="当前巡演主题视觉">
+        <figure class="tour-poster">
+          <img id="tour-poster-image" src="assets/tour-poster-wanwu.png" alt="李健《万物安生时》巡演主视觉" width="1067" height="1474" loading="lazy" decoding="async">
+          <figcaption id="tour-poster-caption">巡演主视觉海报标注 2023—2025；本档案继续收录 2026 年 Encore 场次。</figcaption>
+        </figure>
+        <div class="tour-poster-copy">
+          <span class="section-kicker">TOUR VISUAL / 巡演主题</span>
+          <h3 id="tour-poster-title" aria-live="polite">万物安生时</h3>
+          <p class="tour-poster-period" id="tour-poster-period">2023—2026</p>
+          <p class="tour-poster-description" id="tour-poster-description">以城市为序，把日期、场馆、特别曲目和现场歌单收进同一份巡演档案。</p>
+          <div class="tour-poster-stats"><span><strong id="tour-poster-stops">35</strong>已收录场次</span><span><strong id="tour-poster-cities">24</strong>城市</span></div>
+          <a class="tour-poster-link" href="#tour-map">查看城市与场次 ↓</a>
+        </div>
       </div>
       <div class="tour-layout">
         <figure class="map-card reveal">
@@ -1014,6 +1037,7 @@
       </div>
       <div class="archive-credits">
         <p><strong>用户提供照片</strong><br>序章封面、人物页近景肖像、巡演标识与影像均由网站创建者提供；封面按授权旋转并清理水印。页面仅按版式裁切，图注不推断未确认的场次信息。</p>
+        <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供，并按其要求清理指定文字或标记。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
         <p><strong>李健工作室现场相册</strong><br>西安站官方相册以原帖链接呈现，照片在微博原页查看并由工作室发布；本页不复制托管原帖图片。</p>
         <p><strong>现场照片</strong><br>棉花花糖已经下班啦 · Wikimedia Commons · CC BY 2.5。页面对照片进行了裁切与色调处理；署名和许可链接随图标注。</p>
         <p><strong>清华校庆照片</strong><br>葉又嘉 · Wikimedia Commons · CC BY-SA 4.0。网页直接展示原图，并在图注中署名及链接许可。</p>
@@ -1279,10 +1303,30 @@ movingWord.style.opacity = String(1 - release);
     let activePhase = "all";
     let activeCity = "上海";
     const tourThemeMeta = {
-      "万物安生时": { period: "2023—2026", defaultCity: "上海" },
-      "不止，是李健": { period: "2018—2020", defaultCity: "上海" },
-      "看见李健": { period: "2015—2016", defaultCity: "上海" },
-      "向往·2011": { period: "2011", defaultCity: "上海" }
+      "万物安生时": {
+        period: "2023—2026", defaultCity: "上海", poster: "assets/tour-poster-wanwu.png", posterWidth: 1067, posterHeight: 1474,
+        posterAlt: "李健《万物安生时》巡演主视觉，深色舞台与白色西装人物",
+        posterCaption: "巡演主视觉海报标注 2023—2025；本档案继续收录 2026 年 Encore 场次。",
+        description: "以城市为序，把日期、场馆、特别曲目和现场歌单收进同一份巡演档案。"
+      },
+      "不止，是李健": {
+        period: "2018—2020", defaultCity: "上海", poster: "assets/tour-poster-buzhi.png", posterWidth: 1500, posterHeight: 1049,
+        posterAlt: "李健《不止，是李健》巡演视觉，蓝灰色人物肖像",
+        posterCaption: "主题海报标注 2018—2019；本档案收录的巡演场次延续至 2020 年。",
+        description: "沿着巡演路线，查看这一主题已收录的城市、日期与现场记录。"
+      },
+      "看见李健": {
+        period: "2015—2016", defaultCity: "上海", poster: "assets/tour-poster-kanjian.png", posterWidth: 1144, posterHeight: 1375,
+        posterAlt: "李健《看见李健》巡演视觉，蓝色人物肖像与白色主题字",
+        posterCaption: "取自 2015 年巡演视觉；海报中的单站日期与地点已从展示图中移除。",
+        description: "从国内城市到海外现场，按年份回看《看见李健》的演出足迹。"
+      },
+      "向往·2011": {
+        period: "2011", defaultCity: "上海", poster: "assets/tour-poster-xiangwang.png", posterWidth: 1149, posterHeight: 1369,
+        posterAlt: "李健弹吉他的《向往》主题视觉，绿色背景",
+        posterCaption: "这张《向往》视觉取自 2022 年线上音乐会，并非 2011 年巡演原始海报。",
+        description: "以《向往》为线索，查看 2011 年巡演的已收录场次与城市。"
+      }
     };
 
     function recordsForTheme() {
@@ -1474,6 +1518,17 @@ movingWord.style.opacity = String(1 - release);
       document.getElementById("tour-count-label").textContent = themeRecords.length
         ? meta.period + " · " + themeRecords.length + " 场档案"
         : "场次资料待补";
+      const poster = document.getElementById("tour-poster-image");
+      poster.src = meta.poster;
+      poster.alt = meta.posterAlt;
+      poster.width = meta.posterWidth;
+      poster.height = meta.posterHeight;
+      document.getElementById("tour-poster-caption").textContent = meta.posterCaption;
+      document.getElementById("tour-poster-title").textContent = activeTheme;
+      document.getElementById("tour-poster-period").textContent = meta.period;
+      document.getElementById("tour-poster-description").textContent = meta.description;
+      document.getElementById("tour-poster-stops").textContent = themeRecords.length;
+      document.getElementById("tour-poster-cities").textContent = cities.length;
       document.getElementById("tour-register-caption").textContent = themeRecords.length
         ? themeRecords.length + " STOPS · " + cities.length + " CITIES · " + meta.period
         : "TOUR RECORDS · 待补档";

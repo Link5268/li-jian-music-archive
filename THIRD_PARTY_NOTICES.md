@@ -24,6 +24,7 @@ site/assets/china-province-map.svg 基于 Supeset/China-GeoData 的省界数据�
 - lijian-about-close.jpg：用户提供的人物近照，原图有 BAZAAR MEN 标识。
 - lijian-live-blue-user.jpg、lijian-live-user.jpg、lijian-portrait-glasses-user.jpg、lijian-portrait-user.jpg、lijian-tour-arena-user.jpg：用户提供的肖像及现场照片。
 - wanwu-tour-emblem.jpg、wanwu-tour-wordmark.jpg：巡演标志与主题字样。
+- tour-poster-buzhi.png、tour-poster-kanjian.png、tour-poster-xiangwang.png、tour-poster-wanwu.png：用户提供的四张主题图，经图像编辑清理指定文字或标记后用于巡演主题展示。`tour-poster-xiangwang.png` 的原图是 2022 年线上音乐会视觉，不是 2011 年巡演原始海报。
 
 上述素材没有在本仓库授予第三方通用再利用许可；有公开再分发授权的由维护者补充作者、授权范围及凭证说明，否则可换成获许可素材。不要将非商用用途标注当作开放许可。
 

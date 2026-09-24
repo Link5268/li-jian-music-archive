@@ -41,6 +41,7 @@
     .topline nav::-webkit-scrollbar { display: none; }
     .topline nav a { flex: 0 0 auto; color: rgba(248,246,240,.72); text-decoration: none; font-size: 11px; letter-spacing: .08em; transition: color .25s ease; }
     .topline nav a:hover, .topline nav a[aria-current="location"] { color: #e5c995; }
+    .nav-toggle { display: none; }
 
     .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: 1fr; overflow: hidden; color: var(--white); background: linear-gradient(120deg,#101c2c 8%,#142237 58%,#203248 100%); }
     .hero::after { content: ""; position: absolute; inset: 66px 0 0; z-index: 1; pointer-events: none; opacity: .19; background-image: repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.025) 4px,transparent 5px); mix-blend-mode: soft-light; }
@@ -157,11 +158,12 @@
     .map-card { position: relative; margin: 0; padding: 25px; background: #e7e5dc; border: 1px solid rgba(16,28,44,.15); }
     .map-stage { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1000/744; margin: 0 auto; }
     .map-base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: .82; filter: sepia(.08) hue-rotate(165deg) saturate(.7); }
-    .city-pin { position: absolute; z-index: 2; left: var(--x); top: var(--y); width: 11px; height: 11px; padding: 0; border: 0; color: var(--ink); background: transparent; cursor: pointer; transform: translate(-50%,-50%); }
+    .city-pin { position: absolute; z-index: 2; left: var(--x); top: var(--y); display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; color: var(--ink); background: transparent; cursor: pointer; transform: translate(-50%,-50%); }
     .city-pin .pin-dot { width: 8px; height: 8px; border: 2px solid #f6f1e6; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 1px var(--night), 0 0 0 3px rgba(185,154,100,.2); transition: transform .2s ease, background .2s ease; }
     .city-pin[aria-pressed="true"] { z-index: 5; }
     .city-pin[aria-pressed="true"] .pin-dot, .city-pin:hover .pin-dot { transform: scale(1.28); background: #8b5946; }
-    .city-pin .pin-label { position: absolute; left: var(--label-x,12px); top: var(--label-y,-10px); padding: 3px 6px; color: var(--ink); background: rgba(244,241,234,.96); font-size: 10px; letter-spacing: .04em; white-space: nowrap; opacity: 0; transform: translateY(3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
+    .city-pin .pin-label { position: absolute; left: calc(50% + var(--label-x,12px)); top: calc(50% + var(--label-y,-10px)); padding: 3px 6px; color: var(--ink); background: rgba(244,241,234,.96); font-size: 10px; letter-spacing: .04em; white-space: nowrap; opacity: 0; transform: translateY(3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
+    .map-city-picker { display: none; }
     .city-pin[aria-pressed="true"] .pin-label, .city-pin:hover .pin-label, .city-pin:focus-visible .pin-label { opacity: 1; transform: translateY(0); }
     .city-pin:focus-visible { outline: 2px solid var(--night); outline-offset: 5px; }
     .map-card figcaption { display: flex; justify-content: space-between; gap: 15px; margin-top: 15px; color: #68747a; font-size: 10px; line-height: 1.6; }
@@ -190,6 +192,7 @@
     .tour-side h3 { margin: 11px 0 0; color: var(--ink); font: 400 clamp(31px,4.3vw,56px)/1.05 var(--serif); }
     .tour-side .tour-cn { margin: 8px 0 30px; color: #68747a; font: 300 14px/1.6 var(--serif); letter-spacing: .1em; }
     .city-stops { display: grid; gap: 13px; }
+    .postmark.is-selected { border-color: var(--gold); background: #f8f4e9; box-shadow: inset 3px 0 var(--gold); }
     .city-empty { max-width: 430px; padding: 24px; border: 1px dashed rgba(16,28,44,.35); color: #667579; background: rgba(244,241,234,.45); font: 300 14px/1.8 var(--serif); }
     .postmark { position: relative; max-width: 430px; padding: 22px 23px 20px; border: 1px dashed rgba(16,28,44,.42); background: rgba(244,241,234,.5); }
     .postmark::before { content: "CITY ARCHIVE"; position: absolute; right: 13px; top: 12px; color: rgba(16,28,44,.45); font: 10px/1 var(--serif); letter-spacing: .14em; }
@@ -256,6 +259,8 @@
     .tour-city-filter select { padding: 8px 27px 8px 10px; }
     .tour-filter:focus-visible, .tour-search input:focus-visible, .tour-city-filter select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .tour-results { margin: 0 0 9px; color: #6d777a; font-size: 10px; letter-spacing: .05em; }
+    .tour-clear-filter { min-height: 37px; padding: 7px 11px; border: 1px solid rgba(16,28,44,.27); color: var(--ink); background: transparent; cursor: pointer; font: 11px/1.4 var(--sans); }
+    .tour-clear-filter[hidden] { display: none; }
     .tour-list { border-top: 1px solid rgba(16,28,44,.26); }
     .tour-list-head, .tour-row { display: grid; grid-template-columns: 42px 123px 82px minmax(175px,1.05fr) minmax(210px,1.25fr); gap: 13px; align-items: start; }
     .tour-list-head { padding: 11px 9px 9px; color: #7a8384; font-size: 9px; letter-spacing: .13em; }
@@ -323,8 +328,14 @@
     .js .reveal.is-visible { opacity: 1; transform: none; }
     @media (max-width: 850px) {
       .topline { gap: 15px; min-height: 61px; padding-inline: 18px; }
-      .topline nav { justify-content: flex-start; max-width: 68vw; gap: 17px; }
-      .topline nav a { font-size: 10px; }
+      .nav-toggle { display: inline-flex; align-items: center; gap: 13px; min-height: 44px; padding: 0 12px; border: 1px solid rgba(185,154,100,.4); color: var(--white); background: transparent; cursor: pointer; font-size: 13px; letter-spacing: .08em; }
+      .nav-toggle::after { content: "+"; color: var(--gold); font-size: 20px; line-height: 1; }
+      .nav-toggle[aria-expanded="true"]::after { content: "−"; }
+      .nav-current { color: #d5c49a; font-size: 12px; }
+      .topline nav { position: absolute; top: 100%; left: 0; right: 0; display: none; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0; max-width: none; max-height: calc(100svh - 61px); padding: 12px 18px 18px; overflow-y: auto; background: rgba(16,28,44,.98); border-bottom: 1px solid rgba(185,154,100,.35); box-shadow: 0 18px 34px rgba(0,0,0,.2); }
+      .topline nav.is-open { display: grid; }
+      .topline nav a { padding: 13px 10px; border-bottom: 1px solid rgba(236,232,223,.12); font-size: 14px; }
+      .topline nav a[aria-current="location"] { border-bottom-color: var(--gold); }
       .brand { font-size: 9px; letter-spacing: .12em; }
       .hero { grid-template-columns: 1fr; }
       .about-grid,.music-layout,.tour-layout { gap: 43px; }
@@ -333,6 +344,12 @@
       .tour-themes { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .tour-poster-feature { grid-template-columns: minmax(220px,.8fr) minmax(0,1.2fr); }
       .tour-poster-copy { padding: 30px; }
+      .city-pin { width: 44px; height: 44px; }
+      .map-city-picker { display: block; margin-top: 12px; border-top: 1px solid rgba(16,28,44,.15); }
+      .map-city-picker summary { min-height: 44px; padding: 13px 5px; color: var(--ink); cursor: pointer; font: 13px/1.4 var(--serif); }
+      .map-city-picker-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; padding: 4px 0 13px; }
+      .map-city-picker-list button { min-height: 44px; padding: 8px 4px; border: 1px solid rgba(16,28,44,.24); color: var(--ink); background: rgba(244,241,234,.7); cursor: pointer; font: 13px/1.4 var(--serif); }
+      .map-city-picker-list button[aria-pressed="true"] { color: var(--white); background: var(--night); }
       .time-line { margin-left: 0; }
       .moments-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); }
       .moment-large { grid-column: 1; grid-row: 1 / span 2; }
@@ -347,8 +364,7 @@
       :root { --gutter: 25px; }
       html { scroll-padding-top: 60px; }
       .topline { min-height: 59px; }
-      .topline nav { max-width: 58vw; gap: 16px; }
-      .topline nav a { font-size: 10px; }
+      .nav-toggle { gap: 9px; }
       .hero { display: block; min-height: 100svh; }
       .hero-photo { inset: 0; min-height: 100svh; }
       .hero-photo::before { background: linear-gradient(90deg,rgba(16,28,44,.58),rgba(16,28,44,.18) 70%,rgba(16,28,44,.08)),linear-gradient(0deg,rgba(16,28,44,.7),transparent 55%); }
@@ -549,7 +565,8 @@
   <a class="skip-link" href="#about">跳到档案内容</a>
   <header class="topline">
     <a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-name">LI JIAN</span> ARCHIVE</span></a>
-    <nav aria-label="档案导航">
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">目录 <span class="nav-current" id="nav-current">序</span></button>
+    <nav id="site-nav" aria-label="档案导航">
       <a href="#home">序</a><a href="#about">人物</a><a href="#music">音乐</a><a href="#tour">巡演</a><a href="#time">时间</a><a href="#stage">荧屏</a><a href="#notebook">札记</a><a href="#moments">影像</a><a href="#words">文字</a><a href="#archive">档案</a>
     </nav>
   </header>
@@ -798,6 +815,7 @@
             <img class="map-base" src="assets/china-province-map.svg" alt="按经纬度投影的中国省级行政区地图" width="1000" height="744" loading="lazy">
             <div id="tour-map-pins"></div>
           </div>
+          <details class="map-city-picker" id="map-city-picker"><summary id="map-city-picker-summary">按城市名称选择</summary><div class="map-city-picker-list" id="map-city-picker-list"></div></details>
           <div class="map-overseas" id="map-overseas" hidden>
             <span class="map-overseas-label">OUTSIDE MAP<strong>海外城市 · 城市中心坐标</strong></span>
             <div class="map-overseas-buttons" id="map-overseas-buttons"></div>
@@ -826,6 +844,7 @@
           </div>
           <label class="tour-search"><span class="sr-only">搜索城市、场馆、特别曲目或备注</span><input id="tour-search" type="search" placeholder="搜索城市、场馆或曲目" autocomplete="off"></label>
           <label class="tour-city-filter"><span class="sr-only">按城市筛选</span><select id="tour-city-filter"><option value="">全部城市</option></select></label>
+          <button class="tour-clear-filter" id="tour-clear-filter" type="button" hidden>清除筛选</button>
         </div>
         <p class="tour-results" id="tour-results" aria-live="polite">显示 35 / 35 场</p>
         <div class="tour-list" role="group" aria-label="李健万物安生时巡演场次">
@@ -1296,12 +1315,17 @@ movingWord.style.opacity = String(1 - release);
     const filterButtons = [...document.querySelectorAll("[data-tour-filter]")];
     const themeButtons = [...document.querySelectorAll("[data-tour-theme]")];
     const mapPins = document.getElementById("tour-map-pins");
+    const mapCityPicker = document.getElementById("map-city-picker");
+    const mapCityPickerList = document.getElementById("map-city-picker-list");
     const overseasButtons = document.getElementById("map-overseas-buttons");
+    const clearTourFilter = document.getElementById("tour-clear-filter");
     const recordButtons = [];
     const pinButtons = [];
     let activeTheme = "万物安生时";
     let activePhase = "all";
     let activeCity = "上海";
+    let indexCity = "";
+    let selectedRecordId = null;
     const tourThemeMeta = {
       "万物安生时": {
         period: "2023—2026", defaultCity: "上海", poster: "assets/tour-poster-wanwu.png", posterWidth: 1067, posterHeight: 1474,
@@ -1383,6 +1407,11 @@ movingWord.style.opacity = String(1 - release);
       matching.forEach((record) => {
         const card = document.createElement("article");
         card.className = "postmark";
+        card.dataset.recordId = String(record.id);
+        if (record.id === selectedRecordId) {
+          card.classList.add("is-selected");
+          card.tabIndex = -1;
+        }
         const date = document.createElement("time");
         date.textContent = record.date ? record.date.replaceAll("-", ".") : "";
         if (record.date) date.dateTime = record.date;
@@ -1428,16 +1457,24 @@ movingWord.style.opacity = String(1 - release);
       });
     }
 
-    function selectCity(city) {
+    function selectCity(city, { reveal = false, recordId = null } = {}) {
       activeCity = city;
+      indexCity = city;
+      selectedRecordId = recordId;
       cityFilter.value = city || "";
       searchInput.value = "";
       setActivePin(city);
-      recordButtons.forEach(({ button, item }) => {
-        button.setAttribute("aria-pressed", String(item.theme === activeTheme && item.city === city));
-      });
       renderCityRecords(city);
       renderTourList();
+      if (reveal) {
+        const target = recordId === null
+          ? document.querySelector(".tour-side")
+          : [...document.querySelectorAll("#city-stops .postmark")].find((card) => card.dataset.recordId === String(recordId));
+        if (target) {
+          target.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "center" });
+          if (recordId !== null) target.focus({ preventScroll: true });
+        }
+      }
     }
 
     function renderMapAndOptions() {
@@ -1446,6 +1483,8 @@ movingWord.style.opacity = String(1 - release);
       const cityCounts = new Map(cities.map((city) => [city, themeRecords.filter((record) => record.city === city).length]));
       cityFilter.replaceChildren(new Option("全部城市", ""));
       mapPins.replaceChildren();
+      mapCityPickerList.replaceChildren();
+      document.getElementById("map-city-picker-summary").textContent = "按城市名称选择 · " + cities.length + " 城";
       pinButtons.length = 0;
 
       cities.forEach((city) => {
@@ -1453,6 +1492,18 @@ movingWord.style.opacity = String(1 - release);
         option.value = city;
         option.textContent = city;
         cityFilter.append(option);
+        const cityButton = document.createElement("button");
+        cityButton.type = "button";
+        cityButton.dataset.city = city;
+        cityButton.textContent = city === "中国澳门" ? "澳门" : city;
+        cityButton.setAttribute("aria-label", "查看" + city + "的" + cityCounts.get(city) + "场记录");
+        cityButton.setAttribute("aria-pressed", "false");
+        cityButton.addEventListener("click", () => {
+          mapCityPicker.open = false;
+          selectCity(city, { reveal: true });
+        });
+        mapCityPickerList.append(cityButton);
+        pinButtons.push(cityButton);
         if (city === "新加坡") return;
         const point = cityCoordinates[city];
         if (!point || point[0] < mapBounds.west || point[0] > mapBounds.east || point[1] < mapBounds.south || point[1] > mapBounds.north) return;
@@ -1476,7 +1527,7 @@ movingWord.style.opacity = String(1 - release);
         label.className = "pin-label";
         label.textContent = city === "中国澳门" ? "澳门" : city;
         pin.append(dot, label);
-        pin.addEventListener("click", () => selectCity(city));
+        pin.addEventListener("click", () => selectCity(city, { reveal: true }));
         mapPins.append(pin);
         pinButtons.push(pin);
       });
@@ -1500,12 +1551,12 @@ movingWord.style.opacity = String(1 - release);
         const label = document.createElement("span");
         label.textContent = city + " · " + point[1].toFixed(2) + "°N, " + point[0].toFixed(2) + "°E";
         button.append(dot, label);
-        button.addEventListener("click", () => selectCity(city));
+        button.addEventListener("click", () => selectCity(city, { reveal: true }));
         overseasButtons.append(button);
         pinButtons.push(button);
       });
       document.getElementById("map-overseas").hidden = !outsideCities.length;
-      cityFilter.value = activeCity || "";
+      cityFilter.value = indexCity || "";
       cityFilter.disabled = !themeRecords.length;
       searchInput.disabled = !themeRecords.length;
     }
@@ -1599,7 +1650,7 @@ movingWord.style.opacity = String(1 - release);
       note.textContent = item.note || "";
       song.append(songLabel, document.createTextNode(item.song || ""), note);
       button.append(number, when, city, venue, song);
-      button.addEventListener("click", () => selectCity(item.city));
+      button.addEventListener("click", () => selectCity(item.city, { reveal: true, recordId: item.id }));
       tourList.append(button);
       recordButtons.push({ button, item });
     });
@@ -1607,6 +1658,7 @@ movingWord.style.opacity = String(1 - release);
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
         activePhase = button.dataset.tourFilter;
+        selectedRecordId = null;
         filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
         renderCityRecords(activeCity);
         renderTourList();
@@ -1618,12 +1670,19 @@ movingWord.style.opacity = String(1 - release);
         activeTheme = button.dataset.tourTheme;
         activePhase = "all";
         activeCity = tourThemeMeta[activeTheme]?.defaultCity || "";
+        indexCity = "";
+        selectedRecordId = null;
         searchInput.value = "";
         renderThemeState();
       });
     });
     searchInput.addEventListener("input", renderTourList);
-    cityFilter.addEventListener("change", () => selectCity(cityFilter.value));
+    cityFilter.addEventListener("change", () => selectCity(cityFilter.value, { reveal: Boolean(cityFilter.value) }));
+    clearTourFilter.addEventListener("click", () => {
+      activePhase = "all";
+      selectCity("");
+      filterButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.tourFilter === "all")));
+    });
     function renderTourList() {
       const themeRecords = recordsForTheme();
       const query = searchInput.value.trim().toLocaleLowerCase();
@@ -1631,18 +1690,22 @@ movingWord.style.opacity = String(1 - release);
       recordButtons.forEach(({ button, item }) => {
         const themeMatches = item.theme === activeTheme;
         const phaseMatches = activePhase === "all" || item.phase === activePhase;
-        const cityMatches = !activeCity || item.city === activeCity;
+        const cityMatches = !indexCity || item.city === indexCity;
         const haystack = (item.date + " " + item.stage + " " + item.city + " " + item.venue + " " + item.song + " " + item.note + " " + item.setlist.join(" ")).toLocaleLowerCase();
         const searchMatches = !query || haystack.includes(query);
         const visible = themeMatches && phaseMatches && cityMatches && searchMatches;
         button.hidden = !visible;
-        button.setAttribute("aria-pressed", String(item.theme === activeTheme && item.city === activeCity));
+        button.setAttribute("aria-pressed", String(item.theme === activeTheme && item.id === selectedRecordId));
         if (visible) visibleCount += 1;
       });
       const count = document.getElementById("tour-results");
       count.textContent = themeRecords.length
-        ? (visibleCount ? "显示 " + visibleCount + " / " + themeRecords.length + " 场" + (activeCity ? " · " + activeCity : "") : "没有找到符合条件的场次。")
+        ? (visibleCount ? "显示 " + visibleCount + " / " + themeRecords.length + " 场 · " + (indexCity || "全部城市") + (activePhase === "all" ? "" : " · " + (activePhase === "main" ? "正场" : "Encore")) : "没有找到符合条件的场次。")
         : activeTheme + "：暂无场次资料，待补档。";
+      document.querySelector(".tour-index-summary span").textContent = themeRecords.length
+        ? (indexCity ? "已选 " + indexCity + " · 展开筛选" : "展开筛选与完整记录")
+        : "该主题暂无场次资料";
+      clearTourFilter.hidden = activePhase === "all" && !indexCity && !query;
       let empty = document.getElementById("tour-empty");
       if (!visibleCount && !empty) {
         empty = document.createElement("p");
@@ -1673,13 +1736,45 @@ movingWord.style.opacity = String(1 - release);
     });
 
     const navLinks = document.querySelectorAll(".topline nav a");
+    const navToggle = document.getElementById("nav-toggle");
+    const siteNav = document.getElementById("site-nav");
+    const navCurrent = document.getElementById("nav-current");
+    function closeNav() {
+      siteNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+    navToggle.addEventListener("click", () => {
+      const open = !siteNav.classList.contains("is-open");
+      siteNav.classList.toggle("is-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.forEach((link) => link.addEventListener("click", () => {
+      navCurrent.textContent = link.textContent;
+      closeNav();
+    }));
+    document.querySelector(".brand").addEventListener("click", closeNav);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && siteNav.classList.contains("is-open")) {
+        closeNav();
+        navToggle.focus();
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".topline")) closeNav();
+    });
+    window.matchMedia("(min-width: 851px)").addEventListener("change", (event) => {
+      if (event.matches) closeNav();
+    });
     const watchedSections = document.querySelectorAll("main section[id]");
     if ("IntersectionObserver" in window) {
       const navObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             navLinks.forEach((link) => {
-              if (link.hash === "#" + entry.target.id) link.setAttribute("aria-current", "location");
+              if (link.hash === "#" + entry.target.id) {
+                link.setAttribute("aria-current", "location");
+                navCurrent.textContent = link.textContent;
+              }
               else link.removeAttribute("aria-current");
             });
           }

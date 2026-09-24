@@ -400,13 +400,119 @@
   #notebook .research-fold-content { font-size: 16px; line-height: 1.9; }
 #notebook .notebook-source { font: 14px/1.7 var(--sans); margin-top: 14px; }
 #notebook a { text-decoration: underline; text-underline-offset: 4px; }
+.music-dock {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+}
+
+.music-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 56px;
+  height: 56px;
+  padding: 0 17px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 1px solid rgba(225, 220, 205, 0.35);
+  border-radius: 999px;
+  background: rgba(16, 28, 44, 0.94);
+  color: #ece8df;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+  transition: width 280ms ease, background 280ms ease;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  width: 190px;
+  background: #101c2c;
+}
+
+.music-toggle:focus-visible {
+  outline: 2px solid #b99a64;
+  outline-offset: 3px;
+}
+
+.music-icon {
+  flex: 0 0 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.music-label {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.music-toggle:hover .music-label,
+.music-toggle:focus-visible .music-label {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .music-dock {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-toggle,
+  .music-label {
+    transition: none;
+  }
+}
 </style>
 </head>
+<div class="music-dock">
+  <audio id="background-music" loop preload="none">
+    <source src="assets/backgroundmusic.flac" type="audio/flac">
+  </audio>
+
+  <button
+    class="music-toggle"
+    id="music-toggle"
+    type="button"
+    aria-label="播放背景音乐"
+    aria-pressed="false"
+  >
+    <span class="music-icon" id="music-icon" aria-hidden="true">♫</span>
+    <span class="music-label" id="music-label">播放背景音乐</span>
+  </button>
+</div>
+<script>
+  const music = document.getElementById("background-music");
+  const toggle = document.getElementById("music-toggle");
+  const icon = document.getElementById("music-icon");
+  const label = document.getElementById("music-label");
+
+  toggle.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        icon.textContent = "Ⅱ";
+        label.textContent = "正在播放 · 点击暂停";
+        toggle.setAttribute("aria-label", "暂停背景音乐");
+        toggle.setAttribute("aria-pressed", "true");
+      } catch {
+        label.textContent = "暂时无法播放";
+        toggle.setAttribute("aria-label", "暂时无法播放背景音乐");
+      }
+    } else {
+      music.pause();
+      icon.textContent = "♫";
+      label.textContent = "播放背景音乐";
+      toggle.setAttribute("aria-label", "播放背景音乐");
+      toggle.setAttribute("aria-pressed", "false");
+    }
+  });
+</script>
 <body>
-<audio controls autoplay loop>
-  <source src="assets/backgroundmusic.flac" type="audio/flac">
-  你的浏览器暂不支持播放音频。
-</audio>
+
   <a class="skip-link" href="#about">跳到档案内容</a>
   <header class="topline">
     <a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark" aria-hidden="true"></span><span>LI JIAN ARCHIVE</span></a>

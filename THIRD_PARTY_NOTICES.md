@@ -12,17 +12,16 @@ site/assets/china-province-map.svg 基于 Supeset/China-GeoData 的省界数据�
 
 | 文件 | 来源署名 | 许可与处理 |
 | --- | --- | --- |
-| li-jian-shanghai-2020.jpg | 棉花花糖已经下班啦 / Wikimedia Commons | CC BY 2.5；页面有裁切、色调显示处理，原图链接见图注 |
-| li-jian-tsinghua-2018.jpg、source-media/images/li-jian-tsinghua-2018-detail.png、site/assets/li-jian-tsinghua-2018-detail.webp | 葉又嘉 / Wikimedia Commons | CC BY-SA 4.0；网页 WebP 版本为压缩副本，保留相同许可 |
 | turntable-cc0.jpg | Mink Mingle / Wikimedia Commons | CC0 1.0；唱片视觉意象 |
 
-许可：https://creativecommons.org/licenses/by/2.5/ 、https://creativecommons.org/licenses/by-sa/4.0/ 、https://creativecommons.org/publicdomain/zero/1.0/
+许可：https://creativecommons.org/publicdomain/zero/1.0/
 
 ## 用户提供的素材（不纳入 MIT）
 
 - source-media/images/lijian-intro-cover.png 与 site/assets/lijian-intro-cover.webp：用户提供原图，用户已声明拥有原图或获得去水印授权；网页版本经过旋转、处理及压缩。本项目未另行核实授权是否涵盖向所有公众再分发。
 - lijian-about-close.jpg：用户提供的人物近照，原图有 BAZAAR MEN 标识。
-- lijian-live-blue-user.jpg、lijian-live-user.jpg、lijian-portrait-glasses-user.jpg、lijian-portrait-user.jpg、lijian-tour-arena-user.jpg：用户提供的肖像及现场照片。
+- lijian-portrait-glasses-user.jpg、lijian-portrait-user.jpg、lijian-tour-arena-user.jpg：用户提供的肖像及现场照片；戴眼镜肖像现展示在「人物札记」。
+- site/assets/wanwu-live-01.jpg 至 wanwu-live-26.jpg：网站创建者提供的《万物安生时》前 26 场现场照片，按武汉至合肥的场次顺序展示在「影像」。
 - wanwu-tour-emblem.jpg、wanwu-tour-wordmark.jpg：巡演标志与主题字样。
 - source-media/images/tour-poster-*.png 与 site/assets/tour-poster-*.webp：用户提供的四张主题图，经图像编辑清理指定文字或标记后用于巡演主题展示；网页版本另作压缩。`tour-poster-xiangwang.png` 的原图是 2022 年线上音乐会视觉，不是 2011 年巡演原始海报。
 - source-media/backgroundmusic.flac 与 site/assets/backgroundmusic.mp3：创建者提供的李健《一切刚刚好》录音；MP3 是网页播放副本，不纳入代码 MIT 许可。

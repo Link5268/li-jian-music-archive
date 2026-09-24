@@ -14,7 +14,6 @@ IMAGES = {
     "tour-poster-buzhi.png": 84,
     "tour-poster-kanjian.png": 84,
     "tour-poster-xiangwang.png": 84,
-    "li-jian-tsinghua-2018-detail.png": 84,
 }
 
 

@@ -290,23 +290,26 @@
     .time-entry h3 { margin: 0 0 7px; color: var(--white); font: 400 21px/1.3 var(--serif); }
     .time-entry p { max-width: 570px; margin: 0; color: #b8c2c4; font: 300 14px/1.8 var(--serif); }
 
-    .moments-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.9fr); grid-template-rows: auto auto auto; gap: clamp(22px,3.5vw,48px); align-items: start; }
-    .moment { margin: 0; }
-    .moment img { width: 100%; height: auto; background: #d3d0c8; }
-    .moment-large { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-    .moment-large img { aspect-ratio: 4/3; object-fit: cover; }
-    .moment-xian { grid-column: 3; grid-row: 1 / span 2; }
-    .moment-xian img, .moment-blue img, .moment-portrait img, .moment-small img { aspect-ratio: 4/5; object-fit: cover; }
-    .moment-blue { grid-column: 1; grid-row: 3; }
-    .moment-small { grid-column: 2; grid-row: 3; margin-top: 10vh; }
-    .moment-portrait { grid-column: 3; grid-row: 3; margin-top: 4vh; }
-    .moment-note { grid-column: 1 / span 2; padding: 25px 0 0 20px; border-left: 1px solid rgba(16,28,44,.25); color: #65717a; font: 300 15px/1.9 var(--serif); }
-    .moment-note strong { display: block; margin-bottom: 12px; color: var(--ink); font: 400 12px/1.5 var(--sans); letter-spacing: .16em; }
-    .official-weibo-card { grid-column: 3; align-self: end; display: flex; min-height: 170px; flex-direction: column; justify-content: space-between; padding: 22px; color: var(--white); background: radial-gradient(circle at 90% 8%,rgba(185,154,100,.34),transparent 36%),linear-gradient(145deg,#101c2c,#273c51); text-decoration: none; }
-    .official-weibo-card span { color: #d0bd91; font-size: 9px; letter-spacing: .18em; }
-    .official-weibo-card strong { display: block; margin: 20px 0 6px; font: 400 24px/1.2 var(--serif); }
-    .official-weibo-card time { color: #c5ced0; font: 12px/1.5 var(--serif); }
-    .official-weibo-card:hover { box-shadow: inset 0 0 0 1px rgba(185,154,100,.7); }
+    .notebook-opening { display: grid; grid-template-columns: minmax(0,1fr) minmax(180px,280px); gap: clamp(28px,6vw,90px); align-items: start; margin-bottom: 38px; }
+    .notebook-opening .section-intro { margin-top: 0; }
+    .notebook-portrait { margin: -20px 0 0; }
+    .notebook-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; object-position: center 22%; }
+    .notebook-portrait figcaption { margin-top: 10px; color: #68757b; font: 11px/1.6 var(--serif); }
+    .moments-intro { max-width: 650px; margin: -32px 0 60px; color: #52616d; font: 300 16px/1.9 var(--serif); }
+    .moments-year { margin-top: clamp(52px,7vw,100px); }
+    .moments-intro + .moments-year { margin-top: 0; }
+    .moments-year-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin: 0 0 29px; padding-bottom: 15px; border-bottom: 1px solid rgba(16,28,44,.2); }
+    .moments-year-heading h3 { margin: 0; color: var(--ink); font: 400 clamp(30px,4vw,52px)/1 var(--serif); }
+    .moments-year-heading span { color: #68757b; font: 11px/1.5 var(--sans); letter-spacing: .15em; }
+    .moments-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(30px,4vw,62px) clamp(20px,3vw,48px); align-items: start; }
+    .moment { min-width: 0; margin: 0; }
+    .moment:nth-child(3n + 2) { margin-top: clamp(30px,5vw,75px); }
+    .moment:nth-child(3n) { margin-top: clamp(12px,2vw,30px); }
+    .moment img { display: block; width: 100%; height: auto; background: #d3d0c8; }
+    .moment figcaption { display: flex; align-items: baseline; gap: 12px; padding-top: 3px; border-top: 1px solid rgba(16,28,44,.13); }
+    .moment-number { flex: 0 0 auto; color: #a88c59; font: 400 18px/1.5 var(--serif); }
+    .moment-place { color: var(--ink); font: 400 14px/1.5 var(--serif); }
+    .moment-date { margin-left: auto; white-space: nowrap; color: #758086; font: 11px/1.6 var(--sans); }
 
     .words-section { min-height: 66vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg,#101c2c,#1c2e40 74%,#24364a); }
     .words-section .section-kicker { color: #d0bd91; }
@@ -352,14 +355,9 @@
       .map-city-picker-list button { min-height: 44px; padding: 8px 4px; border: 1px solid rgba(16,28,44,.24); color: var(--ink); background: rgba(244,241,234,.7); cursor: pointer; font: 13px/1.4 var(--serif); }
       .map-city-picker-list button[aria-pressed="true"] { color: var(--white); background: var(--night); }
       .time-line { margin-left: 0; }
-      .moments-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); }
-      .moment-large { grid-column: 1; grid-row: 1 / span 2; }
-      .moment-xian { grid-column: 2; grid-row: 1 / span 2; }
-      .moment-blue { grid-column: 1; grid-row: 3; }
-      .moment-small { grid-column: 2; grid-row: 3; margin-top: 8vh; }
-      .moment-portrait { grid-column: 1; grid-row: 4; margin-top: 0; }
-      .moment-note { grid-column: 2; grid-row: 4; }
-      .official-weibo-card { grid-column: 1 / span 2; grid-row: 5; min-height: 135px; }
+      .moments-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .moment:nth-child(n) { margin-top: 0; }
+      .moment:nth-child(even) { margin-top: 42px; }
     }
     @media (max-width: 650px) {
       :root { --gutter: 25px; }
@@ -434,12 +432,12 @@
       .time-entry::before { left: -29px; }
       .time-entry time { font-size: 14px; }
       .time-entry h3 { font-size: 18px; }
-      .moments-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 26px; }
-      .moment-large,.moment-xian,.moment-blue,.moment-small,.moment-portrait,.moment-note,.official-weibo-card { grid-column: auto; grid-row: auto; }
-      .moment-large img { aspect-ratio: 4/3; }
-      .moment-xian img,.moment-blue img,.moment-portrait img,.moment-small img { aspect-ratio: 4/5; }
-      .moment-small,.moment-portrait { margin-top: 0; }
-      .moment-note { margin-left: 8%; padding-left: 17px; }
+      .notebook-opening { grid-template-columns: 1fr; margin-bottom: 30px; }
+      .notebook-portrait { max-width: 235px; margin: 0; }
+      .moments-intro { margin: -16px 0 35px; }
+      .moments-grid { grid-template-columns: 1fr; gap: 33px; }
+      .moment:nth-child(n) { margin-top: 0; }
+      .moment img { max-height: 78vh; object-fit: contain; object-position: left center; }
       .words-section { min-height: 62vh; }
       .word-card { min-height: 125px; font-size: 22px; }
       .source-list,.archive-credits { grid-template-columns: 1fr; gap: 0; }
@@ -996,42 +994,140 @@
 
 <section class="archive-section section-paper" id="notebook" aria-labelledby="notebook-title">
 <div class="section-head"><div><span class="section-kicker">READING ROOM / BIOGRAPHICAL NOTES</span><h2 id="notebook-title">人物札记</h2></div><span class="section-index">18 则有出处的侧记</span></div>
-<p class="section-intro">从学琴、阅读到一首歌的诞生。这里收录公开访谈和机构记录中的细节；回忆与观点保留讲述时间，沿着出处继续读。</p>
+<div class="notebook-opening">
+  <p class="section-intro">从学琴、阅读到一首歌的诞生。这里收录公开访谈和机构记录中的细节；回忆与观点保留讲述时间，沿着出处继续读。</p>
+  <figure class="notebook-portrait reveal">
+    <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像，用户提供照片" width="1352" height="1800" loading="lazy" decoding="async">
+    <figcaption>人物肖像 · 用户提供</figcaption>
+  </figure>
+</div>
 <div class="research-grid"><div class="research-column"><h3>启蒙与校园</h3><details class="research-fold"><summary><strong>烛光里的一首吉他曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>少年时期，他原本只想学会几首弹唱；一次停电时，老师弹起《爱的罗曼史》，让他决定继续学琴。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>从调琴到听觉训练</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他回忆曾帮老师调琴、教初学者，以教学抵学费；那段大量调琴的经历也锻炼了耳朵。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>和声来自合唱团</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华合唱团与音乐辅修课程帮助他系统学习和声、视唱练耳和曲式；之后因电子系课业繁重停止辅修。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>《风吹麦浪》的校园记忆</strong><span>展开札记</span></summary><div class="research-fold-content"><p>在本人回忆中，清华北门与诗人、画家相处的夏天，后来成为《风吹麦浪》的记忆来源。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details></div><div class="research-column"><h3>作品背后的风景</h3><details class="research-fold"><summary><strong>第一次抵达贝加尔湖</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年访谈中，他明确说写歌时是第一次到访；小时候对这个地名的熟悉，来自东北生活中的寒冷记忆。</p><p class="notebook-source"><a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noopener noreferrer">新浪访谈实录 · 2011.12.20 ↗</a></p></div></details><details class="research-fold"><summary><strong>《依然》写在旅途中</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他谈到，专辑中的不少创作是在旅行中完成的，利用旅途时间记录感受；唱片名则由公司提出。</p><p class="notebook-source"><a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noopener noreferrer">新浪访谈实录 · 2011.12.20 ↗</a></p></div></details><details class="research-fold"><summary><strong>地名也是情感坐标</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把《松花江》与成长记忆相连；谈及《抚仙湖》时，提到2005年的到访和对清澈湖水的印象。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>《音乐傲骨》的命名</strong><span>展开札记</span></summary><div class="research-fold-content"><p>据本人访谈，这个名字由唱片公司提出，用以概括他长期坚持个人音乐方向的状态。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>电影主题曲中的含蓄表达</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《我爱你！》创作特辑中，他谈到用歌曲表达爱情。片名和歌名已经点明主题，歌词没有再直接写出那三个字。</p><p class="notebook-source"><a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noopener noreferrer">1905电影网 · 2023.06.16 ↗</a></p></div></details><details class="research-fold"><summary><strong>布鲁斯与中文语感</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《从黄昏到午夜》创作手记提到，他琢磨布鲁斯旋律与中文表达的融合两三年；常听电台停播的经历也进入创作感受。</p><p class="notebook-source"><a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">JOOX唱片介绍所载李健创作手记 · 2026.05.30 ↗</a></p></div></details></div><div class="research-column"><h3>阅读与音乐观</h3><details class="research-fold"><summary><strong>小说里的音乐结构</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2012年访谈中，他谈及普鲁斯特、罗曼·罗兰与格非，关注小说铺垫、节奏和音乐结构之间的相似之处。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>读书并非寻找歌词素材</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把阅读视为兴趣，不专为写歌寻找灵感；2015年署名文章还谈到反复阅读同一本书的习惯。</p><p class="notebook-source"><a href="https://culture.people.com.cn/n/2015/0422/c87423-26884281.html" target="_blank" rel="noopener noreferrer">李健署名谈阅读 · 人民网 · 2015.04.22 ↗</a></p></div></details><details class="research-fold"><summary><strong>离开组合的本人解释</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年采访中，他把离开水木年华解释为音乐追求与创作自由的选择，并表示与卢庚戌仍是朋友。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noopener noreferrer">《南方人物周刊》访谈 · 2011.01.14，清华转载 ↗</a></p></div></details><details class="research-fold"><summary><strong>怎样看待《传奇》走红</strong><span>展开札记</span></summary><div class="research-fold-content"><p>同一访谈中，他肯定王菲演唱及春晚传播对自己事业的帮助。这是他对当时经历的回顾。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noopener noreferrer">《南方人物周刊》访谈 · 2011.01.14，清华转载 ↗</a></p></div></details><details class="research-fold"><summary><strong>“浅唱会”的现场思路</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为星海音乐厅演出接受采访时，他提出减少声光电、重新编配，以钢琴、吉他或小型乐器组合呈现不同于唱片的版本。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/9978.htm" target="_blank" rel="noopener noreferrer">《新快报》专访 · 清华校友总会转载 ↗</a></p></div></details></div><div class="research-column"><h3>公共活动与文化合作</h3><details class="research-fold"><summary><strong>2015 · 海洋公益形象大使</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2015世界海洋日暨全国海洋宣传日主场活动在三亚举行，国家海洋环境监测中心记录了向李健颁发聘书的环节。</p><p class="notebook-source"><a href="https://www.nmemc.org.cn/hyyw/201506/t20150610_682401.shtml" target="_blank" rel="noopener noreferrer">国家海洋环境监测中心 · 2015.06.10 ↗</a></p></div></details><details class="research-fold"><summary><strong>2021 · 为母校谱曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华110周年校庆作品《一路花香一路唱》由徐荣凯作词、李健谱曲，李健与校友代表共同演绎。</p><p class="notebook-source"><a href="https://www.sigs.tsinghua.edu.cn/2021/0427/c7687a24352/page.htm" target="_blank" rel="noopener noreferrer">清华大学深圳国际研究生院 · 2021.04.27 ↗</a></p></div></details><details class="research-fold"><summary><strong>2023 · 电影与歌曲相遇</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为电影《我爱你！》创作并演唱同名主题曲；1905电影网保留了创作特辑，可继续观看他的表达与制作背景。</p><p class="notebook-source"><a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noopener noreferrer">1905电影网 · 2023.06.16 ↗</a></p></div></details></div></div>
 <p class="research-note">资料整理：2026.09.24。本文为摘要，不转载访谈全文。较早访谈反映当时的经历和看法，不自动视为今天的状态；资料仍将随可核对的公开记录补充。</p>
 </section>
     <section class="archive-section section-light" id="moments" aria-labelledby="moments-title">
       <div class="section-head">
-        <div><span class="section-kicker">07 / MOMENTS</span><h2 id="moments-title">舞台与回望</h2></div>
-        <span class="section-index">现场影像 · 选辑</span>
+        <div><span class="section-kicker">07 / MOMENTS</span><h2 id="moments-title">万物安生时 · 影像</h2></div>
+        <span class="section-index">2023—2025 · 26 场</span>
       </div>
+      <p class="moments-intro">从武汉到合肥，依照巡演场次收藏每一站的现场瞬间。照片按网站创建者提供的编号与演出顺序对应。</p>
+      <div class="moments-year">
+        <div class="moments-year-heading"><h3>2023</h3><span>04 STOPS / 2023 年巡演</span></div>
         <div class="moments-grid">
-          <figure class="moment moment-large reveal">
-            <img src="assets/li-jian-shanghai-2020.jpg" alt="李健在上海演唱会现场演出，2020 年 1 月 11 日" width="1620" height="1080" loading="lazy">
-            <figcaption>上海 · 2020.01.11 · 演唱会现场<br>摄影：棉花花糖已经下班啦 · <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noreferrer">CC BY 2.5</a> · <a href="https://commons.wikimedia.org/wiki/File:20200111_%E6%9D%8E%E5%81%A5_%E4%B8%8A%E6%B5%B7%E6%BC%94%E5%94%B1%E4%BC%9A_01.jpg" target="_blank" rel="noreferrer">查看原图与许可</a></figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-01.jpg" alt="李健《万物安生时》巡演第 1 场，武汉站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">01</span><span class="moment-place">武汉</span><time class="moment-date" datetime="2023-11-04">2023.11.04</time></figcaption>
           </figure>
-          <figure class="moment moment-xian reveal">
-            <img src="assets/lijian-live-user.jpg" alt="李健手持麦克风演唱，用户提供的现场照片" width="1238" height="2200" loading="lazy">
-            <figcaption>演出现场 · 用户提供<br>场次信息未标注</figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-02.jpg" alt="李健《万物安生时》巡演第 2 场，成都站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">02</span><span class="moment-place">成都</span><time class="moment-date" datetime="2023-11-18">2023.11.18</time></figcaption>
           </figure>
-          <figure class="moment moment-blue reveal">
-            <img src="assets/lijian-live-blue-user.jpg" alt="李健身着蓝色演出服站在麦克风前，用户提供照片" width="960" height="1443" loading="lazy">
-            <figcaption>舞台一瞬 · 用户提供</figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-03.jpg" alt="李健《万物安生时》巡演第 3 场，南京站现场照片" width="1919" height="1280" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">03</span><span class="moment-place">南京</span><time class="moment-date" datetime="2023-12-09">2023.12.09</time></figcaption>
           </figure>
-          <figure class="moment moment-small reveal">
-            <img src="assets/li-jian-tsinghua-2018-detail.webp" alt="李健在清华大学校庆演唱会现场，2018 年" width="1500" height="1125" loading="lazy" decoding="async">
-            <figcaption>清华 · 校庆演唱会 · 2018<br>摄影：葉又嘉 · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E6%9D%8E%E5%81%A5%E6%A0%A1%E6%85%B6%E6%BC%94%E5%94%B1%E6%9C%83.png" target="_blank" rel="noreferrer">查看原图与许可</a></figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-04.jpg" alt="李健《万物安生时》巡演第 4 场，上海站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">04</span><span class="moment-place">上海</span><time class="moment-date" datetime="2023-12-16">2023.12.16</time></figcaption>
           </figure>
-          <figure class="moment moment-portrait reveal">
-            <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像，用户提供照片" width="1352" height="1800" loading="lazy">
-            <figcaption>肖像片段 · 用户提供</figcaption>
+        </div>
+      </div>
+      <div class="moments-year">
+        <div class="moments-year-heading"><h3>2024</h3><span>14 STOPS / 2024 年巡演</span></div>
+        <div class="moments-grid">
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-05.jpg" alt="李健《万物安生时》巡演第 5 场，中国澳门站现场照片" width="1276" height="1914" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">05</span><span class="moment-place">中国澳门</span><time class="moment-date" datetime="2024-02-24">2024.02.24</time></figcaption>
           </figure>
-          <div class="moment-note reveal"><strong>IMAGE ARCHIVE / 影像札记</strong>用户提供的照片按人物肖像与舞台现场编目。演出场次、城市与日期只在有明确来源时标注。</div>
-          <a class="official-weibo-card reveal" href="https://weibo.com/2/detail/5345272920015612" target="_blank" rel="noopener noreferrer" aria-label="前往李健工作室微博查看 2026 年 9 月 19 日西安站官方现场相册">
-            <span>OFFICIAL WEIBO · IMAGE LOG</span>
-            <div><strong>西安站 Encore</strong><time datetime="2026-09-19">2026.09.19 · 李健工作室现场相册</time></div>
-            <span>在微博查看原帖与照片 ↗</span>
-          </a>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-06.jpg" alt="李健《万物安生时》巡演第 6 场，重庆站现场照片" width="1920" height="1280" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">06</span><span class="moment-place">重庆</span><time class="moment-date" datetime="2024-03-02">2024.03.02</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-07.jpg" alt="李健《万物安生时》巡演第 7 场，郑州站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">07</span><span class="moment-place">郑州</span><time class="moment-date" datetime="2024-03-16">2024.03.16</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-08.jpg" alt="李健《万物安生时》巡演第 8 场，广州站现场照片" width="1286" height="1928" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">08</span><span class="moment-place">广州</span><time class="moment-date" datetime="2024-04-06">2024.04.06</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-09.jpg" alt="李健《万物安生时》巡演第 9 场，厦门站现场照片" width="1278" height="1916" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">09</span><span class="moment-place">厦门</span><time class="moment-date" datetime="2024-05-25">2024.05.25</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-10.jpg" alt="李健《万物安生时》巡演第 10 场，宁波站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">10</span><span class="moment-place">宁波</span><time class="moment-date" datetime="2024-06-22">2024.06.22</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-11.jpg" alt="李健《万物安生时》巡演第 11 场，青岛站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">11</span><span class="moment-place">青岛</span><time class="moment-date" datetime="2024-07-06">2024.07.06</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-12.jpg" alt="李健《万物安生时》巡演第 12 场，苏州站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">12</span><span class="moment-place">苏州</span><time class="moment-date" datetime="2024-08-17">2024.08.17</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-13.jpg" alt="李健《万物安生时》巡演第 13 场，乌鲁木齐站现场照片" width="1440" height="962" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">13</span><span class="moment-place">乌鲁木齐</span><time class="moment-date" datetime="2024-09-14">2024.09.14</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-14.jpg" alt="李健《万物安生时》巡演第 14 场，乌鲁木齐站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">14</span><span class="moment-place">乌鲁木齐</span><time class="moment-date" datetime="2024-09-16">2024.09.16</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-15.jpg" alt="李健《万物安生时》巡演第 15 场，大连站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">15</span><span class="moment-place">大连</span><time class="moment-date" datetime="2024-09-28">2024.09.28</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-16.jpg" alt="李健《万物安生时》巡演第 16 场，佛山站现场照片" width="1922" height="1282" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">16</span><span class="moment-place">佛山</span><time class="moment-date" datetime="2024-10-12">2024.10.12</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-17.jpg" alt="李健《万物安生时》巡演第 17 场，杭州站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">17</span><span class="moment-place">杭州</span><time class="moment-date" datetime="2024-11-02">2024.11.02</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-18.jpg" alt="李健《万物安生时》巡演第 18 场，深圳站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">18</span><span class="moment-place">深圳</span><time class="moment-date" datetime="2024-12-28">2024.12.28</time></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="moments-year">
+        <div class="moments-year-heading"><h3>2025</h3><span>08 STOPS / 2025 年巡演</span></div>
+        <div class="moments-grid">
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-19.jpg" alt="李健《万物安生时》巡演第 19 场，深圳站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">19</span><span class="moment-place">深圳</span><time class="moment-date" datetime="2025-01-01">2025.01.01</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-20.jpg" alt="李健《万物安生时》巡演第 20 场，北京站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">20</span><span class="moment-place">北京</span><time class="moment-date" datetime="2025-04-18">2025.04.18</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-21.jpg" alt="李健《万物安生时》巡演第 21 场，北京站现场照片" width="1280" height="1792" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">21</span><span class="moment-place">北京</span><time class="moment-date" datetime="2025-04-20">2025.04.20</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-22.jpg" alt="李健《万物安生时》巡演第 22 场，济南站现场照片" width="1284" height="1926" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">22</span><span class="moment-place">济南</span><time class="moment-date" datetime="2025-05-04">2025.05.04</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-23.jpg" alt="李健《万物安生时》巡演第 23 场，泉州站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">23</span><span class="moment-place">泉州</span><time class="moment-date" datetime="2025-05-17">2025.05.17</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-24.jpg" alt="李健《万物安生时》巡演第 24 场，西安站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">24</span><span class="moment-place">西安</span><time class="moment-date" datetime="2025-06-14">2025.06.14</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-25.jpg" alt="李健《万物安生时》巡演第 25 场，南昌站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">25</span><span class="moment-place">南昌</span><time class="moment-date" datetime="2025-06-21">2025.06.21</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-26.jpg" alt="李健《万物安生时》巡演第 26 场，合肥站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">26</span><span class="moment-place">合肥</span><time class="moment-date" datetime="2025-06-28">2025.06.28</time></figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -1067,11 +1163,8 @@
         <a href="https://commons.wikimedia.org/wiki/File:China_blank_province_map.svg" target="_blank" rel="noreferrer"><span>Wikimedia Commons · 中国省级边界底图</span><span>公有领域 ↗</span></a>
       </div>
       <div class="archive-credits">
-        <p><strong>用户提供照片</strong><br>序章封面、人物页近景肖像、巡演标识与影像均由网站创建者提供；封面按授权旋转并清理水印。页面仅按版式裁切，图注不推断未确认的场次信息。</p>
+        <p><strong>用户提供照片</strong><br>序章封面、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；影像按提供的 01—26 编号与巡演场次对应。封面按授权旋转并清理水印。</p>
         <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供，并按其要求清理指定文字或标记。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
-        <p><strong>李健工作室现场相册</strong><br>西安站官方相册以原帖链接呈现，照片在微博原页查看并由工作室发布；本页不复制托管原帖图片。</p>
-        <p><strong>现场照片</strong><br>棉花花糖已经下班啦 · Wikimedia Commons · CC BY 2.5。页面对照片进行了裁切与色调处理；署名和许可链接随图标注。</p>
-        <p><strong>清华校庆照片</strong><br>葉又嘉 · Wikimedia Commons · CC BY-SA 4.0。网页展示压缩后的原照片，并在图注中署名及链接许可。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>

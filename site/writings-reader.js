@@ -56,23 +56,33 @@
     let entryCount = 0;
     chapters.forEach((chapter, chapterIndex) => {
       const chapterId = `writings-chapter-${chapterIndex + 1}`;
-      const chapterNode = make("section", "writings-chapter");
+      const chapterNode = make("details", "writings-chapter");
       chapterNode.id = chapterId;
-      chapterNode.append(make("span", "writings-chapter-number", String(chapterIndex + 1).padStart(2, "0")));
-      chapterNode.append(make("h4", "writings-chapter-title", chapter.title));
-      chapterNode.append(make("p", "writings-chapter-count", `${chapter.entries.length} 篇文字`));
+      const chapterSummary = make("summary", "writings-chapter-summary");
+      const chapterTitle = make("span", "writings-chapter-title", chapter.title);
+      chapterTitle.setAttribute("role", "heading");
+      chapterTitle.setAttribute("aria-level", "4");
+      chapterSummary.append(
+        make("span", "writings-chapter-number", String(chapterIndex + 1).padStart(2, "0")),
+        chapterTitle,
+        make("span", "writings-chapter-count", `${chapter.entries.length} 篇`),
+        make("span", "writings-chapter-icon", "+")
+      );
+      chapterNode.append(chapterSummary);
+      const chapterEntries = make("div", "writings-chapter-entries");
+      chapterNode.append(chapterEntries);
 
       const topic = make("button", "", chapter.title);
       topic.type = "button";
       topic.addEventListener("click", () => {
+        chapterNode.open = true;
         chapterNode.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
       });
       topics.append(topic);
 
-      chapter.entries.forEach((item, index) => {
+      chapter.entries.forEach(item => {
         const details = make("details", "writings-entry");
         details.dataset.search = `${chapter.title} ${item.heading} ${item.paragraphs.join(" ")}`.toLocaleLowerCase();
-        if (chapterIndex === 0 && index === 0) details.open = true;
         const summary = make("summary", "writings-entry-summary");
         const title = make("span", "writings-entry-title", item.heading);
         const number = make("span", "writings-entry-number", String(++entryCount).padStart(2, "0"));
@@ -84,7 +94,7 @@
           body.append(make("p", paragraph === "〇" ? "writings-divider" : "", paragraph));
         });
         details.append(body);
-        chapterNode.append(details);
+        chapterEntries.append(details);
       });
       contents.append(chapterNode);
     });
@@ -101,13 +111,20 @@
           if (matches) chapterVisible += 1;
         });
         chapter.hidden = chapterVisible === 0;
+        if (query && chapterVisible) chapter.open = true;
         visible += chapterVisible;
       });
-      status.textContent = query ? `找到 ${visible} / ${entries.length} 篇文字` : `共 ${entries.length} 篇文字 · 选择标题展开阅读`;
+      status.textContent = query ? `找到 ${visible} / ${entries.length} 篇文字` : `共 ${entries.length} 篇文字 · 先展开主题，再选择篇目`;
     }
     search.addEventListener("input", filter);
-    expand.addEventListener("click", () => entries.filter(entry => !entry.hidden).forEach(entry => { entry.open = true; }));
-    collapse.addEventListener("click", () => entries.forEach(entry => { entry.open = false; }));
+    expand.addEventListener("click", () => {
+      contents.querySelectorAll(".writings-chapter:not([hidden])").forEach(chapter => { chapter.open = true; });
+      entries.filter(entry => !entry.hidden).forEach(entry => { entry.open = true; });
+    });
+    collapse.addEventListener("click", () => {
+      entries.forEach(entry => { entry.open = false; });
+      contents.querySelectorAll(".writings-chapter").forEach(chapter => { chapter.open = false; });
+    });
     filter();
   }
 

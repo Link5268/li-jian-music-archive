@@ -341,10 +341,18 @@
     .writings-search:focus { border-color: #c8b58b; }
     .writings-tools button { min-height: 44px; padding: 8px 4px; border: 0; border-bottom: 1px solid rgba(213,196,154,.55); color: #d5c49a; background: transparent; cursor: pointer; font: 12px var(--sans); }
     .writings-status { margin: 0 0 16px; color: #aab9bd; font: 12px/1.7 var(--sans); }
-    .writings-chapter { margin-top: clamp(44px,6vw,70px); scroll-margin-top: 94px; }
+    .writings-chapter { margin-top: 10px; border-top: 1px solid rgba(236,232,223,.2); scroll-margin-top: 94px; }
+    .writings-chapter:last-child { border-bottom: 1px solid rgba(236,232,223,.2); }
+    .writings-chapter-summary { display: grid; grid-template-columns: 30px minmax(0,1fr) auto 20px; align-items: center; gap: 16px; min-height: 82px; padding: 16px 4px; cursor: pointer; list-style: none; }
+    .writings-chapter-summary::-webkit-details-marker { display: none; }
+    .writings-chapter-summary:hover .writings-chapter-title { color: #d5c49a; }
+    .writings-chapter-summary:focus-visible { outline: 2px solid #d5c49a; outline-offset: 2px; }
     .writings-chapter-number { color: #c8b58b; font: 12px/1.5 var(--sans); letter-spacing: .24em; }
-    .writings-chapter-title { margin: 8px 0 0; font: 400 clamp(24px,3vw,35px)/1.35 var(--serif); }
-    .writings-chapter-count { margin: 5px 0 22px; color: #aab9bd; font: 12px/1.6 var(--sans); }
+    .writings-chapter-title { font: 400 clamp(22px,3vw,33px)/1.35 var(--serif); }
+    .writings-chapter-count { color: #aab9bd; font: 12px/1.6 var(--sans); white-space: nowrap; }
+    .writings-chapter-icon { color: #c8b58b; font: 25px/1 var(--serif); transition: transform .3s ease; }
+    .writings-chapter[open] .writings-chapter-icon { transform: rotate(45deg); }
+    .writings-chapter-entries { padding: 0 0 24px 46px; }
     .writings-entry { margin: 8px 0; color: #17283a; background: #eeeae1; }
     .writings-entry[hidden],.writings-chapter[hidden] { display: none; }
     .writings-entry-summary { display: grid; grid-template-columns: 30px 1fr 18px; align-items: center; gap: 16px; min-height: 58px; padding: 14px 20px; cursor: pointer; list-style: none; }
@@ -488,6 +496,8 @@
       .writings-reader { padding: 18px; }
       .writings-heading { align-items: start; flex-direction: column; gap: 6px; }
       .writings-topics button { min-height: 44px; }
+      .writings-chapter-summary { grid-template-columns: 22px minmax(0,1fr) auto 16px; gap: 10px; min-height: 68px; }
+      .writings-chapter-entries { padding-left: 0; }
       .writings-entry-summary { grid-template-columns: 22px 1fr 16px; gap: 10px; padding-inline: 15px; }
       .writings-entry-body { padding-inline: 18px; }
       .word-card { min-height: 125px; font-size: 22px; }
@@ -1190,7 +1200,7 @@
       <p class="words-note">这里收录的是原创听后感，不摘录歌曲歌词。你也可以把自己的演出记录与聆听记忆整理进来。</p>
       <div class="writings-reader" id="writings-reader" aria-labelledby="writings-title">
         <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>书籍 · 音乐 · 影像</span></div>
-        <p class="writings-intro">李健为书籍、影视与音乐所写的文字，按主题整理为四卷。选择篇目展开正文，也可搜索人名、作品或词句。</p>
+        <p class="writings-intro">李健为书籍、影视与音乐所写的文字，按主题整理为四卷。先展开主题，再选择篇目；也可搜索人名、作品或词句。</p>
         <div class="writings-topics" id="writings-topics" role="group" aria-label="按主题跳转阅读"></div>
         <div class="writings-tools"><input class="writings-search" id="writings-search" type="search" placeholder="搜索篇目、人物或正文" aria-label="搜索李健的文字"><button id="writings-expand" type="button">展开结果</button><button id="writings-collapse" type="button">收起全部</button></div>
         <p class="writings-status" id="writings-status" role="status">正在载入文字……</p>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101c2c">
   <meta name="description" content="李健 · 音乐与时间档案馆。以音乐、时间、城市与影像为线索的非官方粉丝档案。">
-  <link rel="canonical" href="https://li-jian-music-archive.hhj5268.chatgpt.site/">
+  <link rel="canonical" href="https://link5268.github.io/li-jian-music-archive/">
   <title>李健 · 音乐与时间档案馆</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='24' fill='%23101c2c'/%3E%3Cpath d='M14 13v22h20M14 24h15' fill='none' stroke='%23d5c49a' stroke-width='2'/%3E%3C/svg%3E">
   <style>
@@ -41,6 +41,7 @@
     .topline nav::-webkit-scrollbar { display: none; }
     .topline nav a { flex: 0 0 auto; color: rgba(248,246,240,.72); text-decoration: none; font-size: 11px; letter-spacing: .08em; transition: color .25s ease; }
     .topline nav a:hover, .topline nav a[aria-current="location"] { color: #e5c995; }
+    .nav-toggle { display: none; }
 
     .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: 1fr; overflow: hidden; color: var(--white); background: linear-gradient(120deg,#101c2c 8%,#142237 58%,#203248 100%); }
     .hero::after { content: ""; position: absolute; inset: 66px 0 0; z-index: 1; pointer-events: none; opacity: .19; background-image: repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.025) 4px,transparent 5px); mix-blend-mode: soft-light; }
@@ -157,28 +158,42 @@
     .map-card { position: relative; margin: 0; padding: 25px; background: #e7e5dc; border: 1px solid rgba(16,28,44,.15); }
     .map-stage { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1000/744; margin: 0 auto; }
     .map-base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: .82; filter: sepia(.08) hue-rotate(165deg) saturate(.7); }
-    .city-pin { position: absolute; z-index: 2; left: var(--x); top: var(--y); width: 11px; height: 11px; padding: 0; border: 0; color: var(--ink); background: transparent; cursor: pointer; transform: translate(-50%,-50%); }
+    .city-pin { position: absolute; z-index: 2; left: var(--x); top: var(--y); display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; color: var(--ink); background: transparent; cursor: pointer; transform: translate(-50%,-50%); }
     .city-pin .pin-dot { width: 8px; height: 8px; border: 2px solid #f6f1e6; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 1px var(--night), 0 0 0 3px rgba(185,154,100,.2); transition: transform .2s ease, background .2s ease; }
     .city-pin[aria-pressed="true"] { z-index: 5; }
     .city-pin[aria-pressed="true"] .pin-dot, .city-pin:hover .pin-dot { transform: scale(1.28); background: #8b5946; }
-    .city-pin .pin-label { position: absolute; left: var(--label-x,12px); top: var(--label-y,-10px); padding: 3px 6px; color: var(--ink); background: rgba(244,241,234,.96); font-size: 10px; letter-spacing: .04em; white-space: nowrap; opacity: 0; transform: translateY(3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
+    .city-pin .pin-label { position: absolute; left: calc(50% + var(--label-x,12px)); top: calc(50% + var(--label-y,-10px)); padding: 3px 6px; color: var(--ink); background: rgba(244,241,234,.96); font-size: 10px; letter-spacing: .04em; white-space: nowrap; opacity: 0; transform: translateY(3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
+    .map-city-picker { display: none; }
     .city-pin[aria-pressed="true"] .pin-label, .city-pin:hover .pin-label, .city-pin:focus-visible .pin-label { opacity: 1; transform: translateY(0); }
     .city-pin:focus-visible { outline: 2px solid var(--night); outline-offset: 5px; }
     .map-card figcaption { display: flex; justify-content: space-between; gap: 15px; margin-top: 15px; color: #68747a; font-size: 10px; line-height: 1.6; }
     .map-card figcaption a { text-underline-offset: 3px; }
-    .tour-heading-lockup { display: flex; align-items: center; gap: 17px; }
-    .tour-heading-lockup .tour-emblem { width: clamp(48px,6vw,74px); height: clamp(48px,6vw,74px); object-fit: contain; mix-blend-mode: multiply; }
-    .tour-themes { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; margin: -28px 0 clamp(40px,6vw,76px); background: rgba(16,28,44,.18); border: 1px solid rgba(16,28,44,.18); }
+    .tour-themes { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; margin: -28px 0 0; background: rgba(16,28,44,.18); border: 1px solid rgba(16,28,44,.18); }
     .tour-theme { min-height: 76px; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 15px 18px; border: 0; color: var(--ink); background: rgba(244,241,234,.68); text-align: left; cursor: pointer; transition: color .2s ease, background .2s ease; }
     .tour-theme strong { font: 400 17px/1.2 var(--serif); }
     .tour-theme small { color: #718084; font-size: 10px; letter-spacing: .08em; }
     .tour-theme[aria-pressed="true"] { color: var(--white); background: var(--night); }
     .tour-theme[aria-pressed="true"] small { color: #c3cdcb; }
+    .tour-poster-feature { display: grid; grid-template-columns: minmax(250px,.72fr) minmax(320px,1.28fr); margin: 0 0 clamp(44px,6vw,76px); color: var(--white); background: var(--night); }
+    .tour-poster { display: flex; flex-direction: column; justify-content: center; min-width: 0; margin: 0; padding: clamp(17px,2.5vw,34px); background: #142236; }
+    .tour-poster img { display: block; width: 100%; height: clamp(310px,35vw,480px); object-fit: contain; }
+    .tour-poster-enlarge { display: inline-flex; align-items: center; min-height: 38px; margin-top: 5px; color: #d5c49a; font: 12px/1.5 var(--sans); text-underline-offset: 4px; }
+    .tour-poster figcaption { margin-top: 13px; color: #b7c2c2; font: 10px/1.6 var(--sans); }
+    .tour-poster-copy { display: flex; flex-direction: column; justify-content: center; align-items: start; padding: clamp(30px,5vw,76px); }
+    .tour-poster-copy .section-kicker { color: #c7b68c; }
+    .tour-poster-copy h3 { margin: 18px 0 0; font: 400 clamp(37px,5vw,69px)/1.08 var(--serif); }
+    .tour-poster-period { margin: 10px 0 22px; color: #d5c49a; font: 13px/1.5 var(--serif); letter-spacing: .12em; }
+    .tour-poster-description { max-width: 510px; margin: 0; color: #c8d1cf; font: 300 15px/1.85 var(--serif); }
+    .tour-poster-stats { display: flex; flex-wrap: wrap; gap: 22px 38px; width: 100%; margin: 29px 0 0; padding-top: 20px; border-top: 1px solid rgba(236,232,223,.2); }
+    .tour-poster-stats span { display: grid; gap: 5px; color: #b7c2c2; font: 11px/1.5 var(--sans); }
+    .tour-poster-stats strong { color: #f4f1e8; font: 400 27px/1 var(--serif); }
+    .tour-poster-link { margin-top: 31px; color: #d5c49a; font: 12px/1.5 var(--sans); letter-spacing: .08em; text-underline-offset: 5px; }
     .tour-side { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
     .tour-side .section-kicker { color: #66787a; }
     .tour-side h3 { margin: 11px 0 0; color: var(--ink); font: 400 clamp(31px,4.3vw,56px)/1.05 var(--serif); }
     .tour-side .tour-cn { margin: 8px 0 30px; color: #68747a; font: 300 14px/1.6 var(--serif); letter-spacing: .1em; }
     .city-stops { display: grid; gap: 13px; }
+    .postmark.is-selected { border-color: var(--gold); background: #f8f4e9; box-shadow: inset 3px 0 var(--gold); }
     .city-empty { max-width: 430px; padding: 24px; border: 1px dashed rgba(16,28,44,.35); color: #667579; background: rgba(244,241,234,.45); font: 300 14px/1.8 var(--serif); }
     .postmark { position: relative; max-width: 430px; padding: 22px 23px 20px; border: 1px dashed rgba(16,28,44,.42); background: rgba(244,241,234,.5); }
     .postmark::before { content: "CITY ARCHIVE"; position: absolute; right: 13px; top: 12px; color: rgba(16,28,44,.45); font: 10px/1 var(--serif); letter-spacing: .14em; }
@@ -197,6 +212,15 @@
     .setlist-number { color: #9a8660; font: 11px/1.55 var(--serif); }
     .tour-source { display: inline-block; width: fit-content; margin-top: 16px; color: #31495d; font-size: 11px; text-underline-offset: 4px; }
     .tour-note { max-width: 430px; margin: 16px 0 0; color: #68747a; font-size: 11px; line-height: 1.75; }
+    .tour-upcoming { margin-top: 42px; padding: 24px clamp(20px, 3vw, 38px); border: 1px solid rgba(16,28,44,.2); background: rgba(248,246,240,.42); }
+    .tour-upcoming h3 { margin: 0 0 8px; font: 400 clamp(21px,2.5vw,29px)/1.3 var(--serif); }
+    .tour-upcoming p { margin: 0 0 18px; color: #5a6972; font-size: 12px; line-height: 1.8; }
+    .tour-upcoming ul { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; background: rgba(16,28,44,.18); }
+    .tour-upcoming li { display: grid; gap: 6px; padding: 18px; background: #e9eae3; }
+    .tour-upcoming time { color: #796c54; font-size: 11px; letter-spacing: .09em; }
+    .tour-upcoming strong { font: 400 21px/1.2 var(--serif); }
+    .tour-upcoming li span { color: #65747a; font-size: 11px; }
+    @media (max-width: 620px) { .tour-upcoming ul { grid-template-columns: 1fr; } }
     .map-overseas { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin: 4px auto 0; padding: 10px 13px; border-top: 1px solid rgba(16,28,44,.14); color: #68747a; }
     .map-overseas[hidden] { display: none; }
     .map-overseas-label { display: flex; flex-direction: column; gap: 4px; margin-right: auto; font-size: 9px; letter-spacing: .14em; }
@@ -236,7 +260,6 @@
     .tour-register-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
     .tour-register-head p { margin: 0; color: #6d777a; font: 10px/1.5 var(--serif); letter-spacing: .12em; text-align: right; }
     .tour-head-side { display: flex; align-items: center; gap: 15px; }
-    .tour-wordmark { width: clamp(60px,7vw,92px); aspect-ratio: 1179/1082; object-fit: contain; opacity: .66; mix-blend-mode: multiply; }
     .tour-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin: 24px 0 13px; }
     .tour-filters { display: flex; flex-wrap: wrap; gap: 7px; margin-right: auto; }
     .tour-filter, .tour-search input, .tour-city-filter select { min-height: 37px; border: 1px solid rgba(16,28,44,.27); border-radius: 0; color: var(--ink); background: rgba(244,241,234,.58); font: 11px/1.4 var(--sans); }
@@ -246,6 +269,8 @@
     .tour-city-filter select { padding: 8px 27px 8px 10px; }
     .tour-filter:focus-visible, .tour-search input:focus-visible, .tour-city-filter select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .tour-results { margin: 0 0 9px; color: #6d777a; font-size: 10px; letter-spacing: .05em; }
+    .tour-clear-filter { min-height: 37px; padding: 7px 11px; border: 1px solid rgba(16,28,44,.27); color: var(--ink); background: transparent; cursor: pointer; font: 11px/1.4 var(--sans); }
+    .tour-clear-filter[hidden] { display: none; }
     .tour-list { border-top: 1px solid rgba(16,28,44,.26); }
     .tour-list-head, .tour-row { display: grid; grid-template-columns: 42px 123px 82px minmax(175px,1.05fr) minmax(210px,1.25fr); gap: 13px; align-items: start; }
     .tour-list-head { padding: 11px 9px 9px; color: #7a8384; font-size: 9px; letter-spacing: .13em; }
@@ -274,23 +299,26 @@
     .time-entry h3 { margin: 0 0 7px; color: var(--white); font: 400 21px/1.3 var(--serif); }
     .time-entry p { max-width: 570px; margin: 0; color: #b8c2c4; font: 300 14px/1.8 var(--serif); }
 
-    .moments-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.9fr); grid-template-rows: auto auto auto; gap: clamp(22px,3.5vw,48px); align-items: start; }
-    .moment { margin: 0; }
-    .moment img { width: 100%; height: auto; background: #d3d0c8; }
-    .moment-large { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-    .moment-large img { aspect-ratio: 4/3; object-fit: cover; }
-    .moment-xian { grid-column: 3; grid-row: 1 / span 2; }
-    .moment-xian img, .moment-blue img, .moment-portrait img, .moment-small img { aspect-ratio: 4/5; object-fit: cover; }
-    .moment-blue { grid-column: 1; grid-row: 3; }
-    .moment-small { grid-column: 2; grid-row: 3; margin-top: 10vh; }
-    .moment-portrait { grid-column: 3; grid-row: 3; margin-top: 4vh; }
-    .moment-note { grid-column: 1 / span 2; padding: 25px 0 0 20px; border-left: 1px solid rgba(16,28,44,.25); color: #65717a; font: 300 15px/1.9 var(--serif); }
-    .moment-note strong { display: block; margin-bottom: 12px; color: var(--ink); font: 400 12px/1.5 var(--sans); letter-spacing: .16em; }
-    .official-weibo-card { grid-column: 3; align-self: end; display: flex; min-height: 170px; flex-direction: column; justify-content: space-between; padding: 22px; color: var(--white); background: radial-gradient(circle at 90% 8%,rgba(185,154,100,.34),transparent 36%),linear-gradient(145deg,#101c2c,#273c51); text-decoration: none; }
-    .official-weibo-card span { color: #d0bd91; font-size: 9px; letter-spacing: .18em; }
-    .official-weibo-card strong { display: block; margin: 20px 0 6px; font: 400 24px/1.2 var(--serif); }
-    .official-weibo-card time { color: #c5ced0; font: 12px/1.5 var(--serif); }
-    .official-weibo-card:hover { box-shadow: inset 0 0 0 1px rgba(185,154,100,.7); }
+    .notebook-opening { display: grid; grid-template-columns: minmax(0,1fr) minmax(180px,280px); gap: clamp(28px,6vw,90px); align-items: start; margin-bottom: 38px; }
+    .notebook-opening .section-intro { margin-top: 0; }
+    .notebook-portrait { margin: -20px 0 0; }
+    .notebook-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; object-position: center 22%; }
+    .notebook-portrait figcaption { margin-top: 10px; color: #68757b; font: 11px/1.6 var(--serif); }
+    .moments-intro { max-width: 650px; margin: -32px 0 60px; color: #52616d; font: 300 16px/1.9 var(--serif); }
+    .moments-year { margin-top: clamp(52px,7vw,100px); }
+    .moments-intro + .moments-year { margin-top: 0; }
+    .moments-year-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin: 0 0 29px; padding-bottom: 15px; border-bottom: 1px solid rgba(16,28,44,.2); }
+    .moments-year-heading h3 { margin: 0; color: var(--ink); font: 400 clamp(30px,4vw,52px)/1 var(--serif); }
+    .moments-year-heading span { color: #68757b; font: 11px/1.5 var(--sans); letter-spacing: .15em; }
+    .moments-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(30px,4vw,62px) clamp(20px,3vw,48px); align-items: start; }
+    .moment { min-width: 0; margin: 0; }
+    .moment:nth-child(3n + 2) { margin-top: clamp(30px,5vw,75px); }
+    .moment:nth-child(3n) { margin-top: clamp(12px,2vw,30px); }
+    .moment img { display: block; width: 100%; height: auto; background: #d3d0c8; }
+    .moment figcaption { display: flex; align-items: baseline; gap: 12px; padding-top: 3px; border-top: 1px solid rgba(16,28,44,.13); }
+    .moment-number { flex: 0 0 auto; color: #a88c59; font: 400 18px/1.5 var(--serif); }
+    .moment-place { color: var(--ink); font: 400 14px/1.5 var(--serif); }
+    .moment-date { margin-left: auto; white-space: nowrap; color: #758086; font: 11px/1.6 var(--sans); }
 
     .words-section { min-height: 66vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg,#101c2c,#1c2e40 74%,#24364a); }
     .words-section .section-kicker { color: #d0bd91; }
@@ -299,7 +327,52 @@
     .word-author { margin: 21px 0 35px; color: #aab9bd; font-size: 10px; letter-spacing: .22em; }
     .word-next { padding: 12px 2px; color: #d5c49a; border: 0; border-bottom: 1px solid rgba(213,196,154,.6); background: transparent; cursor: pointer; font-size: 11px; letter-spacing: .16em; }
     .words-note { max-width: 540px; margin: 32px 0 0; color: #9eaaae; font-size: 11px; line-height: 1.7; }
+    .writings-reader { box-sizing: border-box; width: min(100%, 1120px); margin: clamp(72px,9vw,130px) auto 0; padding: clamp(24px,4vw,48px); border: 1px solid rgba(236,232,223,.18); color: #ece8df; background: rgba(4,13,24,.22); text-align: left; }
+    .writings-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+    .writings-heading h3 { margin: 10px 0 0; font: 400 clamp(28px,4vw,48px)/1.15 var(--serif); }
+    .writings-heading > span { color: #c8b58b; font: 11px/1.6 var(--sans); letter-spacing: .16em; white-space: nowrap; }
+    .writings-intro { max-width: 780px; margin: 0 0 25px; color: #bac5c8; font: 14px/1.9 var(--serif); }
+    .writings-topics { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 24px; }
+    .writings-topics button { min-height: 38px; padding: 7px 12px; border: 1px solid rgba(236,232,223,.25); color: #cfdbdb; background: transparent; cursor: pointer; font: 12px/1.5 var(--sans); }
+    .writings-topics button:hover { border-color: #c8b58b; color: #101c2c; background: #c8b58b; }
+    .writings-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 26px; }
+    .writings-search { box-sizing: border-box; flex: 1 1 260px; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline: none; color: #ece8df; background: #17283a; font: 13px var(--sans); }
+    .writings-search::placeholder { color: #aab9bd; }
+    .writings-search:focus { border-color: #c8b58b; }
+    .writings-tools button { min-height: 44px; padding: 8px 4px; border: 0; border-bottom: 1px solid rgba(213,196,154,.55); color: #d5c49a; background: transparent; cursor: pointer; font: 12px var(--sans); }
+    .writings-status { margin: 0 0 16px; color: #aab9bd; font: 12px/1.7 var(--sans); }
+    .writings-chapter { margin-top: 10px; border-top: 1px solid rgba(236,232,223,.2); scroll-margin-top: 94px; }
+    .writings-chapter:last-child { border-bottom: 1px solid rgba(236,232,223,.2); }
+    .writings-chapter-summary { display: grid; grid-template-columns: 30px minmax(0,1fr) auto 20px; align-items: center; gap: 16px; min-height: 82px; padding: 16px 4px; cursor: pointer; list-style: none; }
+    .writings-chapter-summary::-webkit-details-marker { display: none; }
+    .writings-chapter-summary:hover .writings-chapter-title { color: #d5c49a; }
+    .writings-chapter-summary:focus-visible { outline: 2px solid #d5c49a; outline-offset: 2px; }
+    .writings-chapter-number { color: #c8b58b; font: 12px/1.5 var(--sans); letter-spacing: .24em; }
+    .writings-chapter-title { font: 400 clamp(22px,3vw,33px)/1.35 var(--serif); }
+    .writings-chapter-count { color: #aab9bd; font: 12px/1.6 var(--sans); white-space: nowrap; }
+    .writings-chapter-icon { color: #c8b58b; font: 25px/1 var(--serif); transition: transform .3s ease; }
+    .writings-chapter[open] .writings-chapter-icon { transform: rotate(45deg); }
+    .writings-chapter-entries { padding: 0 0 24px 46px; }
+    .writings-entry { margin: 8px 0; color: #17283a; background: #eeeae1; }
+    .writings-entry[hidden],.writings-chapter[hidden] { display: none; }
+    .writings-entry-summary { display: grid; grid-template-columns: 30px 1fr 18px; align-items: center; gap: 16px; min-height: 58px; padding: 14px 20px; cursor: pointer; list-style: none; }
+    .writings-entry-summary::-webkit-details-marker { display: none; }
+    .writings-entry-summary:hover { background: #f8f5ee; }
+    .writings-entry-summary:focus-visible,.writings-topics button:focus-visible,.writings-tools button:focus-visible { outline: 2px solid #b38f52; outline-offset: 2px; }
+    .writings-entry-number { color: #987e5a; font: 11px var(--sans); }
+    .writings-entry-title { font: 400 clamp(16px,1.7vw,20px)/1.6 var(--serif); }
+    .writings-entry-icon { color: #987e5a; font: 22px/1 var(--serif); }
+    .writings-entry[open] .writings-entry-icon { transform: rotate(45deg); }
+    .writings-entry-body { padding: 8px clamp(20px,5vw,66px) 30px; border-top: 1px solid rgba(23,40,58,.16); }
+    .writings-entry-body p { max-width: 72ch; margin: 22px auto 0; color: #27394a; font: 400 clamp(15px,1.4vw,17px)/2 var(--serif); overflow-wrap: anywhere; }
+    .writings-entry-body .writings-divider { color: #987e5a; text-align: center; }
+    .writings-series { display: block; max-width: 72ch; margin: 12px auto 0; color: #987e5a; font: 11px/1.5 var(--sans); letter-spacing: .18em; }
 
+    .source-catalog { margin-top: 28px; border-top: 1px solid rgba(16,28,44,.2); }
+    .source-catalog > summary { display: flex; justify-content: space-between; gap: 20px; padding: 20px 0; color: #31495d; cursor: pointer; font: 400 18px/1.5 var(--serif); list-style: none; }
+    .source-catalog > summary::-webkit-details-marker { display: none; }
+    .source-catalog > summary::after { content: "＋"; color: #8b5946; }
+    .source-catalog[open] > summary::after { content: "−"; }
     .source-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; border-top: 1px solid rgba(16,28,44,.2); }
     .source-list a { display: flex; justify-content: space-between; gap: 15px; padding: 16px 0; border-bottom: 1px solid rgba(16,28,44,.16); color: #31495d; text-decoration: none; font: 300 14px/1.6 var(--serif); }
     .source-list a span:last-child { flex: 0 0 auto; color: #7b8688; font: 10px/1.8 var(--sans); }
@@ -313,30 +386,38 @@
     .js .reveal.is-visible { opacity: 1; transform: none; }
     @media (max-width: 850px) {
       .topline { gap: 15px; min-height: 61px; padding-inline: 18px; }
-      .topline nav { justify-content: flex-start; max-width: 68vw; gap: 17px; }
-      .topline nav a { font-size: 10px; }
+      .nav-toggle { display: inline-flex; align-items: center; gap: 13px; min-height: 44px; padding: 0 12px; border: 1px solid rgba(185,154,100,.4); color: var(--white); background: transparent; cursor: pointer; font-size: 13px; letter-spacing: .08em; }
+      .nav-toggle::after { content: "+"; color: var(--gold); font-size: 20px; line-height: 1; }
+      .nav-toggle[aria-expanded="true"]::after { content: "−"; }
+      .nav-current { color: #d5c49a; font-size: 12px; }
+      .topline nav { position: absolute; top: 100%; left: 0; right: 0; display: none; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0; max-width: none; max-height: calc(100svh - 61px); padding: 12px 18px 18px; overflow-y: auto; background: rgba(16,28,44,.98); border-bottom: 1px solid rgba(185,154,100,.35); box-shadow: 0 18px 34px rgba(0,0,0,.2); }
+      .topline nav.is-open { display: grid; }
+      .topline nav a { padding: 13px 10px; border-bottom: 1px solid rgba(236,232,223,.12); font-size: 14px; }
+      .topline nav a[aria-current="location"] { border-bottom-color: var(--gold); }
       .brand { font-size: 9px; letter-spacing: .12em; }
       .hero { grid-template-columns: 1fr; }
       .about-grid,.music-layout,.tour-layout { gap: 43px; }
       .tour-layout { grid-template-columns: 1fr; gap: 34px; }
       .research-grid { gap: 32px; }
       .tour-themes { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .tour-poster-feature { grid-template-columns: minmax(220px,.8fr) minmax(0,1.2fr); }
+      .tour-poster-copy { padding: 30px; }
+      .city-pin { width: 44px; height: 44px; }
+      .map-city-picker { display: block; margin-top: 12px; border-top: 1px solid rgba(16,28,44,.15); }
+      .map-city-picker summary { min-height: 44px; padding: 13px 5px; color: var(--ink); cursor: pointer; font: 13px/1.4 var(--serif); }
+      .map-city-picker-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; padding: 4px 0 13px; }
+      .map-city-picker-list button { min-height: 44px; padding: 8px 4px; border: 1px solid rgba(16,28,44,.24); color: var(--ink); background: rgba(244,241,234,.7); cursor: pointer; font: 13px/1.4 var(--serif); }
+      .map-city-picker-list button[aria-pressed="true"] { color: var(--white); background: var(--night); }
       .time-line { margin-left: 0; }
-      .moments-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); }
-      .moment-large { grid-column: 1; grid-row: 1 / span 2; }
-      .moment-xian { grid-column: 2; grid-row: 1 / span 2; }
-      .moment-blue { grid-column: 1; grid-row: 3; }
-      .moment-small { grid-column: 2; grid-row: 3; margin-top: 8vh; }
-      .moment-portrait { grid-column: 1; grid-row: 4; margin-top: 0; }
-      .moment-note { grid-column: 2; grid-row: 4; }
-      .official-weibo-card { grid-column: 1 / span 2; grid-row: 5; min-height: 135px; }
+      .moments-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .moment:nth-child(n) { margin-top: 0; }
+      .moment:nth-child(even) { margin-top: 42px; }
     }
     @media (max-width: 650px) {
       :root { --gutter: 25px; }
       html { scroll-padding-top: 60px; }
       .topline { min-height: 59px; }
-      .topline nav { max-width: 58vw; gap: 16px; }
-      .topline nav a { font-size: 10px; }
+      .nav-toggle { gap: 9px; }
       .hero { display: block; min-height: 100svh; }
       .hero-photo { inset: 0; min-height: 100svh; }
       .hero-photo::before { background: linear-gradient(90deg,rgba(16,28,44,.58),rgba(16,28,44,.18) 70%,rgba(16,28,44,.08)),linear-gradient(0deg,rgba(16,28,44,.7),transparent 55%); }
@@ -345,9 +426,9 @@
       .hero h1 { margin: 24px 0 14px; font-size: clamp(58px,16vw,92px); }
       .hero-subtitle { font-size: 14px; }
       .hero-cn { margin-top: 17px; font-size: 13px; line-height: 1.75; }
-      .hero-date { bottom: 25px; left: 27px; font-size: 9px; }
+      .hero-date { bottom: 61px; left: 27px; font-size: 9px; }
       .hero-note { right: 18px; bottom: 28px; font-size: 8px; }
-      .photo-credit { left: 12px; bottom: 12px; max-width: 90%; font-size: 9px; }
+      .photo-credit { left: 12px; bottom: 12px; max-width: 70%; font-size: 9px; }
       .scroll-cue { display: none; }
       .archive-section { padding-block: 76px; }
       .section-head { margin-bottom: 39px; }
@@ -368,10 +449,16 @@
       .music-record ol { columns: 1; }
       .archive-lines li { grid-template-columns: 82px minmax(110px,1fr); gap: 7px 12px; }
       .archive-lines li span { grid-column: 2; }
-      .tour-themes { grid-template-columns: 1fr; margin-top: -20px; }
+      .tour-themes { grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: -20px; }
       .tour-theme { min-height: 62px; }
-      .tour-heading-lockup { gap: 12px; }
-      .tour-heading-lockup .tour-emblem { width: 48px; height: 48px; }
+      .tour-poster-feature { grid-template-columns: 1fr; }
+      .tour-poster { padding: 16px 20px 0; }
+      .tour-poster img { height: clamp(190px,55vw,270px); }
+      .tour-poster-copy { padding: 20px 24px 27px; }
+      .tour-poster-copy h3 { margin-top: 8px; font-size: clamp(31px,8vw,42px); }
+      .tour-poster-period { margin: 8px 0 12px; }
+      .tour-poster-stats { margin-top: 17px; padding-top: 15px; }
+      .tour-poster-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 10px; }
       .postmark { padding: 19px 16px; }
       .postmark dl div { grid-template-columns: 85px 1fr; gap: 8px; }
       .postmark-setlist ol { grid-template-columns: 1fr; }
@@ -380,7 +467,6 @@
       .tour-register-head { align-items: start; flex-direction: column; gap: 8px; }
       .tour-register-head p { text-align: left; }
       .tour-head-side { gap: 7px; }
-      .tour-wordmark { width: 58px; }
       .tour-toolbar { align-items: stretch; }
       .tour-filters { width: 100%; margin-right: 0; }
       .tour-search { flex: 1 1 55%; }
@@ -400,17 +486,31 @@
       .time-entry::before { left: -29px; }
       .time-entry time { font-size: 14px; }
       .time-entry h3 { font-size: 18px; }
-      .moments-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 26px; }
-      .moment-large,.moment-xian,.moment-blue,.moment-small,.moment-portrait,.moment-note,.official-weibo-card { grid-column: auto; grid-row: auto; }
-      .moment-large img { aspect-ratio: 4/3; }
-      .moment-xian img,.moment-blue img,.moment-portrait img,.moment-small img { aspect-ratio: 4/5; }
-      .moment-small,.moment-portrait { margin-top: 0; }
-      .moment-note { margin-left: 8%; padding-left: 17px; }
+      .notebook-opening { grid-template-columns: 1fr; margin-bottom: 30px; }
+      .notebook-portrait { max-width: 235px; margin: 0; }
+      .moments-intro { margin: -16px 0 35px; }
+      .moments-grid { grid-template-columns: 1fr; gap: 33px; }
+      .moment:nth-child(n) { margin-top: 0; }
+      .moment img { max-height: 78vh; object-fit: contain; object-position: left center; }
       .words-section { min-height: 62vh; }
+      .writings-reader { padding: 18px; }
+      .writings-heading { align-items: start; flex-direction: column; gap: 6px; }
+      .writings-topics button { min-height: 44px; }
+      .writings-chapter-summary { grid-template-columns: 22px minmax(0,1fr) auto 16px; gap: 10px; min-height: 68px; }
+      .writings-chapter-entries { padding-left: 0; }
+      .writings-entry-summary { grid-template-columns: 22px 1fr 16px; gap: 10px; padding-inline: 15px; }
+      .writings-entry-body { padding-inline: 18px; }
       .word-card { min-height: 125px; font-size: 22px; }
       .source-list,.archive-credits { grid-template-columns: 1fr; gap: 0; }
       .archive-credits { gap: 16px; margin-top: 31px; }
       .site-footer { flex-direction: column; padding-block: 23px; }
+      .eyebrow,.section-kicker,.hero-date,.photo-credit,.hero-note,.section-index,.album-kind,.album-toggle,.music-fold > summary span,.research-fold > summary span,.tour-theme small,.tour-poster figcaption,.tour-index-summary span,.tour-results,.map-card figcaption,.tour-note,.site-footer { font-size: 12px; line-height: 1.6; }
+      .hero-note { right: 15px; }
+      .about-photo figcaption,.moment figcaption,.vinyl-figure figcaption,.rights-note,.research-note,.postmark dt,.tour-stop-when small,.tour-stop-venue small,.tour-stop-song small,.tour-stop-note,.archive-credits p { font-size: 12px; line-height: 1.65; }
+      .research-fold-content,.postmark-setlist li,.single-show-list p { font-size: 14px; line-height: 1.75; }
+      .tour-filter,.tour-search input,.tour-city-filter select,.tour-clear-filter { min-height: 44px; font-size: 13px; }
+      .tour-search input,.tour-city-filter select { font-size: 16px; }
+      .site-footer { padding-bottom: 88px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -488,9 +588,10 @@
 }
 </style>
 </head>
+<body>
 <div class="music-dock">
   <audio id="background-music" loop preload="none">
-    <source src="assets/backgroundmusic.flac" type="audio/flac">
+    <source src="assets/backgroundmusic.mp3" type="audio/mpeg">
   </audio>
 
   <button
@@ -531,12 +632,11 @@
     }
   });
 </script>
-<body>
-
   <a class="skip-link" href="#about">跳到档案内容</a>
   <header class="topline">
     <a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-name">LI JIAN</span> ARCHIVE</span></a>
-    <nav aria-label="档案导航">
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">目录 <span class="nav-current" id="nav-current">序</span></button>
+    <nav id="site-nav" aria-label="档案导航">
       <a href="#home">序</a><a href="#about">人物</a><a href="#music">音乐</a><a href="#tour">巡演</a><a href="#time">时间</a><a href="#stage">荧屏</a><a href="#notebook">札记</a><a href="#moments">影像</a><a href="#words">文字</a><a href="#archive">档案</a>
     </nav>
   </header>
@@ -550,9 +650,8 @@
         <span class="hero-date">1974 — PRESENT&nbsp;&nbsp; / &nbsp;&nbsp;哈尔滨 · 中国</span>
       </div>
       <figure class="hero-photo">
-        <img src="assets/lijian-intro-cover.png" alt="黑白巡演封面：李健与唱片意象" width="2048" height="1191" fetchpriority="high">
+        <img src="assets/lijian-intro-cover.webp" alt="黑白巡演封面：李健与唱片意象" width="2048" height="1191" fetchpriority="high" decoding="async">
         <span class="hero-note">MUSIC · TIME · LANDSCAPE</span>
-        <figcaption class="photo-credit">序 · 巡演视觉封面 · 用户提供</figcaption>
       </figure>
       <a class="scroll-cue" href="#about">SCROLL TO ENTER</a>
     </section>
@@ -565,7 +664,6 @@
       <div class="about-grid">
         <figure class="about-photo reveal">
           <img src="assets/lijian-about-close.jpg" alt="李健面部近景肖像" width="1278" height="960" loading="lazy">
-          <figcaption>人物页肖像 · 用户提供</figcaption>
         </figure>
         <div class="about-copy reveal">
           <span class="section-kicker">LI JIAN · SINGER / SONGWRITER</span>
@@ -593,7 +691,7 @@
             <li><time>2015—2016</time><div><strong>《我是歌手》与「看见李健」</strong><span>《我是歌手》第三季获年度亚军；开启「看见李健」巡演，并在纽约林肯中心举行个人演唱会。</span></div></li>
             <li><time>2017—2020</time><div><strong>节目导师与巡演</strong><span>参加《歌手2017》，担任《中国好声音》导师，展开「不止，是李健」巡演。</span></div></li>
             <li><time>2021—2022</time><div><strong>《无时无刻》与线上现场</strong><span>发行《无时无刻》；参与《声生不息·港乐季》，并将多场现场免费在线播出。</span></div></li>
-            <li><time>2023—2026</time><div><strong>「万物安生时」</strong><span>巡演于 2023 年开启；本档案的 35 场场次依照创建者提供的清单整理至 2026 年 9 月。</span></div></li>
+            <li><time>2023—2026</time><div><strong>「万物安生时」</strong><span>巡演于 2023 年开启；本档案收录 35 场已举行演出及 4 场已公布的后续 Encore 演出。</span></div></li>
           </ol>
         </div>
       </div>
@@ -604,11 +702,10 @@
         <div><span class="section-kicker">03 / MUSIC ARCHIVE</span><h2 id="music-title">把音乐放进时间里</h2></div>
         <span class="section-index">作品档案 · 选辑</span>
       </div>
-      <p class="section-intro">八张个人专辑，沿着发行年份展开。点开作品可查看曲目；聆听请前往正规音乐平台。</p>
+      <p class="section-intro">八张个人专辑，沿着发行年份展开。点开作品可查看曲目，也可检索歌曲并前往 QQ 音乐寻找对应版本。</p>
       <div class="music-layout">
         <figure class="vinyl-figure reveal">
           <div class="vinyl-frame"><img src="assets/turntable-cc0.jpg" alt="黑胶唱片与唱机的俯拍照片，作为唱片档案的视觉意象" width="4896" height="3264" loading="lazy"></div>
-          <figcaption>唱片静物示意，与李健本人及具体专辑封面无关。照片：Mink Mingle via Wikimedia Commons · <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">CC0 1.0</a></figcaption>
         </figure>
         <div class="album-archive reveal">
           <details class="album-detail">
@@ -659,7 +756,7 @@
               <li><span>01</span>不期而遇</li><li><span>02</span>你从天而降</li><li><span>03</span>梅雨</li><li><span>04</span>Marine</li><li><span>05</span>美丽生灵</li><li><span>06</span>爱咋咋地</li><li><span>07</span>带来风景的女人</li><li><span>08</span>无烟之火</li><li><span>09</span>门</li><li><span>10</span>我唯有的你</li><li><span>11</span>人群中的人</li><li><span>12</span>夜晚眺望金桥</li><li><span>13</span>深町小夜曲</li><li><span>14</span>幻梦花园</li><li><span>15</span>一切刚刚好</li>
             </ol>
           </details>
-          <p class="rights-note">专辑与曲目依据所给资料整理，参考 <a href="https://zh.wikipedia.org/wiki/李健音乐作品列表" target="_blank" rel="noreferrer">中文维基百科《李健音乐作品列表》</a>。本页不提供音频或完整歌词，聆听请前往正规音乐平台。</p>
+          <p class="rights-note">本站背景音乐与专辑索引分开；其他曲目的聆听请前往正规音乐平台，完整歌词不在此转载。</p>
         </div>
       </div>
       <div class="music-additions">
@@ -738,7 +835,7 @@
           </div>
         </details>
         <details class="music-fold">
-          <summary><strong>综艺舞台曲目索引</strong><span>按中文维基百科作品列表收录</span></summary>
+          <summary><strong>综艺舞台曲目索引</strong><span>按节目分类</span></summary>
           <div class="music-fold-content">
             <h3>《我是歌手》第三季与巅峰会</h3>
             <ul class="stage-song-list"><li>《贝加尔湖畔》</li><li>《在水一方》</li><li>《袖手旁观》</li><li>《今天是你的生日，妈妈》</li><li>《当你老了》</li><li>《尘缘》</li><li>《月光》</li><li>《陀螺》</li><li>《假如爱有天意》</li><li>《和自己赛跑的人》／《朋友》</li><li>《故乡山川》／《乌苏里船歌》</li><li>《车站》</li><li>《Feeling Good》</li></ul>
@@ -749,25 +846,36 @@
           </div>
         </details>
       </div>
-    <details class="music-fold" id="recent-releases"><summary><strong>近期单曲与现场版本</strong><span>2023—2026 · 7 条补充</span></summary><div class="music-fold-content"><ul class="archive-lines"><li><time>2023.06.16</time><strong>《我爱你！》</strong><span>电影同名主题曲；词曲、演唱：李健。 <a href="https://music.apple.com/us/song/1739326138" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2024 · 节目记录</time><strong>《你一定能看见》</strong><span>央视《影视留声机》2024.12.25刊载演唱视频；此日期为节目页面日期。 <a href="https://tv.cctv.com/2024/12/25/VIDElyZfQZTghvAxpmPJvNxk241225.shtml" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2025.04.19</time><strong>《无论风往何处吹（Live）》</strong><span>现场版本；与录音室版本分别归档。 <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2025.04.22</time><strong>《星空下的家（Live）》</strong><span>现场版本；日期按音乐平台发行记录。 <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2026.02.12</time><strong>《人间共鸣》</strong><span>平台发行记录；另有2026年央视春晚演唱版本。 <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2026.04.19</time><strong>《蓝色夜曲》</strong><span>词曲：李健；编曲：崔万平、李琳萱；制作人：崔万平。 <a href="https://www.youtube.com/watch?v=4irY8I-NWWU" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2026.05.30</time><strong>《从黄昏到午夜》</strong><span>词曲：李健；制作人：刘卓；编曲：刘卓、金天、崔万平。 <a href="https://www.youtube.com/watch?v=PCASW1O8G14" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li></ul><p>发行日、节目播出日与视频上传日分别记录；未将已发布单曲推定为尚未确认的新专辑曲目。</p></div></details>
+    <details class="music-fold" id="recent-releases"><summary><strong>近期单曲与现场版本</strong><span>2023—2026 · 7 条补充</span></summary><div class="music-fold-content"><ul class="archive-lines"><li><time>2023.06.16</time><strong>《我爱你！》</strong><span>电影同名主题曲；词曲、演唱：李健。</span></li><li><time>2024 · 节目记录</time><strong>《你一定能看见》</strong><span>央视《影视留声机》2024.12.25刊载演唱视频；此日期为节目页面日期。</span></li><li><time>2025.04.19</time><strong>《无论风往何处吹（Live）》</strong><span>现场版本；与录音室版本分别归档。</span></li><li><time>2025.04.22</time><strong>《星空下的家（Live）》</strong><span>现场版本；日期按音乐平台发行记录。</span></li><li><time>2026.02.12</time><strong>《人间共鸣》</strong><span>平台发行记录；另有2026年央视春晚演唱版本。</span></li><li><time>2026.04.19</time><strong>《蓝色夜曲》</strong><span>词曲：李健；编曲：崔万平、李琳萱；制作人：崔万平。</span></li><li><time>2026.05.30</time><strong>《从黄昏到午夜》</strong><span>词曲：李健；制作人：刘卓；编曲：刘卓、金天、崔万平。</span></li></ul><p>发行日、节目播出日与视频上传日分别记录；未将已发布单曲推定为尚未确认的新专辑曲目。</p></div></details>
 </section>
 
     <section class="archive-section section-mist" id="tour" aria-labelledby="tour-title">
       <div class="section-head">
-        <div class="tour-heading-lockup">
-          <img class="tour-emblem" src="assets/wanwu-tour-emblem.jpg" alt="" aria-hidden="true" width="1280" height="1280" loading="lazy">
-          <div><span class="section-kicker">04 / TOUR ARCHIVE</span><h2 id="tour-title">万物安生时</h2></div>
-        </div>
+        <div><span class="section-kicker">04 / TOUR ARCHIVE</span><h2 id="tour-title">万物安生时</h2></div>
         <div class="tour-head-side">
-          <img class="tour-wordmark" src="assets/wanwu-tour-wordmark.jpg" alt="" aria-hidden="true" width="1179" height="1082" loading="lazy">
-          <span class="section-index" id="tour-count-label">2023—2026 · 35 场档案</span>
+          <span class="section-index" id="tour-count-label">2023—2026 · 39 场档案</span>
         </div>
       </div>
       <div class="tour-themes" role="group" aria-label="选择巡演主题">
-        <button class="tour-theme" type="button" data-tour-theme="万物安生时" aria-pressed="true"><strong>万物安生时</strong><small>2023—2026 · 35 场</small></button>
+        <button class="tour-theme" type="button" data-tour-theme="万物安生时" aria-pressed="true"><strong>万物安生时</strong><small>2023—2026 · 39 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="不止，是李健" aria-pressed="false"><strong>不止，是李健</strong><small>2018—2020 · 19 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="看见李健" aria-pressed="false"><strong>看见李健</strong><small>2015—2016 · 18 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="向往·2011" aria-pressed="false"><strong>向往 · 2011</strong><small>2011 · 9 场</small></button>
+      </div>
+      <div class="tour-poster-feature" aria-label="当前巡演主题视觉">
+        <figure class="tour-poster">
+          <img id="tour-poster-image" src="assets/tour-poster-wanwu.webp" alt="李健《万物安生时》巡演主视觉" width="1067" height="1474" loading="lazy" decoding="async">
+          <a class="tour-poster-enlarge" id="tour-poster-enlarge" href="assets/tour-poster-wanwu.webp" target="_blank" rel="noopener noreferrer">查看海报大图 ↗</a>
+          <figcaption id="tour-poster-caption">巡演主视觉海报标注 2023—2025；本档案继续收录 2026 年 Encore 场次。</figcaption>
+        </figure>
+        <div class="tour-poster-copy">
+          <span class="section-kicker">TOUR VISUAL / 巡演主题</span>
+          <h3 id="tour-poster-title" aria-live="polite">万物安生时</h3>
+          <p class="tour-poster-period" id="tour-poster-period">2023—2026</p>
+          <p class="tour-poster-description" id="tour-poster-description">以城市为序，把日期、场馆、特别曲目和现场歌单收进同一份巡演档案。</p>
+          <div class="tour-poster-stats"><span><strong id="tour-poster-stops">39</strong>已收录场次</span><span><strong id="tour-poster-cities">24</strong>城市</span></div>
+          <a class="tour-poster-link" href="#tour-map">查看城市与场次 ↓</a>
+        </div>
       </div>
       <div class="tour-layout">
         <figure class="map-card reveal">
@@ -775,25 +883,26 @@
             <img class="map-base" src="assets/china-province-map.svg" alt="按经纬度投影的中国省级行政区地图" width="1000" height="744" loading="lazy">
             <div id="tour-map-pins"></div>
           </div>
+          <details class="map-city-picker" id="map-city-picker"><summary id="map-city-picker-summary">按城市名称选择</summary><div class="map-city-picker-list" id="map-city-picker-list"></div></details>
           <div class="map-overseas" id="map-overseas" hidden>
             <span class="map-overseas-label">OUTSIDE MAP<strong>海外城市 · 城市中心坐标</strong></span>
             <div class="map-overseas-buttons" id="map-overseas-buttons"></div>
           </div>
-          <figcaption><span>城市点位与省界使用同一经纬度投影；标注城市中心，不代表场馆地址。海外场单列。</span><span>省界数据：<a href="https://github.com/Supeset/China-GeoData" target="_blank" rel="noreferrer">China-GeoData</a> · <a href="assets/CHINA-GEODATA-LICENSE.txt">MIT 许可</a></span></figcaption>
+          <figcaption><span>标注城市中心，不代表场馆地址。海外场单列。</span></figcaption>
         </figure>
         <div class="tour-side reveal">
           <span class="section-kicker">CITY RECORDS</span>
           <h3 id="city-name">上海</h3>
           <p class="tour-cn" id="city-caption">选择城市，查看同城场次档案。</p>
           <div class="city-stops" id="city-stops" aria-live="polite"></div>
-          <p class="tour-note">「万物安生时」按你提供的 35 场清单编目，历史巡演按中文维基百科条目收录；未注明的特别曲目与城市备注留空。地图标注中国城市中心，海外城市另列经纬度。</p>
+          <p class="tour-note">同一城市的多场演出合并展示。未公布的特别曲目和歌单留空。</p>
         </div>
       </div>
       <details class="tour-register">
         <summary class="tour-index-summary"><h3>场次索引</h3><span>展开筛选与完整记录</span></summary>
         <div class="tour-register-content">
         <div class="tour-register-head">
-          <p id="tour-register-caption">35 STOPS · 24 CITIES · 2023—2026</p>
+          <p id="tour-register-caption">39 STOPS · 24 CITIES · 2023—2026</p>
         </div>
         <div class="tour-toolbar" aria-label="筛选巡演记录">
           <div class="tour-filters" role="group" aria-label="按巡演阶段筛选">
@@ -803,18 +912,24 @@
           </div>
           <label class="tour-search"><span class="sr-only">搜索城市、场馆、特别曲目或备注</span><input id="tour-search" type="search" placeholder="搜索城市、场馆或曲目" autocomplete="off"></label>
           <label class="tour-city-filter"><span class="sr-only">按城市筛选</span><select id="tour-city-filter"><option value="">全部城市</option></select></label>
+          <button class="tour-clear-filter" id="tour-clear-filter" type="button" hidden>清除筛选</button>
         </div>
-        <p class="tour-results" id="tour-results" aria-live="polite">显示 35 / 35 场</p>
+        <p class="tour-results" id="tour-results" aria-live="polite">显示 39 / 39 场</p>
         <div class="tour-list" role="group" aria-label="李健万物安生时巡演场次">
           <div class="tour-list-head" aria-hidden="true"><span>NO.</span><span>DATE / STAGE</span><span>CITY</span><span>VENUE</span><span>SPECIAL SONG / CITY NOTE</span></div>
           <div id="tour-records"></div>
         </div>
         </div>
       </details>
+      <div class="tour-upcoming" aria-label="日期或场馆待公布的 Encore 城市">
+        <h3>后续城市 · 待公布</h3>
+        <p>具体日期、场馆和歌单待公布，因此暂不计入场次索引。</p>
+        <ul><li><time>2026.12</time><strong>宁波</strong><span>具体日期与场馆待公布</span></li><li><time>2027.01</time><strong>深圳</strong><span>具体日期与场馆待公布</span></li><li><time>2027.01</time><strong>北京</strong><span>具体日期与场馆待公布</span></li></ul>
+      </div>
       <details class="tour-register">
         <summary class="tour-index-summary"><h3>单场演唱会</h3><span>展开查看 1998—2014 年记录</span></summary>
         <div class="tour-register-content">
-          <p class="research-note">以下信息按中文维基百科《李健》条目所列；条目未标城市或场馆的项目留空。</p>
+          <p class="research-note">城市或场馆未注明的项目留空。</p>
           <div class="single-show-list">
             <p><strong>1998.06.10 · 北京</strong>清华大学体育馆 ·「李健·缪杰」个人作品演唱会</p>
             <p><strong>2008.04.29 · 城市未注明</strong>星光现场 ·「李健·完美坚持」演唱会</p>
@@ -852,7 +967,7 @@
         <article class="time-entry reveal"><time>2021—2022</time><div><h3>《无时无刻》与线上音乐会</h3><p>发行原创专辑《无时无刻》，参与《声生不息·港乐季》；多场音乐会在线上免费播出。</p></div></article>
         <article class="time-entry reveal"><time>2023</time><div><h3>「万物安生时」开启</h3><p>新一轮世界巡演从武汉启程；巡演中的城市、曲目和现场片段继续扩展这份档案。</p></div></article>
         <article class="time-entry reveal"><time>2025</time><div><h3>《万物安生时》新篇</h3><p>官方频道以深圳站记录 2024 年巡演收官，并开启 2025 年的新篇。</p></div></article>
-        <article class="time-entry reveal"><time>2026</time><div><h3>Encore · 城市继续相逢</h3><p>截至 2026.09.19，个人巡演档案收录 35 场、24 座城市；Encore 场继续留下新的现场记录。</p></div></article>
+        <article class="time-entry reveal"><time>2026</time><div><h3>Encore · 城市继续相逢</h3><p>截至 2026.09.19，档案收录 35 场已举行演出；另列成都、杭州、合肥 4 场已公布的后续演出。</p></div></article>
       </div>
     </section>
 
@@ -886,7 +1001,7 @@
             <div class="research-fold-content">
               <p>疫情期间，李健与主办方将五场音乐会或演唱会在线免费播出：</p>
               <ol><li>李健海口音乐会</li><li>李健老友新赏音乐会</li><li>李健万物声长音乐会</li><li>李健响往线上演唱会</li><li>李健天行健音乐会</li></ol>
-              <p>维基百科条目记载，《响往》当晚于“歌手李健”微信视频号播出。</p>
+              <p>《响往》当晚于“歌手李健”微信视频号播出。</p>
             </div>
           </details>
           <details class="research-fold">
@@ -896,7 +1011,7 @@
                 <li>1993 年，清华大学冬令营民歌组全国第一名，后获清华大学保送。</li>
                 <li>1998 年毕业于清华大学电子工程系；1998—2000 年在国家广电总局任网络工程师。</li>
                 <li>2015 年获聘国家海洋局海洋公益形象大使。</li>
-                <li>2016 年 3 月，在纽约林肯中心大卫·格芬厅举办个人演唱会；以上为维基百科条目所载描述。</li>
+                <li>2016 年 3 月，在纽约林肯中心大卫·格芬厅举办个人演唱会。</li>
               </ul>
             </div>
           </details>
@@ -927,7 +1042,7 @@
             <summary><strong>奖项之外的舞台记录</strong><span>晚会与单场演出</span></summary>
             <div class="research-fold-content">
               <ul>
-                <li><strong>2026</strong> · 央视春晚演唱《人间共鸣》。<a href="https://tv.cctv.com/2026/02/17/VIDEMN9cmK7gU3UgIVcQaPTC260217.shtml" target="_blank" rel="noopener noreferrer">央视节目记录 ↗</a></li>
+                <li><strong>2026</strong> · 央视春晚演唱《人间共鸣》。</li>
                 <li>2011 年首次登上央视春晚；2013 年第二次登上春晚，与孙俪合唱《风吹麦浪》。</li>
                 <li>2012 年登上央视元宵晚会；条目另记载 2011 年末央视跨年元旦晚会演出。</li>
                 <li>2015 年 11—12 月在清华大学、电子科技大学、哈尔滨工业大学及中国人民大学举办「看见李健」高校健谈会。</li>
@@ -937,47 +1052,142 @@
           </details>
         </div>
       </div>
-      <p class="research-note">中文维基百科《李健》条目自身标注需要改善部分爱好者内容；本区只作资料导航，奖项与节目记录仍建议按原始主办方或节目资料核对。</p>
     </section>
 
 <section class="archive-section section-paper" id="notebook" aria-labelledby="notebook-title">
 <div class="section-head"><div><span class="section-kicker">READING ROOM / BIOGRAPHICAL NOTES</span><h2 id="notebook-title">人物札记</h2></div><span class="section-index">18 则有出处的侧记</span></div>
-<p class="section-intro">从学琴、阅读到一首歌的诞生。这里收录公开访谈和机构记录中的细节；回忆与观点保留讲述时间，沿着出处继续读。</p>
-<div class="research-grid"><div class="research-column"><h3>启蒙与校园</h3><details class="research-fold"><summary><strong>烛光里的一首吉他曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>少年时期，他原本只想学会几首弹唱；一次停电时，老师弹起《爱的罗曼史》，让他决定继续学琴。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>从调琴到听觉训练</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他回忆曾帮老师调琴、教初学者，以教学抵学费；那段大量调琴的经历也锻炼了耳朵。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>和声来自合唱团</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华合唱团与音乐辅修课程帮助他系统学习和声、视唱练耳和曲式；之后因电子系课业繁重停止辅修。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>《风吹麦浪》的校园记忆</strong><span>展开札记</span></summary><div class="research-fold-content"><p>在本人回忆中，清华北门与诗人、画家相处的夏天，后来成为《风吹麦浪》的记忆来源。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details></div><div class="research-column"><h3>作品背后的风景</h3><details class="research-fold"><summary><strong>第一次抵达贝加尔湖</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年访谈中，他明确说写歌时是第一次到访；小时候对这个地名的熟悉，来自东北生活中的寒冷记忆。</p><p class="notebook-source"><a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noopener noreferrer">新浪访谈实录 · 2011.12.20 ↗</a></p></div></details><details class="research-fold"><summary><strong>《依然》写在旅途中</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他谈到，专辑中的不少创作是在旅行中完成的，利用旅途时间记录感受；唱片名则由公司提出。</p><p class="notebook-source"><a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noopener noreferrer">新浪访谈实录 · 2011.12.20 ↗</a></p></div></details><details class="research-fold"><summary><strong>地名也是情感坐标</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把《松花江》与成长记忆相连；谈及《抚仙湖》时，提到2005年的到访和对清澈湖水的印象。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>《音乐傲骨》的命名</strong><span>展开札记</span></summary><div class="research-fold-content"><p>据本人访谈，这个名字由唱片公司提出，用以概括他长期坚持个人音乐方向的状态。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>电影主题曲中的含蓄表达</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《我爱你！》创作特辑中，他谈到用歌曲表达爱情。片名和歌名已经点明主题，歌词没有再直接写出那三个字。</p><p class="notebook-source"><a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noopener noreferrer">1905电影网 · 2023.06.16 ↗</a></p></div></details><details class="research-fold"><summary><strong>布鲁斯与中文语感</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《从黄昏到午夜》创作手记提到，他琢磨布鲁斯旋律与中文表达的融合两三年；常听电台停播的经历也进入创作感受。</p><p class="notebook-source"><a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">JOOX唱片介绍所载李健创作手记 · 2026.05.30 ↗</a></p></div></details></div><div class="research-column"><h3>阅读与音乐观</h3><details class="research-fold"><summary><strong>小说里的音乐结构</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2012年访谈中，他谈及普鲁斯特、罗曼·罗兰与格非，关注小说铺垫、节奏和音乐结构之间的相似之处。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>读书并非寻找歌词素材</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把阅读视为兴趣，不专为写歌寻找灵感；2015年署名文章还谈到反复阅读同一本书的习惯。</p><p class="notebook-source"><a href="https://culture.people.com.cn/n/2015/0422/c87423-26884281.html" target="_blank" rel="noopener noreferrer">李健署名谈阅读 · 人民网 · 2015.04.22 ↗</a></p></div></details><details class="research-fold"><summary><strong>离开组合的本人解释</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年采访中，他把离开水木年华解释为音乐追求与创作自由的选择，并表示与卢庚戌仍是朋友。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noopener noreferrer">《南方人物周刊》访谈 · 2011.01.14，清华转载 ↗</a></p></div></details><details class="research-fold"><summary><strong>怎样看待《传奇》走红</strong><span>展开札记</span></summary><div class="research-fold-content"><p>同一访谈中，他肯定王菲演唱及春晚传播对自己事业的帮助。这是他对当时经历的回顾。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noopener noreferrer">《南方人物周刊》访谈 · 2011.01.14，清华转载 ↗</a></p></div></details><details class="research-fold"><summary><strong>“浅唱会”的现场思路</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为星海音乐厅演出接受采访时，他提出减少声光电、重新编配，以钢琴、吉他或小型乐器组合呈现不同于唱片的版本。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/9978.htm" target="_blank" rel="noopener noreferrer">《新快报》专访 · 清华校友总会转载 ↗</a></p></div></details></div><div class="research-column"><h3>公共活动与文化合作</h3><details class="research-fold"><summary><strong>2015 · 海洋公益形象大使</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2015世界海洋日暨全国海洋宣传日主场活动在三亚举行，国家海洋环境监测中心记录了向李健颁发聘书的环节。</p><p class="notebook-source"><a href="https://www.nmemc.org.cn/hyyw/201506/t20150610_682401.shtml" target="_blank" rel="noopener noreferrer">国家海洋环境监测中心 · 2015.06.10 ↗</a></p></div></details><details class="research-fold"><summary><strong>2021 · 为母校谱曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华110周年校庆作品《一路花香一路唱》由徐荣凯作词、李健谱曲，李健与校友代表共同演绎。</p><p class="notebook-source"><a href="https://www.sigs.tsinghua.edu.cn/2021/0427/c7687a24352/page.htm" target="_blank" rel="noopener noreferrer">清华大学深圳国际研究生院 · 2021.04.27 ↗</a></p></div></details><details class="research-fold"><summary><strong>2023 · 电影与歌曲相遇</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为电影《我爱你！》创作并演唱同名主题曲；1905电影网保留了创作特辑，可继续观看他的表达与制作背景。</p><p class="notebook-source"><a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noopener noreferrer">1905电影网 · 2023.06.16 ↗</a></p></div></details></div></div>
-<p class="research-note">资料整理：2026.09.24。本文为摘要，不转载访谈全文。较早访谈反映当时的经历和看法，不自动视为今天的状态；资料仍将随可核对的公开记录补充。</p>
+<div class="notebook-opening">
+  <p class="section-intro">从学琴、阅读到一首歌的诞生。这里收录公开访谈和机构记录中的细节；回忆与观点保留讲述时间，沿着出处继续读。</p>
+  <figure class="notebook-portrait reveal">
+    <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像" width="1352" height="1800" loading="lazy" decoding="async">
+  </figure>
+</div>
+<div class="research-grid"><div class="research-column"><h3>启蒙与校园</h3><details class="research-fold"><summary><strong>烛光里的一首吉他曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>少年时期，他原本只想学会几首弹唱；一次停电时，老师弹起《爱的罗曼史》，让他决定继续学琴。</p></div></details><details class="research-fold"><summary><strong>从调琴到听觉训练</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他回忆曾帮老师调琴、教初学者，以教学抵学费；那段大量调琴的经历也锻炼了耳朵。</p></div></details><details class="research-fold"><summary><strong>和声来自合唱团</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华合唱团与音乐辅修课程帮助他系统学习和声、视唱练耳和曲式；之后因电子系课业繁重停止辅修。</p></div></details><details class="research-fold"><summary><strong>《风吹麦浪》的校园记忆</strong><span>展开札记</span></summary><div class="research-fold-content"><p>在本人回忆中，清华北门与诗人、画家相处的夏天，后来成为《风吹麦浪》的记忆来源。</p></div></details></div><div class="research-column"><h3>作品背后的风景</h3><details class="research-fold"><summary><strong>第一次抵达贝加尔湖</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年访谈中，他明确说写歌时是第一次到访；小时候对这个地名的熟悉，来自东北生活中的寒冷记忆。</p></div></details><details class="research-fold"><summary><strong>《依然》写在旅途中</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他谈到，专辑中的不少创作是在旅行中完成的，利用旅途时间记录感受；唱片名则由公司提出。</p></div></details><details class="research-fold"><summary><strong>地名也是情感坐标</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把《松花江》与成长记忆相连；谈及《抚仙湖》时，提到2005年的到访和对清澈湖水的印象。</p></div></details><details class="research-fold"><summary><strong>《音乐傲骨》的命名</strong><span>展开札记</span></summary><div class="research-fold-content"><p>据本人访谈，这个名字由唱片公司提出，用以概括他长期坚持个人音乐方向的状态。</p></div></details><details class="research-fold"><summary><strong>电影主题曲中的含蓄表达</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《我爱你！》创作特辑中，他谈到用歌曲表达爱情。片名和歌名已经点明主题，歌词没有再直接写出那三个字。</p></div></details><details class="research-fold"><summary><strong>布鲁斯与中文语感</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《从黄昏到午夜》创作手记提到，他琢磨布鲁斯旋律与中文表达的融合两三年；常听电台停播的经历也进入创作感受。</p></div></details></div><div class="research-column"><h3>阅读与音乐观</h3><details class="research-fold"><summary><strong>小说里的音乐结构</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2012年访谈中，他谈及普鲁斯特、罗曼·罗兰与格非，关注小说铺垫、节奏和音乐结构之间的相似之处。</p></div></details><details class="research-fold"><summary><strong>读书并非寻找歌词素材</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把阅读视为兴趣，不专为写歌寻找灵感；2015年署名文章还谈到反复阅读同一本书的习惯。</p></div></details><details class="research-fold"><summary><strong>离开组合的本人解释</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年采访中，他把离开水木年华解释为音乐追求与创作自由的选择，并表示与卢庚戌仍是朋友。</p></div></details><details class="research-fold"><summary><strong>怎样看待《传奇》走红</strong><span>展开札记</span></summary><div class="research-fold-content"><p>同一访谈中，他肯定王菲演唱及春晚传播对自己事业的帮助。这是他对当时经历的回顾。</p></div></details><details class="research-fold"><summary><strong>“浅唱会”的现场思路</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为星海音乐厅演出接受采访时，他提出减少声光电、重新编配，以钢琴、吉他或小型乐器组合呈现不同于唱片的版本。</p></div></details></div><div class="research-column"><h3>公共活动与文化合作</h3><details class="research-fold"><summary><strong>2015 · 海洋公益形象大使</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2015世界海洋日暨全国海洋宣传日主场活动在三亚举行，国家海洋环境监测中心记录了向李健颁发聘书的环节。</p></div></details><details class="research-fold"><summary><strong>2021 · 为母校谱曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华110周年校庆作品《一路花香一路唱》由徐荣凯作词、李健谱曲，李健与校友代表共同演绎。</p></div></details><details class="research-fold"><summary><strong>2023 · 电影与歌曲相遇</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为电影《我爱你！》创作并演唱同名主题曲；1905电影网保留了创作特辑，可继续观看他的表达与制作背景。</p></div></details></div></div>
 </section>
     <section class="archive-section section-light" id="moments" aria-labelledby="moments-title">
       <div class="section-head">
-        <div><span class="section-kicker">07 / MOMENTS</span><h2 id="moments-title">舞台与回望</h2></div>
-        <span class="section-index">现场影像 · 选辑</span>
+        <div><span class="section-kicker">07 / MOMENTS</span><h2 id="moments-title">万物安生时 · 影像</h2></div>
+        <span class="section-index">2023—2025 · 26 场</span>
       </div>
+      <p class="moments-intro">从武汉到合肥，依照巡演场次收藏每一站的现场瞬间。照片按网站创建者提供的编号与演出顺序对应。</p>
+      <div class="moments-year">
+        <div class="moments-year-heading"><h3>2023</h3><span>04 STOPS / 2023 年巡演</span></div>
         <div class="moments-grid">
-          <figure class="moment moment-large reveal">
-            <img src="assets/li-jian-shanghai-2020.jpg" alt="李健在上海演唱会现场演出，2020 年 1 月 11 日" width="1620" height="1080" loading="lazy">
-            <figcaption>上海 · 2020.01.11 · 演唱会现场<br>摄影：棉花花糖已经下班啦 · <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noreferrer">CC BY 2.5</a> · <a href="https://commons.wikimedia.org/wiki/File:20200111_%E6%9D%8E%E5%81%A5_%E4%B8%8A%E6%B5%B7%E6%BC%94%E5%94%B1%E4%BC%9A_01.jpg" target="_blank" rel="noreferrer">查看原图与许可</a></figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-01.jpg" alt="李健《万物安生时》巡演第 1 场，武汉站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">01</span><span class="moment-place">武汉</span><time class="moment-date" datetime="2023-11-04">2023.11.04</time></figcaption>
           </figure>
-          <figure class="moment moment-xian reveal">
-            <img src="assets/lijian-live-user.jpg" alt="李健手持麦克风演唱，用户提供的现场照片" width="1238" height="2200" loading="lazy">
-            <figcaption>演出现场 · 用户提供<br>场次信息未标注</figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-02.jpg" alt="李健《万物安生时》巡演第 2 场，成都站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">02</span><span class="moment-place">成都</span><time class="moment-date" datetime="2023-11-18">2023.11.18</time></figcaption>
           </figure>
-          <figure class="moment moment-blue reveal">
-            <img src="assets/lijian-live-blue-user.jpg" alt="李健身着蓝色演出服站在麦克风前，用户提供照片" width="960" height="1443" loading="lazy">
-            <figcaption>舞台一瞬 · 用户提供</figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-03.jpg" alt="李健《万物安生时》巡演第 3 场，南京站现场照片" width="1919" height="1280" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">03</span><span class="moment-place">南京</span><time class="moment-date" datetime="2023-12-09">2023.12.09</time></figcaption>
           </figure>
-          <figure class="moment moment-small reveal">
-            <img src="assets/li-jian-tsinghua-2018-detail.png" alt="李健在清华大学校庆演唱会现场，2018 年" width="1500" height="1125" loading="lazy">
-            <figcaption>清华 · 校庆演唱会 · 2018<br>摄影：葉又嘉 · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%8F%AF%E6%9D%8E%E5%81%A5%E6%A0%A1%E6%85%B6%E6%BC%94%E5%94%B1%E6%9C%83.png" target="_blank" rel="noreferrer">查看原图与许可</a></figcaption>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-04.jpg" alt="李健《万物安生时》巡演第 4 场，上海站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">04</span><span class="moment-place">上海</span><time class="moment-date" datetime="2023-12-16">2023.12.16</time></figcaption>
           </figure>
-          <figure class="moment moment-portrait reveal">
-            <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像，用户提供照片" width="1352" height="1800" loading="lazy">
-            <figcaption>肖像片段 · 用户提供</figcaption>
+        </div>
+      </div>
+      <div class="moments-year">
+        <div class="moments-year-heading"><h3>2024</h3><span>14 STOPS / 2024 年巡演</span></div>
+        <div class="moments-grid">
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-05.jpg" alt="李健《万物安生时》巡演第 5 场，中国澳门站现场照片" width="1276" height="1914" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">05</span><span class="moment-place">中国澳门</span><time class="moment-date" datetime="2024-02-24">2024.02.24</time></figcaption>
           </figure>
-          <div class="moment-note reveal"><strong>IMAGE ARCHIVE / 影像札记</strong>用户提供的照片按人物肖像与舞台现场编目。演出场次、城市与日期只在有明确来源时标注。</div>
-          <a class="official-weibo-card reveal" href="https://weibo.com/2/detail/5345272920015612" target="_blank" rel="noopener noreferrer" aria-label="前往李健工作室微博查看 2026 年 9 月 19 日西安站官方现场相册">
-            <span>OFFICIAL WEIBO · IMAGE LOG</span>
-            <div><strong>西安站 Encore</strong><time datetime="2026-09-19">2026.09.19 · 李健工作室现场相册</time></div>
-            <span>在微博查看原帖与照片 ↗</span>
-          </a>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-06.jpg" alt="李健《万物安生时》巡演第 6 场，重庆站现场照片" width="1920" height="1280" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">06</span><span class="moment-place">重庆</span><time class="moment-date" datetime="2024-03-02">2024.03.02</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-07.jpg" alt="李健《万物安生时》巡演第 7 场，郑州站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">07</span><span class="moment-place">郑州</span><time class="moment-date" datetime="2024-03-16">2024.03.16</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-08.jpg" alt="李健《万物安生时》巡演第 8 场，广州站现场照片" width="1286" height="1928" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">08</span><span class="moment-place">广州</span><time class="moment-date" datetime="2024-04-06">2024.04.06</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-09.jpg" alt="李健《万物安生时》巡演第 9 场，厦门站现场照片" width="1278" height="1916" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">09</span><span class="moment-place">厦门</span><time class="moment-date" datetime="2024-05-25">2024.05.25</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-10.jpg" alt="李健《万物安生时》巡演第 10 场，宁波站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">10</span><span class="moment-place">宁波</span><time class="moment-date" datetime="2024-06-22">2024.06.22</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-11.jpg" alt="李健《万物安生时》巡演第 11 场，青岛站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">11</span><span class="moment-place">青岛</span><time class="moment-date" datetime="2024-07-06">2024.07.06</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-12.jpg" alt="李健《万物安生时》巡演第 12 场，苏州站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">12</span><span class="moment-place">苏州</span><time class="moment-date" datetime="2024-08-17">2024.08.17</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-13.jpg" alt="李健《万物安生时》巡演第 13 场，乌鲁木齐站现场照片" width="1440" height="962" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">13</span><span class="moment-place">乌鲁木齐</span><time class="moment-date" datetime="2024-09-14">2024.09.14</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-14.jpg" alt="李健《万物安生时》巡演第 14 场，乌鲁木齐站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">14</span><span class="moment-place">乌鲁木齐</span><time class="moment-date" datetime="2024-09-16">2024.09.16</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-15.jpg" alt="李健《万物安生时》巡演第 15 场，大连站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">15</span><span class="moment-place">大连</span><time class="moment-date" datetime="2024-09-28">2024.09.28</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-16.jpg" alt="李健《万物安生时》巡演第 16 场，佛山站现场照片" width="1922" height="1282" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">16</span><span class="moment-place">佛山</span><time class="moment-date" datetime="2024-10-12">2024.10.12</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-17.jpg" alt="李健《万物安生时》巡演第 17 场，杭州站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">17</span><span class="moment-place">杭州</span><time class="moment-date" datetime="2024-11-02">2024.11.02</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-18.jpg" alt="李健《万物安生时》巡演第 18 场，深圳站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">18</span><span class="moment-place">深圳</span><time class="moment-date" datetime="2024-12-28">2024.12.28</time></figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="moments-year">
+        <div class="moments-year-heading"><h3>2025</h3><span>08 STOPS / 2025 年巡演</span></div>
+        <div class="moments-grid">
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-19.jpg" alt="李健《万物安生时》巡演第 19 场，深圳站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">19</span><span class="moment-place">深圳</span><time class="moment-date" datetime="2025-01-01">2025.01.01</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-20.jpg" alt="李健《万物安生时》巡演第 20 场，北京站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">20</span><span class="moment-place">北京</span><time class="moment-date" datetime="2025-04-18">2025.04.18</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-21.jpg" alt="李健《万物安生时》巡演第 21 场，北京站现场照片" width="1280" height="1792" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">21</span><span class="moment-place">北京</span><time class="moment-date" datetime="2025-04-20">2025.04.20</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-22.jpg" alt="李健《万物安生时》巡演第 22 场，济南站现场照片" width="1284" height="1926" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">22</span><span class="moment-place">济南</span><time class="moment-date" datetime="2025-05-04">2025.05.04</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-23.jpg" alt="李健《万物安生时》巡演第 23 场，泉州站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">23</span><span class="moment-place">泉州</span><time class="moment-date" datetime="2025-05-17">2025.05.17</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-24.jpg" alt="李健《万物安生时》巡演第 24 场，西安站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">24</span><span class="moment-place">西安</span><time class="moment-date" datetime="2025-06-14">2025.06.14</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-25.jpg" alt="李健《万物安生时》巡演第 25 场，南昌站现场照片" width="1280" height="1919" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">25</span><span class="moment-place">南昌</span><time class="moment-date" datetime="2025-06-21">2025.06.21</time></figcaption>
+          </figure>
+          <figure class="moment reveal">
+            <img src="assets/wanwu-live-26.jpg" alt="李健《万物安生时》巡演第 26 场，合肥站现场照片" width="960" height="1440" loading="lazy" decoding="async">
+            <figcaption><span class="moment-number">26</span><span class="moment-place">合肥</span><time class="moment-date" datetime="2025-06-28">2025.06.28</time></figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -988,6 +1198,14 @@
       <p class="word-author">LISTENING NOTES · 档案馆原创文字</p>
       <button class="word-next" id="word-next" type="button">换一则短笺&nbsp; ↗</button>
       <p class="words-note">这里收录的是原创听后感，不摘录歌曲歌词。你也可以把自己的演出记录与聆听记忆整理进来。</p>
+      <div class="writings-reader" id="writings-reader" aria-labelledby="writings-title">
+        <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>书籍 · 音乐 · 影像</span></div>
+        <p class="writings-intro">李健为书籍、影视与音乐所写的文字，按主题整理为四卷。先展开主题，再选择篇目；也可搜索人名、作品或词句。</p>
+        <div class="writings-topics" id="writings-topics" role="group" aria-label="按主题跳转阅读"></div>
+        <div class="writings-tools"><input class="writings-search" id="writings-search" type="search" placeholder="搜索篇目、人物或正文" aria-label="搜索李健的文字"><button id="writings-expand" type="button">展开结果</button><button id="writings-collapse" type="button">收起全部</button></div>
+        <p class="writings-status" id="writings-status" role="status">正在载入文字……</p>
+        <div id="writings-contents"></div>
+      </div>
     </section>
 
     <section class="archive-section section-paper" id="archive" aria-labelledby="archive-title">
@@ -995,7 +1213,8 @@
         <div><span class="section-kicker">09 / ARCHIVE</span><h2 id="archive-title">出处与收藏</h2></div>
         <span class="section-index">SOURCES · CREDITS</span>
       </div>
-      <p class="section-intro">人物生平、节目经历、奖项、作品目录与历史巡演参考中文维基百科及清华校友资料整理；「万物安生时」2023—2026 场次与特别曲目按你提供的清单编目。来源与图片说明列于下方。</p>
+      <p class="section-intro">网页使用的公开资料、粉丝整理数据和图片说明统一收录于此。点击下方目录可查看具体链接。</p>
+      <details class="source-catalog"><summary>公开资料与原始链接</summary>
       <div class="source-list" aria-label="资料来源">
         <a href="https://www.tsinghua.org.cn/info/1014/9978.htm" target="_blank" rel="noreferrer"><span>清华校友总会 · 李健人物资料</span><span>人物履历 ↗</span></a>
         <a href="https://github.com/Supeset/China-GeoData/tree/main/geojson" target="_blank" rel="noreferrer"><span>China-GeoData · 省界底图与部分城市坐标参考（MIT）</span><span>巡演地图数据 ↗</span></a>
@@ -1010,21 +1229,43 @@
         <a href="https://www.motianlun.cn/show-detail/show-detail?showId=6a604556fe96c700014ece66" target="_blank" rel="noreferrer"><span>摩天轮票务 · 南京站演出信息</span><span>2026.09.05 ↗</span></a>
         <a href="https://weibo.com/2/detail/5332897166790464" target="_blank" rel="noreferrer"><span>桔子密码 · 西安站观演信息</span><span>2026.09.19 ↗</span></a>
         <a href="https://www.sina.cn/news/detail/5332498927325735.html" target="_blank" rel="noreferrer"><span>李健工作室公告转载 · 成都站</span><span>2026.10.03 / 10.05 ↗</span></a>
+        <a href="https://www.sina.cn/news/detail/5277754233978933.html" target="_blank" rel="noreferrer"><span>杭州站演出信息 · 杭州交通 918 转载</span><span>2026.11.07 ↗</span></a>
+        <a href="https://m.hf.bendibao.com/xiuxian/105156.shtm" target="_blank" rel="noreferrer"><span>合肥站演出信息 · 合肥本地宝</span><span>2026.11.28 ↗</span></a>
         <a href="https://commons.wikimedia.org/wiki/File:China_blank_province_map.svg" target="_blank" rel="noreferrer"><span>Wikimedia Commons · 中国省级边界底图</span><span>公有领域 ↗</span></a>
+        <a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noreferrer"><span>李健《我与音乐这些年》·《水木清华》</span><span>人物札记 ↗</span></a>
+        <a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noreferrer"><span>新浪访谈实录 · 2011.12.20</span><span>人物札记 ↗</span></a>
+        <a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noreferrer"><span>清华校友总会转载访谈 · 2012.08.06</span><span>人物札记 ↗</span></a>
+        <a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noreferrer"><span>1905电影网 ·《我爱你！》创作特辑</span><span>人物札记 ↗</span></a>
+        <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noreferrer"><span>JOOX · 近期单曲与创作手记</span><span>音乐资料 ↗</span></a>
+        <a href="https://culture.people.com.cn/n/2015/0422/c87423-26884281.html" target="_blank" rel="noreferrer"><span>人民网 · 李健署名谈阅读</span><span>人物札记 ↗</span></a>
+        <a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noreferrer"><span>《南方人物周刊》访谈 · 清华转载</span><span>人物札记 ↗</span></a>
+        <a href="https://www.nmemc.org.cn/hyyw/201506/t20150610_682401.shtml" target="_blank" rel="noreferrer"><span>国家海洋环境监测中心 · 2015 世界海洋日</span><span>人物札记 ↗</span></a>
+        <a href="https://www.sigs.tsinghua.edu.cn/2021/0427/c7687a24352/page.htm" target="_blank" rel="noreferrer"><span>清华大学深圳国际研究生院 · 校庆作品</span><span>人物札记 ↗</span></a>
+        <a href="https://music.apple.com/us/song/1739326138" target="_blank" rel="noreferrer"><span>Apple Music ·《我爱你！》</span><span>单曲资料 ↗</span></a>
+        <a href="https://tv.cctv.com/2024/12/25/VIDElyZfQZTghvAxpmPJvNxk241225.shtml" target="_blank" rel="noreferrer"><span>央视《影视留声机》·《你一定能看见》</span><span>节目记录 ↗</span></a>
+        <a href="https://www.youtube.com/watch?v=4irY8I-NWWU" target="_blank" rel="noreferrer"><span>《蓝色夜曲》公开视频</span><span>单曲资料 ↗</span></a>
+        <a href="https://www.youtube.com/watch?v=PCASW1O8G14" target="_blank" rel="noreferrer"><span>《从黄昏到午夜》公开视频</span><span>单曲资料 ↗</span></a>
+        <a href="https://tv.cctv.com/2026/02/17/VIDEMN9cmK7gU3UgIVcQaPTC260217.shtml" target="_blank" rel="noreferrer"><span>央视春晚 ·《人间共鸣》</span><span>节目记录 ↗</span></a>
+        <a href="assets/CHINA-GEODATA-LICENSE.txt"><span>China-GeoData · 地图数据许可</span><span>MIT ↗</span></a>
+        <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer"><span>黑胶静物照片 · CC0 1.0</span><span>许可说明 ↗</span></a>
       </div>
+      </details>
       <div class="archive-credits">
-        <p><strong>用户提供照片</strong><br>序章封面、人物页近景肖像、巡演标识与影像均由网站创建者提供；封面按授权旋转并清理水印。页面仅按版式裁切，图注不推断未确认的场次信息。</p>
-        <p><strong>李健工作室现场相册</strong><br>西安站官方相册以原帖链接呈现，照片在微博原页查看并由工作室发布；本页不复制托管原帖图片。</p>
-        <p><strong>现场照片</strong><br>棉花花糖已经下班啦 · Wikimedia Commons · CC BY 2.5。页面对照片进行了裁切与色调处理；署名和许可链接随图标注。</p>
-        <p><strong>清华校庆照片</strong><br>葉又嘉 · Wikimedia Commons · CC BY-SA 4.0。网页直接展示原图，并在图注中署名及链接许可。</p>
+        <p><strong>用户提供照片</strong><br>序章封面、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；影像按提供的 01—26 编号与巡演场次对应。封面按授权旋转并清理水印。</p>
+        <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供，并按其要求清理指定文字或标记。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
+        <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>
+        <p><strong>水流润万生老师 · 数据与文字整理支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理；巡演页同步使用其中的巡回演唱会歌单。荧屏页的“资料补编”依据其四张统计图选录清晰可辨的内容，原图标注统计截止 2026.07.04。文字页的篇目由水流润万生老师收集、编排，网站采用创建者提供的分类转录文字排版；部分字句可能有识别误差，尚未逐字校对，不作为校勘本。</p>
+        <p><strong>人物札记与近期作品</strong><br>人物札记整理于 2026.09.24，为公开访谈和机构记录的摘要。较早的回忆与观点保留当时语境，不自动视为今天的状态。近期单曲的发行日、节目播出日及视频上传日分别记录，具体出处均可在上方目录查看。</p>
+        <p><strong>图像与文字许可</strong><br>文字页的转录正文属于第三方内容，不纳入本站代码的 MIT 许可；相关文字权利仍归原权利人。省界数据使用 China-GeoData 的 MIT 许可；唱片静物照片为 Mink Mingle 经 Wikimedia Commons 提供的 CC0 1.0 素材。</p>
         <p><strong>非官方网站</strong><br>本页为听众整理的个人档案，与李健本人、经纪团队、唱片公司或主办方无隶属关系。音乐播放请前往正规平台。</p>
       </div>
     </section>
   </main>
   <footer class="site-footer"><span>LI JIAN · MUSIC · TIME · LANDSCAPE</span><span>非官方网站 · Fan-made archive · <a href="#home">回到首页 ↑</a></span></footer>
 
+  <script src="assets/fan-music-data.js"></script>
   <script>
     document.documentElement.classList.add("js");
 const title = document.querySelector(".hero-title-text");
@@ -1147,6 +1388,10 @@ movingWord.style.opacity = String(1 - release);
       ["2026-08-08", "厦门", "凤凰体育馆", "Angel/八月照相馆", "鹭岛夜，乐声起", "encore"],
       ["2026-09-05", "南京", "南京梦之蓝青奥体育公园体育馆", "在遥远的天空地下思念是一种病", "万物安生时，金陵夜回响", "encore"],
       ["2026-09-19", "西安", "西安奥体中心体育馆", "世界上不存在的歌/云上的日子", "长安夜色，乐起星河", "encore"],
+      ["2026-10-03", "成都", "五粮液文化体育中心综合体育馆", "", "待演出 · 特别曲目待补", "encore"],
+      ["2026-10-05", "成都", "五粮液文化体育中心综合体育馆", "", "待演出 · 特别曲目待补", "encore"],
+      ["2026-11-07", "杭州", "杭州奥体中心体育馆", "", "待演出 · 特别曲目待补", "encore"],
+      ["2026-11-28", "合肥", "合肥少荃体育中心体育馆", "", "待演出 · 特别曲目待补", "encore"],
       ["2011-04-15", "成都", "锦城艺术宫", "", "", "main", "向往·2011"],
       ["2011-04-22", "广州", "星海音乐厅", "", "", "main", "向往·2011"],
       ["2011-04-23", "深圳", "深圳市民中心", "", "", "main", "向往·2011"],
@@ -1226,6 +1471,10 @@ movingWord.style.opacity = String(1 - release);
       "2026-06-20": ["万物安生", "一切刚刚好", "深海之寻", "风吹麦浪", "梅雨", "璀璨", "在水一方", "不期而遇", "给你", "假如爱有天意", "车站", "迷雾", "异乡人", "雨后初晴", "当你老了", "父亲写的散文诗", "水流众生", "传奇", "无论风往何处吹", "山中行", "枫桥夜泊", "夜晚眺望金桥", "爱的箴言", "贝加尔湖畔"],
       "2026-06-27": ["万物安生", "一切刚刚好", "深海之寻", "风吹麦浪", "美若黎明", "月半弯", "沧海轻舟", "不期而遇", "给你", "假如爱有天意", "车站", "迷雾", "门", "风吹黄昏", "父亲写的散文诗", "蓝色夜曲", "水流众生", "传奇", "从黄昏到午夜", "山中行", "人间共鸣", "夜晚眺望金桥", "今宵多珍重", "贝加尔湖畔"]
     };
+    const fanSetlistKey = (date, theme) => date + "|" + theme.replace(/[，,\s]/g, "").replace(/Encore$/i, "");
+    const fanTourSetlists = new Map((window.LI_JIAN_FAN_MUSIC_DATA?.performances || [])
+      .filter((item) => item.category === "巡回演唱会" && Array.isArray(item.songs))
+      .map((item) => [fanSetlistKey(item.date, item.theme), item.songs]));
     const themeRecordCounters = {};
     const tourRecords = tourRows.map((row) => {
       const theme = row[6] || "万物安生时";
@@ -1239,7 +1488,8 @@ movingWord.style.opacity = String(1 - release);
         note: row[4],
         phase: row[5],
         stage: row[5] === "encore" ? theme + " Encore" : theme,
-        setlist: tourSetlists[row[0]] || [],
+        setlist: fanTourSetlists.get(fanSetlistKey(row[0], theme)) || tourSetlists[row[0]] || [],
+        setlistSource: fanTourSetlists.has(fanSetlistKey(row[0], theme)) ? "水流润万生老师 · 粉丝个人统计" : "网站创建者提供",
         theme
       };
     });
@@ -1271,17 +1521,42 @@ movingWord.style.opacity = String(1 - release);
     const filterButtons = [...document.querySelectorAll("[data-tour-filter]")];
     const themeButtons = [...document.querySelectorAll("[data-tour-theme]")];
     const mapPins = document.getElementById("tour-map-pins");
+    const mapCityPicker = document.getElementById("map-city-picker");
+    const mapCityPickerList = document.getElementById("map-city-picker-list");
     const overseasButtons = document.getElementById("map-overseas-buttons");
+    const clearTourFilter = document.getElementById("tour-clear-filter");
     const recordButtons = [];
     const pinButtons = [];
     let activeTheme = "万物安生时";
     let activePhase = "all";
     let activeCity = "上海";
+    let indexCity = "";
+    let selectedRecordId = null;
     const tourThemeMeta = {
-      "万物安生时": { period: "2023—2026", defaultCity: "上海" },
-      "不止，是李健": { period: "2018—2020", defaultCity: "上海" },
-      "看见李健": { period: "2015—2016", defaultCity: "上海" },
-      "向往·2011": { period: "2011", defaultCity: "上海" }
+      "万物安生时": {
+        period: "2023—2026", defaultCity: "上海", poster: "assets/tour-poster-wanwu.webp", posterWidth: 1067, posterHeight: 1474,
+        posterAlt: "李健《万物安生时》巡演主视觉，深色舞台与白色西装人物",
+        posterCaption: "巡演主视觉海报标注 2023—2025；本档案继续收录 2026 年 Encore 场次。",
+        description: "以城市为序，把日期、场馆、特别曲目和现场歌单收进同一份巡演档案。"
+      },
+      "不止，是李健": {
+        period: "2018—2020", defaultCity: "上海", poster: "assets/tour-poster-buzhi.webp", posterWidth: 1500, posterHeight: 1049,
+        posterAlt: "李健《不止，是李健》巡演视觉，蓝灰色人物肖像",
+        posterCaption: "主题海报标注 2018—2019；本档案收录的巡演场次延续至 2020 年。",
+        description: "沿着巡演路线，查看这一主题已收录的城市、日期与现场记录。"
+      },
+      "看见李健": {
+        period: "2015—2016", defaultCity: "上海", poster: "assets/tour-poster-kanjian.webp", posterWidth: 1144, posterHeight: 1375,
+        posterAlt: "李健《看见李健》巡演视觉，蓝色人物肖像与白色主题字",
+        posterCaption: "取自 2015 年巡演视觉；海报中的单站日期与地点已从展示图中移除。",
+        description: "从国内城市到海外现场，按年份回看《看见李健》的演出足迹。"
+      },
+      "向往·2011": {
+        period: "2011", defaultCity: "上海", poster: "assets/tour-poster-xiangwang.webp", posterWidth: 1149, posterHeight: 1369,
+        posterAlt: "李健弹吉他的《向往》主题视觉，绿色背景",
+        posterCaption: "这张《向往》视觉取自 2022 年线上音乐会，并非 2011 年巡演原始海报。",
+        description: "以《向往》为线索，查看 2011 年巡演的已收录场次与城市。"
+      }
     };
 
     function recordsForTheme() {
@@ -1338,6 +1613,11 @@ movingWord.style.opacity = String(1 - release);
       matching.forEach((record) => {
         const card = document.createElement("article");
         card.className = "postmark";
+        card.dataset.recordId = String(record.id);
+        if (record.id === selectedRecordId) {
+          card.classList.add("is-selected");
+          card.tabIndex = -1;
+        }
         const date = document.createElement("time");
         date.textContent = record.date ? record.date.replaceAll("-", ".") : "";
         if (record.date) date.dateTime = record.date;
@@ -1383,16 +1663,24 @@ movingWord.style.opacity = String(1 - release);
       });
     }
 
-    function selectCity(city) {
+    function selectCity(city, { reveal = false, recordId = null } = {}) {
       activeCity = city;
+      indexCity = city;
+      selectedRecordId = recordId;
       cityFilter.value = city || "";
       searchInput.value = "";
       setActivePin(city);
-      recordButtons.forEach(({ button, item }) => {
-        button.setAttribute("aria-pressed", String(item.theme === activeTheme && item.city === city));
-      });
       renderCityRecords(city);
       renderTourList();
+      if (reveal) {
+        const target = recordId === null
+          ? document.querySelector(".tour-side")
+          : [...document.querySelectorAll("#city-stops .postmark")].find((card) => card.dataset.recordId === String(recordId));
+        if (target) {
+          target.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "center" });
+          if (recordId !== null) target.focus({ preventScroll: true });
+        }
+      }
     }
 
     function renderMapAndOptions() {
@@ -1401,6 +1689,8 @@ movingWord.style.opacity = String(1 - release);
       const cityCounts = new Map(cities.map((city) => [city, themeRecords.filter((record) => record.city === city).length]));
       cityFilter.replaceChildren(new Option("全部城市", ""));
       mapPins.replaceChildren();
+      mapCityPickerList.replaceChildren();
+      document.getElementById("map-city-picker-summary").textContent = "按城市名称选择 · " + cities.length + " 城";
       pinButtons.length = 0;
 
       cities.forEach((city) => {
@@ -1408,6 +1698,18 @@ movingWord.style.opacity = String(1 - release);
         option.value = city;
         option.textContent = city;
         cityFilter.append(option);
+        const cityButton = document.createElement("button");
+        cityButton.type = "button";
+        cityButton.dataset.city = city;
+        cityButton.textContent = city === "中国澳门" ? "澳门" : city;
+        cityButton.setAttribute("aria-label", "查看" + city + "的" + cityCounts.get(city) + "场记录");
+        cityButton.setAttribute("aria-pressed", "false");
+        cityButton.addEventListener("click", () => {
+          mapCityPicker.open = false;
+          selectCity(city, { reveal: true });
+        });
+        mapCityPickerList.append(cityButton);
+        pinButtons.push(cityButton);
         if (city === "新加坡") return;
         const point = cityCoordinates[city];
         if (!point || point[0] < mapBounds.west || point[0] > mapBounds.east || point[1] < mapBounds.south || point[1] > mapBounds.north) return;
@@ -1431,7 +1733,7 @@ movingWord.style.opacity = String(1 - release);
         label.className = "pin-label";
         label.textContent = city === "中国澳门" ? "澳门" : city;
         pin.append(dot, label);
-        pin.addEventListener("click", () => selectCity(city));
+        pin.addEventListener("click", () => selectCity(city, { reveal: true }));
         mapPins.append(pin);
         pinButtons.push(pin);
       });
@@ -1455,12 +1757,12 @@ movingWord.style.opacity = String(1 - release);
         const label = document.createElement("span");
         label.textContent = city + " · " + point[1].toFixed(2) + "°N, " + point[0].toFixed(2) + "°E";
         button.append(dot, label);
-        button.addEventListener("click", () => selectCity(city));
+        button.addEventListener("click", () => selectCity(city, { reveal: true }));
         overseasButtons.append(button);
         pinButtons.push(button);
       });
       document.getElementById("map-overseas").hidden = !outsideCities.length;
-      cityFilter.value = activeCity || "";
+      cityFilter.value = indexCity || "";
       cityFilter.disabled = !themeRecords.length;
       searchInput.disabled = !themeRecords.length;
     }
@@ -1473,6 +1775,18 @@ movingWord.style.opacity = String(1 - release);
       document.getElementById("tour-count-label").textContent = themeRecords.length
         ? meta.period + " · " + themeRecords.length + " 场档案"
         : "场次资料待补";
+      const poster = document.getElementById("tour-poster-image");
+      poster.src = meta.poster;
+      poster.alt = meta.posterAlt;
+      poster.width = meta.posterWidth;
+      poster.height = meta.posterHeight;
+      document.getElementById("tour-poster-enlarge").href = meta.poster;
+      document.getElementById("tour-poster-caption").textContent = meta.posterCaption;
+      document.getElementById("tour-poster-title").textContent = activeTheme;
+      document.getElementById("tour-poster-period").textContent = meta.period;
+      document.getElementById("tour-poster-description").textContent = meta.description;
+      document.getElementById("tour-poster-stops").textContent = themeRecords.length;
+      document.getElementById("tour-poster-cities").textContent = cities.length;
       document.getElementById("tour-register-caption").textContent = themeRecords.length
         ? themeRecords.length + " STOPS · " + cities.length + " CITIES · " + meta.period
         : "TOUR RECORDS · 待补档";
@@ -1543,7 +1857,7 @@ movingWord.style.opacity = String(1 - release);
       note.textContent = item.note || "";
       song.append(songLabel, document.createTextNode(item.song || ""), note);
       button.append(number, when, city, venue, song);
-      button.addEventListener("click", () => selectCity(item.city));
+      button.addEventListener("click", () => selectCity(item.city, { reveal: true, recordId: item.id }));
       tourList.append(button);
       recordButtons.push({ button, item });
     });
@@ -1551,6 +1865,7 @@ movingWord.style.opacity = String(1 - release);
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
         activePhase = button.dataset.tourFilter;
+        selectedRecordId = null;
         filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
         renderCityRecords(activeCity);
         renderTourList();
@@ -1562,12 +1877,19 @@ movingWord.style.opacity = String(1 - release);
         activeTheme = button.dataset.tourTheme;
         activePhase = "all";
         activeCity = tourThemeMeta[activeTheme]?.defaultCity || "";
+        indexCity = "";
+        selectedRecordId = null;
         searchInput.value = "";
         renderThemeState();
       });
     });
     searchInput.addEventListener("input", renderTourList);
-    cityFilter.addEventListener("change", () => selectCity(cityFilter.value));
+    cityFilter.addEventListener("change", () => selectCity(cityFilter.value, { reveal: Boolean(cityFilter.value) }));
+    clearTourFilter.addEventListener("click", () => {
+      activePhase = "all";
+      selectCity("");
+      filterButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.tourFilter === "all")));
+    });
     function renderTourList() {
       const themeRecords = recordsForTheme();
       const query = searchInput.value.trim().toLocaleLowerCase();
@@ -1575,18 +1897,22 @@ movingWord.style.opacity = String(1 - release);
       recordButtons.forEach(({ button, item }) => {
         const themeMatches = item.theme === activeTheme;
         const phaseMatches = activePhase === "all" || item.phase === activePhase;
-        const cityMatches = !activeCity || item.city === activeCity;
+        const cityMatches = !indexCity || item.city === indexCity;
         const haystack = (item.date + " " + item.stage + " " + item.city + " " + item.venue + " " + item.song + " " + item.note + " " + item.setlist.join(" ")).toLocaleLowerCase();
         const searchMatches = !query || haystack.includes(query);
         const visible = themeMatches && phaseMatches && cityMatches && searchMatches;
         button.hidden = !visible;
-        button.setAttribute("aria-pressed", String(item.theme === activeTheme && item.city === activeCity));
+        button.setAttribute("aria-pressed", String(item.theme === activeTheme && item.id === selectedRecordId));
         if (visible) visibleCount += 1;
       });
       const count = document.getElementById("tour-results");
       count.textContent = themeRecords.length
-        ? (visibleCount ? "显示 " + visibleCount + " / " + themeRecords.length + " 场" + (activeCity ? " · " + activeCity : "") : "没有找到符合条件的场次。")
+        ? (visibleCount ? "显示 " + visibleCount + " / " + themeRecords.length + " 场 · " + (indexCity || "全部城市") + (activePhase === "all" ? "" : " · " + (activePhase === "main" ? "正场" : "Encore")) : "没有找到符合条件的场次。")
         : activeTheme + "：暂无场次资料，待补档。";
+      document.querySelector(".tour-index-summary span").textContent = themeRecords.length
+        ? (indexCity ? "已选 " + indexCity + " · 展开筛选" : "展开筛选与完整记录")
+        : "该主题暂无场次资料";
+      clearTourFilter.hidden = activePhase === "all" && !indexCity && !query;
       let empty = document.getElementById("tour-empty");
       if (!visibleCount && !empty) {
         empty = document.createElement("p");
@@ -1618,13 +1944,45 @@ movingWord.style.opacity = String(1 - release);
     });
 
     const navLinks = document.querySelectorAll(".topline nav a");
+    const navToggle = document.getElementById("nav-toggle");
+    const siteNav = document.getElementById("site-nav");
+    const navCurrent = document.getElementById("nav-current");
+    function closeNav() {
+      siteNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+    navToggle.addEventListener("click", () => {
+      const open = !siteNav.classList.contains("is-open");
+      siteNav.classList.toggle("is-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.forEach((link) => link.addEventListener("click", () => {
+      navCurrent.textContent = link.textContent;
+      closeNav();
+    }));
+    document.querySelector(".brand").addEventListener("click", closeNav);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && siteNav.classList.contains("is-open")) {
+        closeNav();
+        navToggle.focus();
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".topline")) closeNav();
+    });
+    window.matchMedia("(min-width: 851px)").addEventListener("change", (event) => {
+      if (event.matches) closeNav();
+    });
     const watchedSections = document.querySelectorAll("main section[id]");
     if ("IntersectionObserver" in window) {
       const navObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             navLinks.forEach((link) => {
-              if (link.hash === "#" + entry.target.id) link.setAttribute("aria-current", "location");
+              if (link.hash === "#" + entry.target.id) {
+                link.setAttribute("aria-current", "location");
+                navCurrent.textContent = link.textContent;
+              }
               else link.removeAttribute("aria-current");
             });
           }
@@ -1633,6 +1991,10 @@ movingWord.style.opacity = String(1 - release);
       watchedSections.forEach((section) => navObserver.observe(section));
     }
   </script>
+<script src="fan-music.js" defer></script>
+<script src="fan-research.js" defer></script>
+<script src="song-links.js" defer></script>
+<script src="writings-reader.js" defer></script>
 <script src="guestbook.js" defer></script>
 </body>
 </html>

@@ -45,7 +45,12 @@
       .guestbook-hint { margin-top: 9px; }
       .guestbook-form { grid-template-columns: 1fr; }
       .guestbook-submit { width: 100%; }
-      .guestbook-card { flex-basis: 238px; }
+      .guestbook-card { flex-basis: min(78vw, 280px); }
+      .guestbook-kicker,.guestbook-card-date,.guestbook-form label,.guestbook-status { font-size: 12px; }
+      .guestbook-hint,.guestbook-pause { font-size: 13px; }
+      .guestbook-pause { min-height: 44px; }
+      .guestbook-form input,.guestbook-form textarea { font-size: 16px; }
+      .guestbook-submit { font-size: 14px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .guestbook-window { overflow-x: auto; }

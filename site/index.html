@@ -43,7 +43,7 @@
     .topline nav a:hover, .topline nav a[aria-current="location"] { color: #e5c995; }
     .nav-toggle { display: none; }
 
-    .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: 1fr; overflow: hidden; color: var(--ink); background: linear-gradient(180deg,#f8f6f0 0%,#f4f1ea 48%,var(--paper) 100%); }
+    .hero { position: relative; isolation: isolate; min-height: 100svh; display: grid; grid-template-columns: 1fr; overflow: hidden; color: var(--ink); background: radial-gradient(ellipse at 77% 60%,rgba(218,207,184,.26),transparent 31%),linear-gradient(180deg,#f8f6f0 0%,#f4f1ea 48%,var(--paper) 100%); }
     .hero::after { display: none; }
     .hero-copy { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: 110px 12px 100px var(--gutter); }
     .eyebrow, .section-kicker { color: #c5b58f; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; }
@@ -72,9 +72,23 @@
     .hero-subtitle { margin: 0; color: #536577; font: 300 clamp(15px,1.5vw,19px)/1.7 var(--serif); letter-spacing: .11em; }
     .hero-cn { max-width: 390px; margin: 54px 0 0; color: rgba(23,40,59,.76); font: 300 16px/2 var(--serif); letter-spacing: .1em; }
     .hero-date { position: absolute; bottom: 42px; left: var(--gutter); color: #66747b; font-size: 10px; letter-spacing: .2em; }
-    .hero-photo { position: absolute; z-index: 0; inset: 0; min-height: 100svh; margin: 0; overflow: hidden; }
+    .hero-ornament { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+    .hero-ornament svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-ornament path { fill: none; stroke: rgba(142,129,103,.34); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: hero-route-in 1.35s cubic-bezier(.22,.7,.2,1) forwards; }
+    .hero-ornament path:nth-child(2) { stroke: rgba(185,154,100,.34); animation-delay: .18s; }
+    .hero-ornament__block { position: absolute; display: block; border: 1px solid rgba(142,129,103,.18); opacity: 0; animation: hero-block-in .95s cubic-bezier(.2,.75,.2,1) forwards; }
+    .hero-ornament__block--tall { top: 7%; right: 6%; width: 17%; height: 47%; background: rgba(224,215,196,.19); animation-delay: .08s; }
+    .hero-ornament__block--wash { top: 25%; right: 9%; width: 34%; height: 19%; background: rgba(200,185,157,.12); animation-name: hero-block-from-left; animation-delay: .23s; }
+    .hero-ornament__block--frame { bottom: 8%; left: 27%; width: 22%; height: 24%; background: rgba(248,246,240,.12); animation-name: hero-block-from-bottom; animation-delay: .32s; }
+    .hero-ornament__circle { position: absolute; left: 30%; bottom: 28%; width: clamp(64px,10vw,142px); aspect-ratio: 1; border-radius: 50%; background: rgba(190,168,132,.22); opacity: 0; transform: scale(.62); animation: hero-circle-in 1s cubic-bezier(.2,.75,.2,1) .2s forwards; }
+    @keyframes hero-route-in { to { stroke-dashoffset: 0; } }
+    @keyframes hero-block-in { from { opacity: 0; transform: translateY(-32px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes hero-block-from-left { from { opacity: 0; transform: translateX(-42px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes hero-block-from-bottom { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes hero-circle-in { to { opacity: 1; transform: scale(1); } }
+    .hero-photo { position: absolute; z-index: 2; inset: 0; min-height: 100svh; margin: 0; overflow: hidden; }
     .hero-photo::before { content: none; }
-    .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right bottom; filter: none; }
+    .hero-photo img { position: absolute; inset: auto clamp(9%,16vw,245px) 3% auto; width: auto; height: 85%; max-width: none; object-fit: contain; object-position: right bottom; transform: translateY(-8%); filter: none; }
     .photo-credit { position: absolute; z-index: 3; left: 22px; bottom: 21px; max-width: 76%; color: rgba(248,246,240,.79); font-size: 10px; line-height: 1.6; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
     .photo-credit a { text-underline-offset: 3px; }
     .hero-note { position: absolute; z-index: 3; right: 6.5%; bottom: 62px; color: rgba(23,40,59,.68); font-size: 10px; letter-spacing: .16em; writing-mode: vertical-rl; }
@@ -394,6 +408,11 @@
       .topline nav a[aria-current="location"] { border-bottom-color: var(--gold); }
       .brand { font-size: 9px; letter-spacing: .12em; }
       .hero { grid-template-columns: 1fr; }
+      .hero-photo img { inset: auto 2% 2% auto; width: min(46vw,360px); height: auto; max-height: 69%; transform: translateY(-3%); }
+      .hero-ornament__block--tall { right: 3%; width: 20%; height: 38%; }
+      .hero-ornament__block--wash { right: 4%; width: 42%; height: 15%; }
+      .hero-ornament__block--frame { left: 21%; width: 26%; height: 19%; }
+      .hero-ornament__circle { left: 31%; bottom: 24%; width: 74px; }
       .about-grid,.music-layout,.tour-layout { gap: 43px; }
       .tour-layout { grid-template-columns: 1fr; gap: 34px; }
       .research-grid { gap: 32px; }
@@ -418,13 +437,18 @@
       .nav-toggle { gap: 9px; }
       .hero { display: block; min-height: 100svh; }
       .hero-photo { inset: 0; min-height: 100svh; }
-      .hero-photo img { inset: auto 0 0 auto; width: min(66vw,320px); height: 72%; object-position: right bottom; }
+      .hero-photo img { inset: auto 4% 4% auto; width: min(55vw,270px); height: auto; max-height: 58%; object-position: right bottom; transform: translateY(-3%); }
       .hero-copy { position: absolute; inset: 0; padding: 14vh 27px 0; justify-content: flex-start; background: transparent; }
       .hero h1 { margin: 24px 0 14px; font-size: clamp(58px,16vw,92px); }
       .hero-subtitle { font-size: 14px; }
       .hero-cn { margin-top: 17px; font-size: 13px; line-height: 1.75; }
       .hero-date { bottom: 61px; left: 27px; font-size: 9px; }
       .hero-note { display: none; }
+      .hero-ornament svg { opacity: .7; }
+      .hero-ornament__block--tall { top: 13%; right: 2%; width: 20%; height: 31%; }
+      .hero-ornament__block--wash { top: 43%; right: 3%; width: 41%; height: 12%; }
+      .hero-ornament__block--frame { bottom: 8%; left: 13%; width: 31%; height: 16%; }
+      .hero-ornament__circle { left: 39%; bottom: 24%; width: 58px; }
       .photo-credit { left: 12px; bottom: 12px; max-width: 70%; font-size: 9px; }
       .scroll-cue { display: none; }
       .archive-section { padding-block: 76px; }
@@ -507,6 +531,9 @@
       .tour-filter,.tour-search input,.tour-city-filter select,.tour-clear-filter { min-height: 44px; font-size: 13px; }
       .tour-search input,.tour-city-filter select { font-size: 16px; }
       .site-footer { padding-bottom: 88px; }
+    }
+    @media (max-width: 1100px) and (min-width: 851px) {
+      .hero-photo img { inset: auto 5% 4% auto; height: 80%; transform: translateY(-4%); }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -644,6 +671,26 @@
         <p class="hero-subtitle">as everything is all right</p>
         <p class="hero-cn">让声音经过时间，<br>也让时间留下回声。</p>
         <span class="hero-date">1974 — PRESENT&nbsp;&nbsp; / &nbsp;&nbsp;哈尔滨 · 中国</span>
+      </div>
+      <div class="hero-ornament" aria-hidden="true">
+        <span class="hero-ornament__block hero-ornament__block--tall"></span>
+        <span class="hero-ornament__block hero-ornament__block--wash"></span>
+        <span class="hero-ornament__block hero-ornament__block--frame"></span>
+        <span class="hero-ornament__circle"></span>
+        <svg viewBox="0 0 1440 1000" preserveAspectRatio="none" focusable="false">
+          <path pathLength="1" d="M 1360 55 V 190 H 1190 V 430 H 1090" />
+          <path pathLength="1" d="M 280 875 H 465 V 735 H 650 V 620 H 770" />
+        </svg>
+      </div>
+      <div class="hero-ornament" aria-hidden="true">
+        <span class="hero-ornament__block hero-ornament__block--tall"></span>
+        <span class="hero-ornament__block hero-ornament__block--wash"></span>
+        <span class="hero-ornament__block hero-ornament__block--frame"></span>
+        <span class="hero-ornament__circle"></span>
+        <svg viewBox="0 0 1440 1000" preserveAspectRatio="none" focusable="false">
+          <path pathLength="1" d="M 1360 55 V 190 H 1190 V 430 H 1090" />
+          <path pathLength="1" d="M 280 875 H 465 V 735 H 650 V 620 H 770" />
+        </svg>
       </div>
       <figure class="hero-photo">
         <img src="assets/lijian-intro-cutout.png" alt="暖米色背景上的李健透明背景肖像" fetchpriority="high" decoding="async">

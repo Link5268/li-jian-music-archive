@@ -320,8 +320,15 @@
     .notebook-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; object-position: center 22%; }
     .notebook-portrait figcaption { margin-top: 10px; color: #68757b; font: 12px/1.6 var(--serif); }
     .moments-intro { max-width: 650px; margin: -32px 0 60px; color: #52616d; font: 300 17px/1.9 var(--serif); }
+    .moments-head-actions { display: grid; justify-items: end; gap: 12px; flex: 0 0 auto; }
+    .moments-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 42px; padding: 8px 14px; border: 1px solid rgba(16,28,44,.28); color: #344653; background: transparent; cursor: pointer; font: 13px/1.4 var(--sans); letter-spacing: .06em; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+    .moments-toggle::after { content: "−"; color: #a88c59; font: 18px/1 var(--serif); }
+    .moments-toggle[aria-expanded="false"]::after { content: "+"; }
+    .moments-toggle:hover { border-color: rgba(16,28,44,.55); background: rgba(16,28,44,.045); }
+    .moments-toggle:focus-visible { outline: 2px solid #a88c59; outline-offset: 3px; }
+    .moments-gallery[hidden] { display: none; }
     .moments-year { margin-top: clamp(52px,7vw,100px); }
-    .moments-intro + .moments-year { margin-top: 0; }
+    .moments-gallery > .moments-year:first-child { margin-top: 0; }
     .moments-year-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin: 0 0 29px; padding-bottom: 15px; border-bottom: 1px solid rgba(16,28,44,.2); }
     .moments-year-heading h3 { margin: 0; color: var(--ink); font: 400 clamp(30px,4vw,52px)/1 var(--serif); }
     .moments-year-heading span { color: #68757b; font: 12px/1.5 var(--sans); letter-spacing: .15em; }
@@ -510,6 +517,8 @@
       .notebook-opening { grid-template-columns: 1fr; margin-bottom: 30px; }
       .notebook-portrait { max-width: 235px; margin: 0; }
       .moments-intro { margin: -16px 0 35px; }
+      .moments-head-actions { gap: 8px; }
+      .moments-toggle { min-height: 38px; padding: 6px 10px; font-size: 12px; }
       .moments-grid { grid-template-columns: 1fr; gap: 33px; }
       .moment:nth-child(n) { margin-top: 0; }
       .moment img { max-height: 78vh; object-fit: contain; object-position: left center; }
@@ -1111,9 +1120,13 @@
     <section class="archive-section section-light" id="moments" aria-labelledby="moments-title">
       <div class="section-head">
         <div><span class="section-kicker">07 / MOMENTS</span><h2 id="moments-title">万物安生时 · 影像</h2></div>
-        <span class="section-index">2023—2025 · 26 场</span>
+        <div class="moments-head-actions">
+          <span class="section-index">2023—2025 · 26 场</span>
+          <button class="moments-toggle" id="moments-toggle" type="button" aria-expanded="true" aria-controls="moments-gallery">收起照片</button>
+        </div>
       </div>
       <p class="moments-intro">从武汉到合肥，依照巡演场次收藏每一站的现场瞬间。</p>
+      <div class="moments-gallery" id="moments-gallery">
       <div class="moments-year">
         <div class="moments-year-heading"><h3>2023</h3><span>04 STOPS / 2023 年巡演</span></div>
         <div class="moments-grid">
@@ -1232,6 +1245,7 @@
             <figcaption><span class="moment-number">26</span><span class="moment-place">合肥</span><time class="moment-date" datetime="2025-06-28">2025.06.28</time></figcaption>
           </figure>
         </div>
+      </div>
       </div>
     </section>
 
@@ -1990,6 +2004,15 @@ movingWord.style.color = `rgb(${fromColor.map((value, index) => Math.round(value
     document.getElementById("word-next").addEventListener("click", () => {
       noteIndex = (noteIndex + 1) % notes.length;
       document.getElementById("word-card").textContent = notes[noteIndex];
+    });
+
+    const momentsToggle = document.getElementById("moments-toggle");
+    const momentsGallery = document.getElementById("moments-gallery");
+    momentsToggle.addEventListener("click", () => {
+      const expanded = momentsToggle.getAttribute("aria-expanded") === "true";
+      momentsToggle.setAttribute("aria-expanded", String(!expanded));
+      momentsGallery.hidden = expanded;
+      momentsToggle.textContent = expanded ? "展开照片" : "收起照片";
     });
 
     const navLinks = document.querySelectorAll(".topline nav a");

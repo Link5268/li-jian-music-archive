@@ -14,22 +14,17 @@
     .guestbook-kicker { display: block; margin-bottom: 9px; color: #b99a64; font: 11px/1.5 var(--sans, sans-serif); letter-spacing: .22em; }
     .guestbook-heading h3 { margin: 0; color: #ece8df; font: 400 clamp(24px,3vw,38px)/1.3 var(--serif, serif); }
     .guestbook-hint { margin: 0; color: #aebbc3; font: 12px/1.6 var(--sans, sans-serif); }
-    .guestbook-window { position: relative; overflow: hidden; margin-top: 26px; }
-    .guestbook-window::before, .guestbook-window::after { position: absolute; top: 0; bottom: 0; z-index: 1; width: 38px; content: ""; pointer-events: none; }
-    .guestbook-window::before { left: 0; background: linear-gradient(90deg,#101c2c,transparent); }
-    .guestbook-window::after { right: 0; background: linear-gradient(270deg,#101c2c,transparent); }
-    .guestbook-track { display: flex; width: max-content; gap: 20px; animation: guestbook-drift var(--guestbook-duration, 50s) linear infinite; }
-    .guestbook-track.is-static { width: 100%; animation: none; }
-    .guestbook-window:hover .guestbook-track, .guestbook-window:focus-within .guestbook-track, .guestbook-track.is-paused { animation-play-state: paused; }
-    .guestbook-group { display: flex; gap: 20px; }
-    .guestbook-card { box-sizing: border-box; display: flex; flex: 0 0 270px; flex-direction: column; min-height: 172px; padding: 22px 24px; border: 1px solid rgba(185,154,100,.28); background: rgba(255,255,255,.035); }
+    .guestbook-window { position: relative; overflow-x: auto; overflow-y: hidden; margin-top: 26px; padding-bottom: 10px; overscroll-behavior-x: contain; scroll-behavior: auto; scrollbar-color: rgba(205,187,150,.6) rgba(255,255,255,.08); scrollbar-width: thin; cursor: grab; }
+    .guestbook-window:focus-visible { outline: 1px solid rgba(205,187,150,.65); outline-offset: 4px; }
+    .guestbook-window.is-dragging { cursor: grabbing; user-select: none; }
+    .guestbook-track, .guestbook-track.is-static { display: flex; align-items: start; width: max-content; gap: 16px; }
+    .guestbook-group { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, minmax(172px, auto)); grid-auto-columns: 270px; gap: 16px; }
+    .guestbook-card { box-sizing: border-box; display: flex; min-width: 0; flex-direction: column; min-height: 172px; padding: 22px 24px; border: 1px solid rgba(185,154,100,.28); background: rgba(255,255,255,.035); }
     .guestbook-card-head { display: flex; justify-content: space-between; gap: 15px; align-items: baseline; margin-bottom: 18px; }
     .guestbook-card-name { color: #d8c49b; font: 15px/1.4 var(--serif, serif); }
     .guestbook-card-date { flex: 0 0 auto; color: #91a1aa; font: 10px/1.4 var(--sans, sans-serif); }
     .guestbook-card-message { margin: 0; color: #ece8df; font: 15px/1.75 var(--serif, serif); overflow-wrap: anywhere; white-space: pre-wrap; }
     .guestbook-empty { width: 100%; padding: 28px 0; color: #aebbc3; text-align: center; font: 13px/1.7 var(--sans, sans-serif); }
-    .guestbook-controls { display: flex; justify-content: flex-end; margin-top: 12px; }
-    .guestbook-pause { padding: 7px 0; color: #cdbb96; border: 0; border-bottom: 1px solid rgba(205,187,150,.4); background: transparent; cursor: pointer; font: 11px/1.5 var(--sans, sans-serif); }
     .guestbook-form { display: grid; grid-template-columns: minmax(140px,1fr) minmax(220px,2.6fr) auto; gap: 12px; align-items: start; margin-top: 44px; }
     .guestbook-form label { display: grid; gap: 9px; color: #bdc8ca; font: 11px/1.5 var(--sans, sans-serif); letter-spacing: .12em; }
     .guestbook-form input, .guestbook-form textarea { box-sizing: border-box; width: 100%; min-height: 48px; padding: 13px 14px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline: none; color: #ece8df; background: rgba(255,255,255,.04); font: 14px/1.5 var(--sans, sans-serif); letter-spacing: 0; }
@@ -38,25 +33,25 @@
     .guestbook-submit { align-self: end; min-height: 48px; padding: 0 22px; border: 1px solid #b99a64; border-radius: 0; color: #101c2c; background: #cdbb96; cursor: pointer; font: 12px/1.4 var(--sans, sans-serif); }
     .guestbook-submit:disabled { opacity: .55; cursor: wait; }
     .guestbook-status { min-height: 23px; margin: 10px 0 0; color: #d8c49b; font: 12px/1.7 var(--sans, sans-serif); }
-    @keyframes guestbook-drift { to { transform: translateX(calc(-50% - 10px)); } }
     @media (max-width: 720px) {
       .guestbook { margin-top: 62px; }
       .guestbook-heading { display: block; }
       .guestbook-hint { margin-top: 9px; }
       .guestbook-form { grid-template-columns: 1fr; }
       .guestbook-submit { width: 100%; }
-      .guestbook-card { flex-basis: min(78vw, 280px); }
+      .guestbook-group { grid-auto-columns: min(78vw, 280px); }
       .guestbook-kicker,.guestbook-card-date,.guestbook-form label,.guestbook-status { font-size: 12px; }
-      .guestbook-hint,.guestbook-pause { font-size: 13px; }
-      .guestbook-pause { min-height: 44px; }
+      .guestbook-hint { font-size: 13px; }
       .guestbook-form input,.guestbook-form textarea { font-size: 16px; }
       .guestbook-submit { font-size: 14px; }
     }
+    @media (max-width: 720px) {
+      .guestbook-window::-webkit-scrollbar { height: 5px; }
+      .guestbook-window::-webkit-scrollbar-thumb { border-radius: 5px; background: rgba(205,187,150,.6); }
+      .guestbook-window::-webkit-scrollbar-track { background: rgba(255,255,255,.08); }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .guestbook-window { overflow-x: auto; }
-      .guestbook-window::before, .guestbook-window::after { display: none; }
-      .guestbook-track { animation: none !important; }
-      .guestbook-group[aria-hidden="true"] { display: none; }
+      .guestbook-window { scroll-behavior: auto; }
     }
   `;
   document.head.append(style);
@@ -66,12 +61,11 @@
   guestbook.innerHTML = `
     <div class="guestbook-heading">
       <div><span class="guestbook-kicker">VISITOR NOTES / 来访者留声</span><h3>留下你的短笺</h3></div>
-      <p class="guestbook-hint">留言经审核后展示在这里</p>
+      <p class="guestbook-hint">留言经审核后展示 · 自动缓慢滑动，悬停暂停后可拖动浏览</p>
     </div>
-    <div class="guestbook-window" aria-label="已审核的访客留言">
+    <div class="guestbook-window" tabindex="0" aria-label="已审核的访客留言，可左右滑动查看更多">
       <div class="guestbook-track is-static" id="guestbook-track"><p class="guestbook-empty">正在读取留言…</p></div>
     </div>
-    <div class="guestbook-controls"><button class="guestbook-pause" id="guestbook-pause" type="button" hidden>暂停滚动</button></div>
     <form class="guestbook-form" id="guestbook-form">
       <label>你的名字<input name="name" maxlength="30" required autocomplete="name" placeholder="怎么称呼你"></label>
       <label>你想说的话<textarea name="message" maxlength="500" required placeholder="写下一段听歌或看演出的记忆"></textarea></label>
@@ -82,7 +76,7 @@
   wordsSection.append(guestbook);
 
   const track = guestbook.querySelector("#guestbook-track");
-  const pauseButton = guestbook.querySelector("#guestbook-pause");
+  const guestbookWindow = guestbook.querySelector(".guestbook-window");
   const status = guestbook.querySelector("#guestbook-status");
   const form = guestbook.querySelector("#guestbook-form");
   const submitButton = form.querySelector("button[type='submit']");
@@ -127,14 +121,7 @@
       firstGroup.className = "guestbook-group";
       messages.forEach((item) => firstGroup.append(makeCard(item)));
       track.append(firstGroup);
-      if (messages.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        const secondGroup = firstGroup.cloneNode(true);
-        secondGroup.setAttribute("aria-hidden", "true");
-        track.append(secondGroup);
-        track.classList.remove("is-static");
-        track.style.setProperty("--guestbook-duration", `${Math.max(28, messages.length * 8)}s`);
-        pauseButton.hidden = false;
-      }
+      if (messages.length > 1) setupAutoplay(firstGroup);
     } catch {
       track.replaceChildren();
       const error = document.createElement("p");
@@ -144,11 +131,99 @@
     }
   }
 
-  pauseButton.addEventListener("click", () => {
-    const paused = track.classList.toggle("is-paused");
-    pauseButton.textContent = paused ? "继续滚动" : "暂停滚动";
-    pauseButton.setAttribute("aria-pressed", String(paused));
-  });
+  function setupAutoplay(firstGroup) {
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    let animationFrame = 0;
+    let hovered = false;
+    let focused = false;
+    let interacting = false;
+    let resumeAfter = 0;
+    let dragStart = null;
+
+    function configure() {
+      cancelAnimationFrame(animationFrame);
+      track.querySelectorAll("[data-guestbook-clone]").forEach((clone) => clone.remove());
+      guestbookWindow.scrollLeft = 0;
+
+      const groupWidth = firstGroup.getBoundingClientRect().width;
+      if (reducedMotion.matches) return;
+
+      const trackGap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      const cycleWidth = groupWidth + trackGap;
+      const copiesNeeded = Math.ceil((guestbookWindow.clientWidth + cycleWidth) / cycleWidth);
+      for (let index = 0; index < copiesNeeded; index += 1) {
+        const clone = firstGroup.cloneNode(true);
+        clone.dataset.guestbookClone = "true";
+        clone.setAttribute("aria-hidden", "true");
+        track.append(clone);
+      }
+
+      let previousTime = 0;
+      function animate(time) {
+        if (!previousTime) previousTime = time;
+        const elapsed = Math.min(time - previousTime, 50);
+        previousTime = time;
+        const isPaused = hovered || focused || interacting || time < resumeAfter || document.hidden;
+        if (!isPaused) {
+          guestbookWindow.scrollLeft += elapsed * 0.018;
+          if (guestbookWindow.scrollLeft >= cycleWidth) {
+            guestbookWindow.scrollLeft -= cycleWidth;
+          }
+        }
+        animationFrame = requestAnimationFrame(animate);
+      }
+      animationFrame = requestAnimationFrame(animate);
+    }
+
+    guestbookWindow.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") hovered = true;
+    });
+    guestbookWindow.addEventListener("pointerleave", (event) => {
+      if (event.pointerType === "mouse") hovered = false;
+    });
+    guestbookWindow.addEventListener("pointerdown", (event) => {
+      interacting = true;
+      if (event.pointerType === "mouse" && event.button === 0) {
+        dragStart = { x: event.clientX, scrollLeft: guestbookWindow.scrollLeft };
+        guestbookWindow.setPointerCapture(event.pointerId);
+      }
+    });
+    guestbookWindow.addEventListener("pointermove", (event) => {
+      if (!dragStart) return;
+      const distance = event.clientX - dragStart.x;
+      if (Math.abs(distance) > 3) guestbookWindow.classList.add("is-dragging");
+      if (guestbookWindow.classList.contains("is-dragging")) {
+        guestbookWindow.scrollLeft = dragStart.scrollLeft - distance;
+      }
+    });
+    const finishInteraction = () => {
+      interacting = false;
+      dragStart = null;
+      guestbookWindow.classList.remove("is-dragging");
+      resumeAfter = performance.now() + 1800;
+    };
+    guestbookWindow.addEventListener("pointerup", finishInteraction);
+    guestbookWindow.addEventListener("pointercancel", finishInteraction);
+    guestbookWindow.addEventListener("wheel", () => {
+      resumeAfter = performance.now() + 1800;
+    }, { passive: true });
+    guestbookWindow.addEventListener("focusin", () => {
+      focused = true;
+    });
+    guestbookWindow.addEventListener("focusout", (event) => {
+      if (!guestbookWindow.contains(event.relatedTarget)) focused = false;
+    });
+
+    if (typeof ResizeObserver === "function") {
+      const observer = new ResizeObserver(configure);
+      observer.observe(guestbookWindow);
+      observer.observe(firstGroup);
+    } else {
+      window.addEventListener("resize", configure);
+    }
+    reducedMotion.addEventListener?.("change", configure);
+    configure();
+  }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();

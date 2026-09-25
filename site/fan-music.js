@@ -217,7 +217,7 @@
   });
   theme.addEventListener("change", () => { visibleCount = pageSize; render(); });
   query.addEventListener("input", () => { visibleCount = pageSize; render(); });
-  more.addEventListener("click", () => { visibleCount += pageSize; render(); });
+  more.addEventListener("click", () => { visibleCount = Infinity; render(); });
   setMode(mode);
   window.LI_JIAN_FAN_MUSIC_OPEN = (nextMode, title) => {
     setMode(nextMode);

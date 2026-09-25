@@ -327,7 +327,31 @@
     .word-author { margin: 21px 0 35px; color: #aab9bd; font-size: 10px; letter-spacing: .22em; }
     .word-next { padding: 12px 2px; color: #d5c49a; border: 0; border-bottom: 1px solid rgba(213,196,154,.6); background: transparent; cursor: pointer; font-size: 11px; letter-spacing: .16em; }
     .words-note { max-width: 540px; margin: 32px 0 0; color: #9eaaae; font-size: 11px; line-height: 1.7; }
+    .writings-reader { box-sizing: border-box; width: min(100%, 1120px); margin: clamp(72px,9vw,130px) auto 0; padding: clamp(24px,4vw,48px); border: 1px solid rgba(236,232,223,.18); color: #ece8df; background: rgba(4,13,24,.22); text-align: left; }
+    .writings-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+    .writings-heading h3 { margin: 10px 0 0; font: 400 clamp(28px,4vw,48px)/1.15 var(--serif); }
+    .writings-heading > span { color: #c8b58b; font: 11px/1.6 var(--sans); letter-spacing: .16em; white-space: nowrap; }
+    .writings-intro { max-width: 780px; margin: 0 0 25px; color: #bac5c8; font: 14px/1.9 var(--serif); }
+    .writings-topics { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 24px; }
+    .writings-topics button { min-height: 38px; padding: 7px 12px; border: 1px solid rgba(236,232,223,.25); color: #cfdbdb; background: transparent; cursor: pointer; font: 12px/1.5 var(--sans); }
+    .writings-topics button:hover,.writings-topics button[aria-pressed="true"] { border-color: #c8b58b; color: #101c2c; background: #c8b58b; }
+    .writings-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; color: #e9e7de; }
+    .writings-toolbar strong { font: 400 20px/1.5 var(--serif); }
+    .writings-toolbar label { display: flex; align-items: center; gap: 9px; color: #bfc9c9; font: 12px/1.5 var(--sans); }
+    .writings-toolbar select { min-height: 38px; padding: 6px 24px 6px 10px; border: 1px solid rgba(236,232,223,.35); border-radius: 0; color: #ece8df; background: #17283a; font: 13px var(--sans); }
+    .writings-page { display: block; width: min(100%, 720px); margin: 0 auto; background: #e7f1fb; scroll-margin-top: 78px; }
+    .writings-page img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 5; object-fit: contain; }
+    .writings-page:focus-visible,.writings-topics button:focus-visible,.writings-controls button:focus-visible { outline: 2px solid #d5c49a; outline-offset: 3px; }
+    .writings-controls { display: flex; justify-content: space-between; align-items: center; gap: 20px; max-width: 720px; margin: 20px auto 0; }
+    .writings-controls button { min-height: 42px; padding: 5px 0; border: 0; border-bottom: 1px solid rgba(213,196,154,.55); color: #d5c49a; background: transparent; cursor: pointer; font: 13px var(--sans); }
+    .writings-controls button:disabled { opacity: .35; cursor: default; }
+    .writings-controls span { color: #bdc8ca; font: 12px var(--sans); }
 
+    .source-catalog { margin-top: 28px; border-top: 1px solid rgba(16,28,44,.2); }
+    .source-catalog > summary { display: flex; justify-content: space-between; gap: 20px; padding: 20px 0; color: #31495d; cursor: pointer; font: 400 18px/1.5 var(--serif); list-style: none; }
+    .source-catalog > summary::-webkit-details-marker { display: none; }
+    .source-catalog > summary::after { content: "＋"; color: #8b5946; }
+    .source-catalog[open] > summary::after { content: "−"; }
     .source-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; border-top: 1px solid rgba(16,28,44,.2); }
     .source-list a { display: flex; justify-content: space-between; gap: 15px; padding: 16px 0; border-bottom: 1px solid rgba(16,28,44,.16); color: #31495d; text-decoration: none; font: 300 14px/1.6 var(--serif); }
     .source-list a span:last-child { flex: 0 0 auto; color: #7b8688; font: 10px/1.8 var(--sans); }
@@ -448,6 +472,10 @@
       .moment:nth-child(n) { margin-top: 0; }
       .moment img { max-height: 78vh; object-fit: contain; object-position: left center; }
       .words-section { min-height: 62vh; }
+      .writings-reader { padding: 18px; }
+      .writings-heading { align-items: start; flex-direction: column; gap: 6px; }
+      .writings-toolbar { align-items: start; flex-direction: column; }
+      .writings-topics button { min-height: 44px; }
       .word-card { min-height: 125px; font-size: 22px; }
       .source-list,.archive-credits { grid-template-columns: 1fr; gap: 0; }
       .archive-credits { gap: 16px; margin-top: 31px; }
@@ -600,7 +628,6 @@
       <figure class="hero-photo">
         <img src="assets/lijian-intro-cover.webp" alt="黑白巡演封面：李健与唱片意象" width="2048" height="1191" fetchpriority="high" decoding="async">
         <span class="hero-note">MUSIC · TIME · LANDSCAPE</span>
-        <figcaption class="photo-credit">序 · 巡演视觉封面 · 用户提供</figcaption>
       </figure>
       <a class="scroll-cue" href="#about">SCROLL TO ENTER</a>
     </section>
@@ -613,7 +640,6 @@
       <div class="about-grid">
         <figure class="about-photo reveal">
           <img src="assets/lijian-about-close.jpg" alt="李健面部近景肖像" width="1278" height="960" loading="lazy">
-          <figcaption>人物页肖像 · 用户提供</figcaption>
         </figure>
         <div class="about-copy reveal">
           <span class="section-kicker">LI JIAN · SINGER / SONGWRITER</span>
@@ -656,7 +682,6 @@
       <div class="music-layout">
         <figure class="vinyl-figure reveal">
           <div class="vinyl-frame"><img src="assets/turntable-cc0.jpg" alt="黑胶唱片与唱机的俯拍照片，作为唱片档案的视觉意象" width="4896" height="3264" loading="lazy"></div>
-          <figcaption>唱片静物示意，与李健本人及具体专辑封面无关。照片：Mink Mingle via Wikimedia Commons · <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">CC0 1.0</a></figcaption>
         </figure>
         <div class="album-archive reveal">
           <details class="album-detail">
@@ -707,7 +732,7 @@
               <li><span>01</span>不期而遇</li><li><span>02</span>你从天而降</li><li><span>03</span>梅雨</li><li><span>04</span>Marine</li><li><span>05</span>美丽生灵</li><li><span>06</span>爱咋咋地</li><li><span>07</span>带来风景的女人</li><li><span>08</span>无烟之火</li><li><span>09</span>门</li><li><span>10</span>我唯有的你</li><li><span>11</span>人群中的人</li><li><span>12</span>夜晚眺望金桥</li><li><span>13</span>深町小夜曲</li><li><span>14</span>幻梦花园</li><li><span>15</span>一切刚刚好</li>
             </ol>
           </details>
-          <p class="rights-note">专辑与曲目依据所给资料整理，参考 <a href="https://zh.wikipedia.org/wiki/李健音乐作品列表" target="_blank" rel="noreferrer">中文维基百科《李健音乐作品列表》</a>。本站背景音乐与专辑索引分开；其他曲目的聆听请前往正规音乐平台，完整歌词不在此转载。</p>
+          <p class="rights-note">本站背景音乐与专辑索引分开；其他曲目的聆听请前往正规音乐平台，完整歌词不在此转载。</p>
         </div>
       </div>
       <div class="music-additions">
@@ -786,7 +811,7 @@
           </div>
         </details>
         <details class="music-fold">
-          <summary><strong>综艺舞台曲目索引</strong><span>按中文维基百科作品列表收录</span></summary>
+          <summary><strong>综艺舞台曲目索引</strong><span>按节目分类</span></summary>
           <div class="music-fold-content">
             <h3>《我是歌手》第三季与巅峰会</h3>
             <ul class="stage-song-list"><li>《贝加尔湖畔》</li><li>《在水一方》</li><li>《袖手旁观》</li><li>《今天是你的生日，妈妈》</li><li>《当你老了》</li><li>《尘缘》</li><li>《月光》</li><li>《陀螺》</li><li>《假如爱有天意》</li><li>《和自己赛跑的人》／《朋友》</li><li>《故乡山川》／《乌苏里船歌》</li><li>《车站》</li><li>《Feeling Good》</li></ul>
@@ -797,7 +822,7 @@
           </div>
         </details>
       </div>
-    <details class="music-fold" id="recent-releases"><summary><strong>近期单曲与现场版本</strong><span>2023—2026 · 7 条补充</span></summary><div class="music-fold-content"><ul class="archive-lines"><li><time>2023.06.16</time><strong>《我爱你！》</strong><span>电影同名主题曲；词曲、演唱：李健。 <a href="https://music.apple.com/us/song/1739326138" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2024 · 节目记录</time><strong>《你一定能看见》</strong><span>央视《影视留声机》2024.12.25刊载演唱视频；此日期为节目页面日期。 <a href="https://tv.cctv.com/2024/12/25/VIDElyZfQZTghvAxpmPJvNxk241225.shtml" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2025.04.19</time><strong>《无论风往何处吹（Live）》</strong><span>现场版本；与录音室版本分别归档。 <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2025.04.22</time><strong>《星空下的家（Live）》</strong><span>现场版本；日期按音乐平台发行记录。 <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2026.02.12</time><strong>《人间共鸣》</strong><span>平台发行记录；另有2026年央视春晚演唱版本。 <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2026.04.19</time><strong>《蓝色夜曲》</strong><span>词曲：李健；编曲：崔万平、李琳萱；制作人：崔万平。 <a href="https://www.youtube.com/watch?v=4irY8I-NWWU" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li><li><time>2026.05.30</time><strong>《从黄昏到午夜》</strong><span>词曲：李健；制作人：刘卓；编曲：刘卓、金天、崔万平。 <a href="https://www.youtube.com/watch?v=PCASW1O8G14" target="_blank" rel="noopener noreferrer">发行／节目来源 ↗</a></span></li></ul><p>发行日、节目播出日与视频上传日分别记录；未将已发布单曲推定为尚未确认的新专辑曲目。</p></div></details>
+    <details class="music-fold" id="recent-releases"><summary><strong>近期单曲与现场版本</strong><span>2023—2026 · 7 条补充</span></summary><div class="music-fold-content"><ul class="archive-lines"><li><time>2023.06.16</time><strong>《我爱你！》</strong><span>电影同名主题曲；词曲、演唱：李健。</span></li><li><time>2024 · 节目记录</time><strong>《你一定能看见》</strong><span>央视《影视留声机》2024.12.25刊载演唱视频；此日期为节目页面日期。</span></li><li><time>2025.04.19</time><strong>《无论风往何处吹（Live）》</strong><span>现场版本；与录音室版本分别归档。</span></li><li><time>2025.04.22</time><strong>《星空下的家（Live）》</strong><span>现场版本；日期按音乐平台发行记录。</span></li><li><time>2026.02.12</time><strong>《人间共鸣》</strong><span>平台发行记录；另有2026年央视春晚演唱版本。</span></li><li><time>2026.04.19</time><strong>《蓝色夜曲》</strong><span>词曲：李健；编曲：崔万平、李琳萱；制作人：崔万平。</span></li><li><time>2026.05.30</time><strong>《从黄昏到午夜》</strong><span>词曲：李健；制作人：刘卓；编曲：刘卓、金天、崔万平。</span></li></ul><p>发行日、节目播出日与视频上传日分别记录；未将已发布单曲推定为尚未确认的新专辑曲目。</p></div></details>
 </section>
 
     <section class="archive-section section-mist" id="tour" aria-labelledby="tour-title">
@@ -839,14 +864,14 @@
             <span class="map-overseas-label">OUTSIDE MAP<strong>海外城市 · 城市中心坐标</strong></span>
             <div class="map-overseas-buttons" id="map-overseas-buttons"></div>
           </div>
-          <figcaption><span>城市点位与省界使用同一经纬度投影；标注城市中心，不代表场馆地址。海外场单列。</span><span>省界数据：<a href="https://github.com/Supeset/China-GeoData" target="_blank" rel="noreferrer">China-GeoData</a> · <a href="assets/CHINA-GEODATA-LICENSE.txt">MIT 许可</a></span></figcaption>
+          <figcaption><span>标注城市中心，不代表场馆地址。海外场单列。</span></figcaption>
         </figure>
         <div class="tour-side reveal">
           <span class="section-kicker">CITY RECORDS</span>
           <h3 id="city-name">上海</h3>
           <p class="tour-cn" id="city-caption">选择城市，查看同城场次档案。</p>
           <div class="city-stops" id="city-stops" aria-live="polite"></div>
-          <p class="tour-note">「万物安生时」按网站创建者提供的场次资料编目；音乐页“巡回演唱会”歌单已同步至单场详情，数据支持：水流润万生老师。未公布的特别曲目和歌单留空。地图标注城市中心，海外城市单列。</p>
+          <p class="tour-note">同一城市的多场演出合并展示。未公布的特别曲目和歌单留空。</p>
         </div>
       </div>
       <details class="tour-register">
@@ -874,13 +899,13 @@
       </details>
       <div class="tour-upcoming" aria-label="日期或场馆待公布的 Encore 城市">
         <h3>后续城市 · 待公布</h3>
-        <p>以下为创建者提供的计划档期，具体日期、场馆和歌单待公布，因此暂不计入场次索引。</p>
+        <p>具体日期、场馆和歌单待公布，因此暂不计入场次索引。</p>
         <ul><li><time>2026.12</time><strong>宁波</strong><span>具体日期与场馆待公布</span></li><li><time>2027.01</time><strong>深圳</strong><span>具体日期与场馆待公布</span></li><li><time>2027.01</time><strong>北京</strong><span>具体日期与场馆待公布</span></li></ul>
       </div>
       <details class="tour-register">
         <summary class="tour-index-summary"><h3>单场演唱会</h3><span>展开查看 1998—2014 年记录</span></summary>
         <div class="tour-register-content">
-          <p class="research-note">以下信息按中文维基百科《李健》条目所列；条目未标城市或场馆的项目留空。</p>
+          <p class="research-note">城市或场馆未注明的项目留空。</p>
           <div class="single-show-list">
             <p><strong>1998.06.10 · 北京</strong>清华大学体育馆 ·「李健·缪杰」个人作品演唱会</p>
             <p><strong>2008.04.29 · 城市未注明</strong>星光现场 ·「李健·完美坚持」演唱会</p>
@@ -952,7 +977,7 @@
             <div class="research-fold-content">
               <p>疫情期间，李健与主办方将五场音乐会或演唱会在线免费播出：</p>
               <ol><li>李健海口音乐会</li><li>李健老友新赏音乐会</li><li>李健万物声长音乐会</li><li>李健响往线上演唱会</li><li>李健天行健音乐会</li></ol>
-              <p>维基百科条目记载，《响往》当晚于“歌手李健”微信视频号播出。</p>
+              <p>《响往》当晚于“歌手李健”微信视频号播出。</p>
             </div>
           </details>
           <details class="research-fold">
@@ -962,7 +987,7 @@
                 <li>1993 年，清华大学冬令营民歌组全国第一名，后获清华大学保送。</li>
                 <li>1998 年毕业于清华大学电子工程系；1998—2000 年在国家广电总局任网络工程师。</li>
                 <li>2015 年获聘国家海洋局海洋公益形象大使。</li>
-                <li>2016 年 3 月，在纽约林肯中心大卫·格芬厅举办个人演唱会；以上为维基百科条目所载描述。</li>
+                <li>2016 年 3 月，在纽约林肯中心大卫·格芬厅举办个人演唱会。</li>
               </ul>
             </div>
           </details>
@@ -993,7 +1018,7 @@
             <summary><strong>奖项之外的舞台记录</strong><span>晚会与单场演出</span></summary>
             <div class="research-fold-content">
               <ul>
-                <li><strong>2026</strong> · 央视春晚演唱《人间共鸣》。<a href="https://tv.cctv.com/2026/02/17/VIDEMN9cmK7gU3UgIVcQaPTC260217.shtml" target="_blank" rel="noopener noreferrer">央视节目记录 ↗</a></li>
+                <li><strong>2026</strong> · 央视春晚演唱《人间共鸣》。</li>
                 <li>2011 年首次登上央视春晚；2013 年第二次登上春晚，与孙俪合唱《风吹麦浪》。</li>
                 <li>2012 年登上央视元宵晚会；条目另记载 2011 年末央视跨年元旦晚会演出。</li>
                 <li>2015 年 11—12 月在清华大学、电子科技大学、哈尔滨工业大学及中国人民大学举办「看见李健」高校健谈会。</li>
@@ -1003,7 +1028,6 @@
           </details>
         </div>
       </div>
-      <p class="research-note">中文维基百科《李健》条目自身标注需要改善部分爱好者内容；本区只作资料导航，奖项与节目记录仍建议按原始主办方或节目资料核对。</p>
     </section>
 
 <section class="archive-section section-paper" id="notebook" aria-labelledby="notebook-title">
@@ -1011,12 +1035,10 @@
 <div class="notebook-opening">
   <p class="section-intro">从学琴、阅读到一首歌的诞生。这里收录公开访谈和机构记录中的细节；回忆与观点保留讲述时间，沿着出处继续读。</p>
   <figure class="notebook-portrait reveal">
-    <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像，用户提供照片" width="1352" height="1800" loading="lazy" decoding="async">
-    <figcaption>人物肖像 · 用户提供</figcaption>
+    <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像" width="1352" height="1800" loading="lazy" decoding="async">
   </figure>
 </div>
-<div class="research-grid"><div class="research-column"><h3>启蒙与校园</h3><details class="research-fold"><summary><strong>烛光里的一首吉他曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>少年时期，他原本只想学会几首弹唱；一次停电时，老师弹起《爱的罗曼史》，让他决定继续学琴。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>从调琴到听觉训练</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他回忆曾帮老师调琴、教初学者，以教学抵学费；那段大量调琴的经历也锻炼了耳朵。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>和声来自合唱团</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华合唱团与音乐辅修课程帮助他系统学习和声、视唱练耳和曲式；之后因电子系课业繁重停止辅修。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details><details class="research-fold"><summary><strong>《风吹麦浪》的校园记忆</strong><span>展开札记</span></summary><div class="research-fold-content"><p>在本人回忆中，清华北门与诗人、画家相处的夏天，后来成为《风吹麦浪》的记忆来源。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noopener noreferrer">李健《我与音乐这些年》·《水木清华》2015年第1、2期 ↗</a></p></div></details></div><div class="research-column"><h3>作品背后的风景</h3><details class="research-fold"><summary><strong>第一次抵达贝加尔湖</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年访谈中，他明确说写歌时是第一次到访；小时候对这个地名的熟悉，来自东北生活中的寒冷记忆。</p><p class="notebook-source"><a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noopener noreferrer">新浪访谈实录 · 2011.12.20 ↗</a></p></div></details><details class="research-fold"><summary><strong>《依然》写在旅途中</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他谈到，专辑中的不少创作是在旅行中完成的，利用旅途时间记录感受；唱片名则由公司提出。</p><p class="notebook-source"><a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noopener noreferrer">新浪访谈实录 · 2011.12.20 ↗</a></p></div></details><details class="research-fold"><summary><strong>地名也是情感坐标</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把《松花江》与成长记忆相连；谈及《抚仙湖》时，提到2005年的到访和对清澈湖水的印象。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>《音乐傲骨》的命名</strong><span>展开札记</span></summary><div class="research-fold-content"><p>据本人访谈，这个名字由唱片公司提出，用以概括他长期坚持个人音乐方向的状态。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>电影主题曲中的含蓄表达</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《我爱你！》创作特辑中，他谈到用歌曲表达爱情。片名和歌名已经点明主题，歌词没有再直接写出那三个字。</p><p class="notebook-source"><a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noopener noreferrer">1905电影网 · 2023.06.16 ↗</a></p></div></details><details class="research-fold"><summary><strong>布鲁斯与中文语感</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《从黄昏到午夜》创作手记提到，他琢磨布鲁斯旋律与中文表达的融合两三年；常听电台停播的经历也进入创作感受。</p><p class="notebook-source"><a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noopener noreferrer">JOOX唱片介绍所载李健创作手记 · 2026.05.30 ↗</a></p></div></details></div><div class="research-column"><h3>阅读与音乐观</h3><details class="research-fold"><summary><strong>小说里的音乐结构</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2012年访谈中，他谈及普鲁斯特、罗曼·罗兰与格非，关注小说铺垫、节奏和音乐结构之间的相似之处。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noopener noreferrer">清华校友总会转载访谈 · 2012.08.06 ↗</a></p></div></details><details class="research-fold"><summary><strong>读书并非寻找歌词素材</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把阅读视为兴趣，不专为写歌寻找灵感；2015年署名文章还谈到反复阅读同一本书的习惯。</p><p class="notebook-source"><a href="https://culture.people.com.cn/n/2015/0422/c87423-26884281.html" target="_blank" rel="noopener noreferrer">李健署名谈阅读 · 人民网 · 2015.04.22 ↗</a></p></div></details><details class="research-fold"><summary><strong>离开组合的本人解释</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年采访中，他把离开水木年华解释为音乐追求与创作自由的选择，并表示与卢庚戌仍是朋友。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noopener noreferrer">《南方人物周刊》访谈 · 2011.01.14，清华转载 ↗</a></p></div></details><details class="research-fold"><summary><strong>怎样看待《传奇》走红</strong><span>展开札记</span></summary><div class="research-fold-content"><p>同一访谈中，他肯定王菲演唱及春晚传播对自己事业的帮助。这是他对当时经历的回顾。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noopener noreferrer">《南方人物周刊》访谈 · 2011.01.14，清华转载 ↗</a></p></div></details><details class="research-fold"><summary><strong>“浅唱会”的现场思路</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为星海音乐厅演出接受采访时，他提出减少声光电、重新编配，以钢琴、吉他或小型乐器组合呈现不同于唱片的版本。</p><p class="notebook-source"><a href="https://www.tsinghua.org.cn/info/1014/9978.htm" target="_blank" rel="noopener noreferrer">《新快报》专访 · 清华校友总会转载 ↗</a></p></div></details></div><div class="research-column"><h3>公共活动与文化合作</h3><details class="research-fold"><summary><strong>2015 · 海洋公益形象大使</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2015世界海洋日暨全国海洋宣传日主场活动在三亚举行，国家海洋环境监测中心记录了向李健颁发聘书的环节。</p><p class="notebook-source"><a href="https://www.nmemc.org.cn/hyyw/201506/t20150610_682401.shtml" target="_blank" rel="noopener noreferrer">国家海洋环境监测中心 · 2015.06.10 ↗</a></p></div></details><details class="research-fold"><summary><strong>2021 · 为母校谱曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华110周年校庆作品《一路花香一路唱》由徐荣凯作词、李健谱曲，李健与校友代表共同演绎。</p><p class="notebook-source"><a href="https://www.sigs.tsinghua.edu.cn/2021/0427/c7687a24352/page.htm" target="_blank" rel="noopener noreferrer">清华大学深圳国际研究生院 · 2021.04.27 ↗</a></p></div></details><details class="research-fold"><summary><strong>2023 · 电影与歌曲相遇</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为电影《我爱你！》创作并演唱同名主题曲；1905电影网保留了创作特辑，可继续观看他的表达与制作背景。</p><p class="notebook-source"><a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noopener noreferrer">1905电影网 · 2023.06.16 ↗</a></p></div></details></div></div>
-<p class="research-note">资料整理：2026.09.24。本文为摘要，不转载访谈全文。较早访谈反映当时的经历和看法，不自动视为今天的状态；资料仍将随可核对的公开记录补充。</p>
+<div class="research-grid"><div class="research-column"><h3>启蒙与校园</h3><details class="research-fold"><summary><strong>烛光里的一首吉他曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>少年时期，他原本只想学会几首弹唱；一次停电时，老师弹起《爱的罗曼史》，让他决定继续学琴。</p></div></details><details class="research-fold"><summary><strong>从调琴到听觉训练</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他回忆曾帮老师调琴、教初学者，以教学抵学费；那段大量调琴的经历也锻炼了耳朵。</p></div></details><details class="research-fold"><summary><strong>和声来自合唱团</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华合唱团与音乐辅修课程帮助他系统学习和声、视唱练耳和曲式；之后因电子系课业繁重停止辅修。</p></div></details><details class="research-fold"><summary><strong>《风吹麦浪》的校园记忆</strong><span>展开札记</span></summary><div class="research-fold-content"><p>在本人回忆中，清华北门与诗人、画家相处的夏天，后来成为《风吹麦浪》的记忆来源。</p></div></details></div><div class="research-column"><h3>作品背后的风景</h3><details class="research-fold"><summary><strong>第一次抵达贝加尔湖</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年访谈中，他明确说写歌时是第一次到访；小时候对这个地名的熟悉，来自东北生活中的寒冷记忆。</p></div></details><details class="research-fold"><summary><strong>《依然》写在旅途中</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他谈到，专辑中的不少创作是在旅行中完成的，利用旅途时间记录感受；唱片名则由公司提出。</p></div></details><details class="research-fold"><summary><strong>地名也是情感坐标</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把《松花江》与成长记忆相连；谈及《抚仙湖》时，提到2005年的到访和对清澈湖水的印象。</p></div></details><details class="research-fold"><summary><strong>《音乐傲骨》的命名</strong><span>展开札记</span></summary><div class="research-fold-content"><p>据本人访谈，这个名字由唱片公司提出，用以概括他长期坚持个人音乐方向的状态。</p></div></details><details class="research-fold"><summary><strong>电影主题曲中的含蓄表达</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《我爱你！》创作特辑中，他谈到用歌曲表达爱情。片名和歌名已经点明主题，歌词没有再直接写出那三个字。</p></div></details><details class="research-fold"><summary><strong>布鲁斯与中文语感</strong><span>展开札记</span></summary><div class="research-fold-content"><p>《从黄昏到午夜》创作手记提到，他琢磨布鲁斯旋律与中文表达的融合两三年；常听电台停播的经历也进入创作感受。</p></div></details></div><div class="research-column"><h3>阅读与音乐观</h3><details class="research-fold"><summary><strong>小说里的音乐结构</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2012年访谈中，他谈及普鲁斯特、罗曼·罗兰与格非，关注小说铺垫、节奏和音乐结构之间的相似之处。</p></div></details><details class="research-fold"><summary><strong>读书并非寻找歌词素材</strong><span>展开札记</span></summary><div class="research-fold-content"><p>他把阅读视为兴趣，不专为写歌寻找灵感；2015年署名文章还谈到反复阅读同一本书的习惯。</p></div></details><details class="research-fold"><summary><strong>离开组合的本人解释</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2011年采访中，他把离开水木年华解释为音乐追求与创作自由的选择，并表示与卢庚戌仍是朋友。</p></div></details><details class="research-fold"><summary><strong>怎样看待《传奇》走红</strong><span>展开札记</span></summary><div class="research-fold-content"><p>同一访谈中，他肯定王菲演唱及春晚传播对自己事业的帮助。这是他对当时经历的回顾。</p></div></details><details class="research-fold"><summary><strong>“浅唱会”的现场思路</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为星海音乐厅演出接受采访时，他提出减少声光电、重新编配，以钢琴、吉他或小型乐器组合呈现不同于唱片的版本。</p></div></details></div><div class="research-column"><h3>公共活动与文化合作</h3><details class="research-fold"><summary><strong>2015 · 海洋公益形象大使</strong><span>展开札记</span></summary><div class="research-fold-content"><p>2015世界海洋日暨全国海洋宣传日主场活动在三亚举行，国家海洋环境监测中心记录了向李健颁发聘书的环节。</p></div></details><details class="research-fold"><summary><strong>2021 · 为母校谱曲</strong><span>展开札记</span></summary><div class="research-fold-content"><p>清华110周年校庆作品《一路花香一路唱》由徐荣凯作词、李健谱曲，李健与校友代表共同演绎。</p></div></details><details class="research-fold"><summary><strong>2023 · 电影与歌曲相遇</strong><span>展开札记</span></summary><div class="research-fold-content"><p>为电影《我爱你！》创作并演唱同名主题曲；1905电影网保留了创作特辑，可继续观看他的表达与制作背景。</p></div></details></div></div>
 </section>
     <section class="archive-section section-light" id="moments" aria-labelledby="moments-title">
       <div class="section-head">
@@ -1152,6 +1174,14 @@
       <p class="word-author">LISTENING NOTES · 档案馆原创文字</p>
       <button class="word-next" id="word-next" type="button">换一则短笺&nbsp; ↗</button>
       <p class="words-note">这里收录的是原创听后感，不摘录歌曲歌词。你也可以把自己的演出记录与聆听记忆整理进来。</p>
+      <div class="writings-reader" id="writings-reader" aria-labelledby="writings-title">
+        <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>30 页 · 图文整理</span></div>
+        <p class="writings-intro">关于音乐、书籍、同行者与电影的文字，按原图顺序编排。选择主题可跳至对应页；点开图片可放大阅读。</p>
+        <div class="writings-topics" id="writings-topics" role="group" aria-label="按主题跳转阅读"></div>
+        <div class="writings-toolbar"><strong id="writings-page-title" aria-live="polite">卷首 · 音乐与文字</strong><label for="writings-page-select">页码 <select id="writings-page-select" aria-label="选择阅读页码"></select></label></div>
+        <a class="writings-page" id="writings-page-link" href="assets/writings/01.jpg" target="_blank" rel="noopener noreferrer" aria-label="放大阅读第 1 页"><img id="writings-page-image" src="assets/writings/01.jpg" alt="李健文字整理图，第 1 页，卷首" width="1080" height="1800" loading="lazy" decoding="async"></a>
+        <div class="writings-controls"><button id="writings-prev" type="button" disabled>← 上一页</button><span id="writings-counter" aria-live="polite">01 / 30</span><button id="writings-next" type="button">下一页 →</button></div>
+      </div>
     </section>
 
     <section class="archive-section section-paper" id="archive" aria-labelledby="archive-title">
@@ -1159,7 +1189,8 @@
         <div><span class="section-kicker">09 / ARCHIVE</span><h2 id="archive-title">出处与收藏</h2></div>
         <span class="section-index">SOURCES · CREDITS</span>
       </div>
-      <p class="section-intro">人物生平、节目经历、奖项、作品目录与历史巡演参考中文维基百科及清华校友资料整理；「万物安生时」2023—2026 场次与特别曲目按你提供的清单编目。来源与图片说明列于下方。</p>
+      <p class="section-intro">网页使用的公开资料、粉丝整理数据和图片说明统一收录于此。点击下方目录可查看具体链接。</p>
+      <details class="source-catalog"><summary>公开资料与原始链接</summary>
       <div class="source-list" aria-label="资料来源">
         <a href="https://www.tsinghua.org.cn/info/1014/9978.htm" target="_blank" rel="noreferrer"><span>清华校友总会 · 李健人物资料</span><span>人物履历 ↗</span></a>
         <a href="https://github.com/Supeset/China-GeoData/tree/main/geojson" target="_blank" rel="noreferrer"><span>China-GeoData · 省界底图与部分城市坐标参考（MIT）</span><span>巡演地图数据 ↗</span></a>
@@ -1177,14 +1208,33 @@
         <a href="https://www.sina.cn/news/detail/5277754233978933.html" target="_blank" rel="noreferrer"><span>杭州站演出信息 · 杭州交通 918 转载</span><span>2026.11.07 ↗</span></a>
         <a href="https://m.hf.bendibao.com/xiuxian/105156.shtm" target="_blank" rel="noreferrer"><span>合肥站演出信息 · 合肥本地宝</span><span>2026.11.28 ↗</span></a>
         <a href="https://commons.wikimedia.org/wiki/File:China_blank_province_map.svg" target="_blank" rel="noreferrer"><span>Wikimedia Commons · 中国省级边界底图</span><span>公有领域 ↗</span></a>
+        <a href="https://www.tsinghua.org.cn/upload/file/1460207772191.pdf" target="_blank" rel="noreferrer"><span>李健《我与音乐这些年》·《水木清华》</span><span>人物札记 ↗</span></a>
+        <a href="https://ent.sina.com.cn/y/2011-12-20/ba3512736.shtml" target="_blank" rel="noreferrer"><span>新浪访谈实录 · 2011.12.20</span><span>人物札记 ↗</span></a>
+        <a href="https://www.tsinghua.org.cn/info/1014/10772.htm" target="_blank" rel="noreferrer"><span>清华校友总会转载访谈 · 2012.08.06</span><span>人物札记 ↗</span></a>
+        <a href="https://www.1905.com/news/20230616/1629196.shtml" target="_blank" rel="noreferrer"><span>1905电影网 ·《我爱你！》创作特辑</span><span>人物札记 ↗</span></a>
+        <a href="https://www.joox.com/hk/album/wdYNQziYcir9N6K_daVFDQ%3D%3D" target="_blank" rel="noreferrer"><span>JOOX · 近期单曲与创作手记</span><span>音乐资料 ↗</span></a>
+        <a href="https://culture.people.com.cn/n/2015/0422/c87423-26884281.html" target="_blank" rel="noreferrer"><span>人民网 · 李健署名谈阅读</span><span>人物札记 ↗</span></a>
+        <a href="https://www.tsinghua.org.cn/info/1014/10217.htm" target="_blank" rel="noreferrer"><span>《南方人物周刊》访谈 · 清华转载</span><span>人物札记 ↗</span></a>
+        <a href="https://www.nmemc.org.cn/hyyw/201506/t20150610_682401.shtml" target="_blank" rel="noreferrer"><span>国家海洋环境监测中心 · 2015 世界海洋日</span><span>人物札记 ↗</span></a>
+        <a href="https://www.sigs.tsinghua.edu.cn/2021/0427/c7687a24352/page.htm" target="_blank" rel="noreferrer"><span>清华大学深圳国际研究生院 · 校庆作品</span><span>人物札记 ↗</span></a>
+        <a href="https://music.apple.com/us/song/1739326138" target="_blank" rel="noreferrer"><span>Apple Music ·《我爱你！》</span><span>单曲资料 ↗</span></a>
+        <a href="https://tv.cctv.com/2024/12/25/VIDElyZfQZTghvAxpmPJvNxk241225.shtml" target="_blank" rel="noreferrer"><span>央视《影视留声机》·《你一定能看见》</span><span>节目记录 ↗</span></a>
+        <a href="https://www.youtube.com/watch?v=4irY8I-NWWU" target="_blank" rel="noreferrer"><span>《蓝色夜曲》公开视频</span><span>单曲资料 ↗</span></a>
+        <a href="https://www.youtube.com/watch?v=PCASW1O8G14" target="_blank" rel="noreferrer"><span>《从黄昏到午夜》公开视频</span><span>单曲资料 ↗</span></a>
+        <a href="https://tv.cctv.com/2026/02/17/VIDEMN9cmK7gU3UgIVcQaPTC260217.shtml" target="_blank" rel="noreferrer"><span>央视春晚 ·《人间共鸣》</span><span>节目记录 ↗</span></a>
+        <a href="assets/CHINA-GEODATA-LICENSE.txt"><span>China-GeoData · 地图数据许可</span><span>MIT ↗</span></a>
+        <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer"><span>黑胶静物照片 · CC0 1.0</span><span>许可说明 ↗</span></a>
       </div>
+      </details>
       <div class="archive-credits">
         <p><strong>用户提供照片</strong><br>序章封面、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；影像按提供的 01—26 编号与巡演场次对应。封面按授权旋转并清理水印。</p>
         <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供，并按其要求清理指定文字或标记。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>
-        <p><strong>水流润万生老师 · 数据支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理；巡演页同步使用其中的巡回演唱会歌单。荧屏页的“资料补编”依据其四张统计图选录清晰可辨的内容，原图保留供核对，统计截止 2026.07.04。粉丝统计可能不完整，不作为官方公告。</p>
+        <p><strong>水流润万生老师 · 数据与图文整理支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理；巡演页同步使用其中的巡回演唱会歌单。荧屏页的“资料补编”依据其四张统计图选录清晰可辨的内容，原图标注统计截止 2026.07.04。文字页的 30 张“李健写的文字”整理图亦由其个人收集和编排，网站按用户提供的编号顺序展示，并据图片可辨识的主题制作导航；正文以原图为准。粉丝统计和图片文字识别可能不完整，不作为官方公告或校勘本。</p>
+        <p><strong>人物札记与近期作品</strong><br>人物札记整理于 2026.09.24，为公开访谈和机构记录的摘要。较早的回忆与观点保留当时语境，不自动视为今天的状态。近期单曲的发行日、节目播出日及视频上传日分别记录，具体出处均可在上方目录查看。</p>
+        <p><strong>图像与文字许可</strong><br>新加入的 30 张整理图保留原有署名和平台标记，属于用户提供的第三方内容，不纳入本站代码的 MIT 许可；图中李健文字和相关照片的权利仍归原权利人。省界数据使用 China-GeoData 的 MIT 许可；唱片静物照片为 Mink Mingle 经 Wikimedia Commons 提供的 CC0 1.0 素材。</p>
         <p><strong>非官方网站</strong><br>本页为听众整理的个人档案，与李健本人、经纪团队、唱片公司或主办方无隶属关系。音乐播放请前往正规平台。</p>
       </div>
     </section>
@@ -1569,7 +1619,7 @@ movingWord.style.opacity = String(1 - release);
           const setlist = document.createElement("details");
           setlist.className = "postmark-setlist";
           const summary = document.createElement("summary");
-          summary.textContent = "SETLIST · " + record.setlist.length + " 首 · " + record.setlistSource;
+          summary.textContent = "SETLIST · " + record.setlist.length + " 首";
           const songs = document.createElement("ol");
           record.setlist.forEach((title, index) => {
             const item = document.createElement("li");
@@ -1919,6 +1969,7 @@ movingWord.style.opacity = String(1 - release);
 <script src="fan-music.js" defer></script>
 <script src="fan-research.js" defer></script>
 <script src="song-links.js" defer></script>
+<script src="writings-reader.js" defer></script>
 <script src="guestbook.js" defer></script>
 </body>
 </html>

@@ -94,7 +94,6 @@
     <p class="fan-music-count" role="status" aria-live="polite"></p>
     <div class="fan-music-list"></div>
     <button type="button" class="fan-music-more" hidden>查看更多记录</button>
-    <p class="fan-music-credit">数据支持：水流润万生老师。依据粉丝个人整理的《李健演出歌单汇总（不完全统计）》及《李健创作的歌曲授权为影视作品、机构使用合集》编目；两份资料均可能不完整。曲目及用途沿用原表记法，不作为官方演出或授权公告。</p>
   `;
   music.append(archive);
 
@@ -167,8 +166,7 @@
       songs.append(row);
     });
     body.append(songs);
-    const note = [item.reportedTotal ? `原表标注：${item.reportedTotal}` : "", `源表位置：${item.source}`].filter(Boolean).join(" · ");
-    body.append(make("p", "fan-record-note", note));
+    if (item.reportedTotal) body.append(make("p", "fan-record-note", `收录曲目：${item.reportedTotal}`));
     card.append(summary, body);
     return card;
   }
@@ -183,7 +181,6 @@
       if (value) details.append(make("dt", "", label), make("dd", "", value));
     }
     card.append(details);
-    card.append(make("p", "fan-record-note", `源表位置：${item.source}`));
     return card;
   }
 

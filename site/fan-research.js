@@ -192,7 +192,7 @@
   wrap.className = "fan-research";
   wrap.id = "fan-research";
   wrap.setAttribute("aria-labelledby", "fan-research-title");
-  wrap.innerHTML = `<div class="fan-research-head"><div><span class="section-kicker">FAN RESEARCH / 资料补编</span><h3 id="fan-research-title">资料里的另一面</h3></div><span>4 张原始统计图 · 2026.07.04 截止</span></div><p class="fan-research-intro">将演出、访谈、合作、音乐荣誉、公共活动与影像作品分门别类。条目依据水流润万生老师的粉丝个人统计图转录；选录清晰可辨的内容，并保留原图供核对。它们是线索，不作为官方公告；不同资料的日期或场次数目有出入时分别注明。</p><div class="fan-research-grid"></div><p class="fan-research-foot">数据支持与原图制作：水流润万生老师。原图标注“数据统计截至 2026.07.04”。统计可能不完整，部分条目仍待原始节目、主办方或刊物核实。</p>`;
+  wrap.innerHTML = `<div class="fan-research-head"><div><span class="section-kicker">FAN RESEARCH / 资料补编</span><h3 id="fan-research-title">资料里的另一面</h3></div><span>4 张资料图 · 截至 2026.07.04</span></div><p class="fan-research-intro">将演出、访谈、合作、音乐荣誉、公共活动与影像作品分门别类。可展开条目，查看细节与原图。</p><div class="fan-research-grid"></div>`;
   const grid = wrap.querySelector(".fan-research-grid");
   scans.forEach((scan, index) => {
     const fold = document.createElement("details");

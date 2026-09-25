@@ -3,12 +3,10 @@
   if (!reader) return;
 
   const contents = reader.querySelector("#writings-contents");
-  const topics = reader.querySelector("#writings-topics");
   const search = reader.querySelector("#writings-search");
   const status = reader.querySelector("#writings-status");
   const expand = reader.querySelector("#writings-expand");
   const collapse = reader.querySelector("#writings-collapse");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const make = (tag, className, value) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -71,14 +69,6 @@
       chapterNode.append(chapterSummary);
       const chapterEntries = make("div", "writings-chapter-entries");
       chapterNode.append(chapterEntries);
-
-      const topic = make("button", "", chapter.title);
-      topic.type = "button";
-      topic.addEventListener("click", () => {
-        chapterNode.open = true;
-        chapterNode.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
-      });
-      topics.append(topic);
 
       chapter.entries.forEach(item => {
         const details = make("details", "writings-entry");

@@ -74,13 +74,13 @@
     .hero-date { position: absolute; bottom: 42px; left: var(--gutter); color: #66747b; font-size: 10px; letter-spacing: .2em; }
     .hero-ornament { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-ornament svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .hero-ornament path { fill: none; stroke: rgba(142,129,103,.34); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: hero-route-in 1.35s cubic-bezier(.22,.7,.2,1) forwards; }
+    .hero-ornament path { fill: none; stroke: rgba(142,129,103,.34); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: hero-route-in 1.7s cubic-bezier(.22,.7,.2,1) forwards; }
     .hero-ornament path:nth-child(2) { stroke: rgba(185,154,100,.34); animation-delay: .18s; }
-    .hero-ornament__block { position: absolute; display: block; border: 1px solid rgba(142,129,103,.18); opacity: 0; animation: hero-block-in .95s cubic-bezier(.2,.75,.2,1) forwards; }
+    .hero-ornament__block { position: absolute; display: block; border: 1.5px solid rgba(142,129,103,.18); opacity: 0; animation: hero-block-in 1.2s cubic-bezier(.2,.75,.2,1) forwards; }
     .hero-ornament__block--tall { top: 7%; right: 6%; width: 17%; height: 47%; background: rgba(224,215,196,.19); animation-delay: .08s; }
     .hero-ornament__block--wash { top: 25%; right: 9%; width: 34%; height: 19%; background: rgba(200,185,157,.12); animation-name: hero-block-from-left; animation-delay: .23s; }
     .hero-ornament__block--frame { bottom: 8%; left: 27%; width: 22%; height: 24%; background: rgba(248,246,240,.12); animation-name: hero-block-from-bottom; animation-delay: .32s; }
-    .hero-ornament__circle { position: absolute; left: 30%; bottom: 28%; width: clamp(64px,10vw,142px); aspect-ratio: 1; border-radius: 50%; background: rgba(190,168,132,.22); opacity: 0; transform: scale(.62); animation: hero-circle-in 1s cubic-bezier(.2,.75,.2,1) .2s forwards; }
+    .hero-ornament__circle { position: absolute; left: 30%; bottom: 28%; width: clamp(64px,10vw,142px); aspect-ratio: 1; border-radius: 50%; background: rgba(190,168,132,.22); opacity: 0; transform: scale(.62); animation: hero-circle-in 1.25s cubic-bezier(.2,.75,.2,1) .2s forwards; }
     @keyframes hero-route-in { to { stroke-dashoffset: 0; } }
     @keyframes hero-block-in { from { opacity: 0; transform: translateY(-32px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes hero-block-from-left { from { opacity: 0; transform: translateX(-42px); } to { opacity: 1; transform: translateX(0); } }

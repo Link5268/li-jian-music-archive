@@ -105,8 +105,9 @@
   const count = archive.querySelector(".fan-music-count");
   const list = archive.querySelector(".fan-music-list");
   const more = archive.querySelector(".fan-music-more");
+  const pageSize = 3;
   let mode = "performances";
-  let visibleCount = 24;
+  let visibleCount = pageSize;
 
   function make(tag, className, text) {
     const node = document.createElement(tag);
@@ -126,7 +127,7 @@
 
   function setMode(next) {
     mode = next;
-    visibleCount = 24;
+    visibleCount = pageSize;
     query.value = "";
     tabs.forEach(tab => tab.setAttribute("aria-pressed", String(tab.dataset.mode === mode)));
     const values = mode === "performances"
@@ -209,14 +210,14 @@
 
   tabs.forEach(tab => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
   category.addEventListener("change", () => {
-    visibleCount = 24;
+    visibleCount = pageSize;
     if (category.value && category.value !== "巡回演唱会") theme.value = "";
     themeWrap.hidden = mode !== "performances" || (category.value && category.value !== "巡回演唱会");
     render();
   });
-  theme.addEventListener("change", () => { visibleCount = 24; render(); });
-  query.addEventListener("input", () => { visibleCount = 24; render(); });
-  more.addEventListener("click", () => { visibleCount += 24; render(); });
+  theme.addEventListener("change", () => { visibleCount = pageSize; render(); });
+  query.addEventListener("input", () => { visibleCount = pageSize; render(); });
+  more.addEventListener("click", () => { visibleCount += pageSize; render(); });
   setMode(mode);
   window.LI_JIAN_FAN_MUSIC_OPEN = (nextMode, title) => {
     setMode(nextMode);

@@ -43,8 +43,8 @@
     .topline nav a:hover, .topline nav a[aria-current="location"] { color: #e5c995; }
     .nav-toggle { display: none; }
 
-    .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: 1fr; overflow: hidden; color: var(--white); background: linear-gradient(120deg,#101c2c 8%,#142237 58%,#203248 100%); }
-    .hero::after { content: ""; position: absolute; inset: 66px 0 0; z-index: 1; pointer-events: none; opacity: .19; background-image: repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.025) 4px,transparent 5px); mix-blend-mode: soft-light; }
+    .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: 1fr; overflow: hidden; color: var(--ink); background: linear-gradient(180deg,#f8f6f0 0%,#f4f1ea 48%,var(--paper) 100%); }
+    .hero::after { display: none; }
     .hero-copy { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: 110px 12px 100px var(--gutter); }
     .eyebrow, .section-kicker { color: #c5b58f; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; }
     .hero h1 { margin: 30px 0 20px; font: 400 clamp(68px,10vw,148px)/.82 var(--serif); letter-spacing: -.055em; }
@@ -62,22 +62,23 @@
   top: 0;
   left: 0;
   margin: 0;
-  color: var(--white);
+  color: var(--ink);
   white-space: nowrap;
   pointer-events: none;
   transform-origin: top left;
   will-change: transform;
 }
-    .hero-subtitle { margin: 0; color: #d2d8d7; font: 300 clamp(15px,1.5vw,19px)/1.7 var(--serif); letter-spacing: .11em; }
-    .hero-cn { max-width: 390px; margin: 54px 0 0; color: rgba(248,246,240,.76); font: 300 16px/2 var(--serif); letter-spacing: .1em; }
-    .hero-date { position: absolute; bottom: 42px; left: var(--gutter); color: #aeb9bd; font-size: 10px; letter-spacing: .2em; }
-    .hero-photo { position: absolute; z-index: 0; inset: 0; min-height: 100svh; overflow: hidden; }
-    .hero-photo::before { content: ""; position: absolute; z-index: 2; inset: 0; background: linear-gradient(90deg,rgba(16,28,44,.55),rgba(16,28,44,.18) 34%,transparent 68%),linear-gradient(0deg,rgba(16,28,44,.48),transparent 48%); }
-    .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: grayscale(1) contrast(1.04); }
+    .hero .eyebrow { color: #65727a; }
+    .hero-subtitle { margin: 0; color: #536577; font: 300 clamp(15px,1.5vw,19px)/1.7 var(--serif); letter-spacing: .11em; }
+    .hero-cn { max-width: 390px; margin: 54px 0 0; color: rgba(23,40,59,.76); font: 300 16px/2 var(--serif); letter-spacing: .1em; }
+    .hero-date { position: absolute; bottom: 42px; left: var(--gutter); color: #66747b; font-size: 10px; letter-spacing: .2em; }
+    .hero-photo { position: absolute; z-index: 0; inset: 0; min-height: 100svh; margin: 0; overflow: hidden; }
+    .hero-photo::before { content: none; }
+    .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right bottom; filter: none; }
     .photo-credit { position: absolute; z-index: 3; left: 22px; bottom: 21px; max-width: 76%; color: rgba(248,246,240,.79); font-size: 10px; line-height: 1.6; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
     .photo-credit a { text-underline-offset: 3px; }
-    .hero-note { position: absolute; z-index: 3; right: 6.5%; bottom: 62px; color: rgba(248,246,240,.74); font-size: 10px; letter-spacing: .16em; writing-mode: vertical-rl; }
-    .scroll-cue { position: absolute; z-index: 4; bottom: 36px; left: 50%; display: flex; align-items: center; gap: 12px; color: rgba(248,246,240,.74); text-decoration: none; font-size: 9px; letter-spacing: .23em; transform: translateX(-50%); }
+    .hero-note { position: absolute; z-index: 3; right: 6.5%; bottom: 62px; color: rgba(23,40,59,.68); font-size: 10px; letter-spacing: .16em; writing-mode: vertical-rl; }
+    .scroll-cue { position: absolute; z-index: 4; bottom: 36px; left: 50%; display: flex; align-items: center; gap: 12px; color: rgba(23,40,59,.72); text-decoration: none; font-size: 9px; letter-spacing: .23em; transform: translateX(-50%); }
     .scroll-cue::after { content: ""; width: 43px; height: 1px; background: var(--gold); }
 
     .archive-section { position: relative; padding: clamp(82px,10vw,150px) var(--gutter); scroll-margin-top: 66px; }
@@ -417,14 +418,13 @@
       .nav-toggle { gap: 9px; }
       .hero { display: block; min-height: 100svh; }
       .hero-photo { inset: 0; min-height: 100svh; }
-      .hero-photo::before { background: linear-gradient(90deg,rgba(16,28,44,.58),rgba(16,28,44,.18) 70%,rgba(16,28,44,.08)),linear-gradient(0deg,rgba(16,28,44,.7),transparent 55%); }
-      .hero-photo img { object-position: 48% center; }
-      .hero-copy { position: absolute; inset: 0; padding: 18vh 27px 85px; justify-content: center; background: transparent; }
+      .hero-photo img { inset: auto 0 0 auto; width: min(66vw,320px); height: 72%; object-position: right bottom; }
+      .hero-copy { position: absolute; inset: 0; padding: 14vh 27px 0; justify-content: flex-start; background: transparent; }
       .hero h1 { margin: 24px 0 14px; font-size: clamp(58px,16vw,92px); }
       .hero-subtitle { font-size: 14px; }
       .hero-cn { margin-top: 17px; font-size: 13px; line-height: 1.75; }
       .hero-date { bottom: 61px; left: 27px; font-size: 9px; }
-      .hero-note { right: 18px; bottom: 28px; font-size: 8px; }
+      .hero-note { display: none; }
       .photo-credit { left: 12px; bottom: 12px; max-width: 70%; font-size: 9px; }
       .scroll-cue { display: none; }
       .archive-section { padding-block: 76px; }
@@ -646,7 +646,7 @@
         <span class="hero-date">1974 — PRESENT&nbsp;&nbsp; / &nbsp;&nbsp;哈尔滨 · 中国</span>
       </div>
       <figure class="hero-photo">
-        <img src="assets/lijian-intro-cover.webp" alt="黑白巡演封面：李健与唱片意象" width="2048" height="1191" fetchpriority="high" decoding="async">
+        <img src="assets/lijian-intro-cutout.png" alt="暖米色背景上的李健透明背景肖像" fetchpriority="high" decoding="async">
         <span class="hero-note">MUSIC · TIME · LANDSCAPE</span>
       </figure>
       <a class="scroll-cue" href="#about">SCROLL TO ENTER</a>
@@ -1199,7 +1199,6 @@
         <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>书籍 · 音乐 · 影像</span></div>
         <p class="writings-intro">李健为书籍、影视与音乐所写的文字，按主题整理为四卷。</p>
         <div class="writings-topics" id="writings-topics" role="group" aria-label="按主题跳转阅读"></div>
-=======
         <div class="writings-tools"><input class="writings-search" id="writings-search" type="search" placeholder="搜索篇目、人物或正文" aria-label="搜索李健的文字"><button id="writings-expand" type="button">展开结果</button><button id="writings-collapse" type="button">收起全部</button></div>
         <p class="writings-status" id="writings-status" role="status">正在载入文字……</p>
         <div id="writings-contents"></div>
@@ -1249,8 +1248,8 @@
       </div>
       </details>
       <div class="archive-credits">
-        <p><strong>用户提供照片</strong><br>序章封面、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；影像按提供的 01—26 编号与巡演场次对应。封面按授权旋转并清理水印。</p>
         <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
+        <p><strong>用户提供照片</strong><br>序章人物图、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；序章使用透明背景版本，影像按提供的 01—26 编号与巡演场次对应。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>
@@ -1304,6 +1303,8 @@ const release = Math.min(1, Math.max(0, (progress - 0.98) / 0.02));
 
 brand.style.opacity = String(1 - cover + release);
 movingWord.style.opacity = String(1 - release);
+const fromColor = [23, 40, 59], toColor = [233, 227, 212];
+movingWord.style.color = `rgb(${fromColor.map((value, index) => Math.round(value + (toColor[index] - value) * progress)).join(",")})`;
   }
 
   function measure() {

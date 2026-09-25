@@ -141,10 +141,8 @@
   }
 
   function setupAutoplay(firstGroup) {
-    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
-    let userPaused = reducedMotion.matches;
-    let userOverrodeMotion = false;
+    let userPaused = false;
     let interacting = false;
     let resumeAfter = 0;
     let dragStart = null;
@@ -191,7 +189,6 @@
     }
 
     autoplayButton.addEventListener("click", () => {
-      userOverrodeMotion = true;
       userPaused = !userPaused;
       resumeAfter = 0;
       updateAutoplayButton();
@@ -227,13 +224,6 @@
         resumeAfter = performance.now() + 1800;
       }
     });
-    reducedMotion.addEventListener?.("change", (event) => {
-      if (!userOverrodeMotion) {
-        userPaused = event.matches;
-        updateAutoplayButton();
-      }
-    });
-
     if (typeof ResizeObserver === "function") {
       const observer = new ResizeObserver(configure);
       observer.observe(guestbookWindow);

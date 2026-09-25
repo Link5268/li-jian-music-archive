@@ -13,7 +13,10 @@
     .guestbook-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding-bottom: 17px; border-bottom: 1px solid rgba(236,232,223,.24); }
     .guestbook-kicker { display: block; margin-bottom: 9px; color: #b99a64; font: 11px/1.5 var(--sans, sans-serif); letter-spacing: .22em; }
     .guestbook-heading h3 { margin: 0; color: #ece8df; font: 400 clamp(24px,3vw,38px)/1.3 var(--serif, serif); }
+    .guestbook-heading-side { display: flex; align-items: center; gap: 16px; }
     .guestbook-hint { margin: 0; color: #aebbc3; font: 12px/1.6 var(--sans, sans-serif); }
+    .guestbook-toggle { flex: 0 0 auto; padding: 8px 12px; border: 1px solid rgba(205,187,150,.45); color: #d8c49b; background: transparent; cursor: pointer; font: 11px/1.4 var(--sans, sans-serif); }
+    .guestbook-toggle:hover { border-color: #cdbb96; color: #f4f1ea; }
     .guestbook-window { position: relative; overflow-x: auto; overflow-y: hidden; margin-top: 26px; padding-bottom: 10px; overscroll-behavior-x: contain; scroll-behavior: auto; scrollbar-color: rgba(205,187,150,.6) rgba(255,255,255,.08); scrollbar-width: thin; cursor: grab; }
     .guestbook-window:focus-visible { outline: 1px solid rgba(205,187,150,.65); outline-offset: 4px; }
     .guestbook-window.is-dragging { cursor: grabbing; user-select: none; }
@@ -36,7 +39,9 @@
     @media (max-width: 720px) {
       .guestbook { margin-top: 62px; }
       .guestbook-heading { display: block; }
+      .guestbook-heading-side { align-items: flex-start; justify-content: space-between; margin-top: 9px; }
       .guestbook-hint { margin-top: 9px; }
+      .guestbook-toggle { margin-top: 2px; }
       .guestbook-form { grid-template-columns: 1fr; }
       .guestbook-submit { width: 100%; }
       .guestbook-group { grid-auto-columns: min(78vw, 280px); }
@@ -61,7 +66,10 @@
   guestbook.innerHTML = `
     <div class="guestbook-heading">
       <div><span class="guestbook-kicker">VISITOR NOTES / 来访者留声</span><h3>留下你的短笺</h3></div>
-      <p class="guestbook-hint">留言经审核后展示 · 自动缓慢滑动，悬停暂停后可拖动浏览</p>
+      <div class="guestbook-heading-side">
+        <p class="guestbook-hint">留言经审核后展示 · 自动缓慢滑动，手动操作后短暂停顿</p>
+        <button class="guestbook-toggle" type="button" aria-label="暂停留言自动滚动">暂停滚动</button>
+      </div>
     </div>
     <div class="guestbook-window" tabindex="0" aria-label="已审核的访客留言，可左右滑动查看更多">
       <div class="guestbook-track is-static" id="guestbook-track"><p class="guestbook-empty">正在读取留言…</p></div>
@@ -77,6 +85,7 @@
 
   const track = guestbook.querySelector("#guestbook-track");
   const guestbookWindow = guestbook.querySelector(".guestbook-window");
+  const autoplayButton = guestbook.querySelector(".guestbook-toggle");
   const status = guestbook.querySelector("#guestbook-status");
   const form = guestbook.querySelector("#guestbook-form");
   const submitButton = form.querySelector("button[type='submit']");
@@ -134,11 +143,17 @@
   function setupAutoplay(firstGroup) {
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
-    let hovered = false;
-    let focused = false;
+    let userPaused = reducedMotion.matches;
+    let userOverrodeMotion = false;
     let interacting = false;
     let resumeAfter = 0;
     let dragStart = null;
+
+    function updateAutoplayButton() {
+      const action = userPaused ? "继续" : "暂停";
+      autoplayButton.textContent = `${action}滚动`;
+      autoplayButton.setAttribute("aria-label", `${action}留言自动滚动`);
+    }
 
     function configure() {
       cancelAnimationFrame(animationFrame);
@@ -146,7 +161,7 @@
       guestbookWindow.scrollLeft = 0;
 
       const groupWidth = firstGroup.getBoundingClientRect().width;
-      if (reducedMotion.matches) return;
+      if (!groupWidth || !guestbookWindow.clientWidth) return;
 
       const trackGap = parseFloat(getComputedStyle(track).columnGap) || 0;
       const cycleWidth = groupWidth + trackGap;
@@ -163,7 +178,7 @@
         if (!previousTime) previousTime = time;
         const elapsed = Math.min(time - previousTime, 50);
         previousTime = time;
-        const isPaused = hovered || focused || interacting || time < resumeAfter || document.hidden;
+        const isPaused = userPaused || interacting || time < resumeAfter || document.hidden;
         if (!isPaused) {
           guestbookWindow.scrollLeft += elapsed * 0.018;
           if (guestbookWindow.scrollLeft >= cycleWidth) {
@@ -175,11 +190,11 @@
       animationFrame = requestAnimationFrame(animate);
     }
 
-    guestbookWindow.addEventListener("pointerenter", (event) => {
-      if (event.pointerType === "mouse") hovered = true;
-    });
-    guestbookWindow.addEventListener("pointerleave", (event) => {
-      if (event.pointerType === "mouse") hovered = false;
+    autoplayButton.addEventListener("click", () => {
+      userOverrodeMotion = true;
+      userPaused = !userPaused;
+      resumeAfter = 0;
+      updateAutoplayButton();
     });
     guestbookWindow.addEventListener("pointerdown", (event) => {
       interacting = true;
@@ -207,11 +222,16 @@
     guestbookWindow.addEventListener("wheel", () => {
       resumeAfter = performance.now() + 1800;
     }, { passive: true });
-    guestbookWindow.addEventListener("focusin", () => {
-      focused = true;
+    guestbookWindow.addEventListener("keydown", (event) => {
+      if (["ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"].includes(event.key)) {
+        resumeAfter = performance.now() + 1800;
+      }
     });
-    guestbookWindow.addEventListener("focusout", (event) => {
-      if (!guestbookWindow.contains(event.relatedTarget)) focused = false;
+    reducedMotion.addEventListener?.("change", (event) => {
+      if (!userOverrodeMotion) {
+        userPaused = event.matches;
+        updateAutoplayButton();
+      }
     });
 
     if (typeof ResizeObserver === "function") {
@@ -221,7 +241,7 @@
     } else {
       window.addEventListener("resize", configure);
     }
-    reducedMotion.addEventListener?.("change", configure);
+    updateAutoplayButton();
     configure();
   }
 

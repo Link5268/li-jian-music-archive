@@ -334,18 +334,31 @@
     .writings-intro { max-width: 780px; margin: 0 0 25px; color: #bac5c8; font: 14px/1.9 var(--serif); }
     .writings-topics { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 24px; }
     .writings-topics button { min-height: 38px; padding: 7px 12px; border: 1px solid rgba(236,232,223,.25); color: #cfdbdb; background: transparent; cursor: pointer; font: 12px/1.5 var(--sans); }
-    .writings-topics button:hover,.writings-topics button[aria-pressed="true"] { border-color: #c8b58b; color: #101c2c; background: #c8b58b; }
-    .writings-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; color: #e9e7de; }
-    .writings-toolbar strong { font: 400 20px/1.5 var(--serif); }
-    .writings-toolbar label { display: flex; align-items: center; gap: 9px; color: #bfc9c9; font: 12px/1.5 var(--sans); }
-    .writings-toolbar select { min-height: 38px; padding: 6px 24px 6px 10px; border: 1px solid rgba(236,232,223,.35); border-radius: 0; color: #ece8df; background: #17283a; font: 13px var(--sans); }
-    .writings-page { display: block; width: min(100%, 720px); margin: 0 auto; background: #e7f1fb; scroll-margin-top: 78px; }
-    .writings-page img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 5; object-fit: contain; }
-    .writings-page:focus-visible,.writings-topics button:focus-visible,.writings-controls button:focus-visible { outline: 2px solid #d5c49a; outline-offset: 3px; }
-    .writings-controls { display: flex; justify-content: space-between; align-items: center; gap: 20px; max-width: 720px; margin: 20px auto 0; }
-    .writings-controls button { min-height: 42px; padding: 5px 0; border: 0; border-bottom: 1px solid rgba(213,196,154,.55); color: #d5c49a; background: transparent; cursor: pointer; font: 13px var(--sans); }
-    .writings-controls button:disabled { opacity: .35; cursor: default; }
-    .writings-controls span { color: #bdc8ca; font: 12px var(--sans); }
+    .writings-topics button:hover { border-color: #c8b58b; color: #101c2c; background: #c8b58b; }
+    .writings-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 26px; }
+    .writings-search { box-sizing: border-box; flex: 1 1 260px; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline: none; color: #ece8df; background: #17283a; font: 13px var(--sans); }
+    .writings-search::placeholder { color: #aab9bd; }
+    .writings-search:focus { border-color: #c8b58b; }
+    .writings-tools button { min-height: 44px; padding: 8px 4px; border: 0; border-bottom: 1px solid rgba(213,196,154,.55); color: #d5c49a; background: transparent; cursor: pointer; font: 12px var(--sans); }
+    .writings-status { margin: 0 0 16px; color: #aab9bd; font: 12px/1.7 var(--sans); }
+    .writings-chapter { margin-top: clamp(44px,6vw,70px); scroll-margin-top: 94px; }
+    .writings-chapter-number { color: #c8b58b; font: 12px/1.5 var(--sans); letter-spacing: .24em; }
+    .writings-chapter-title { margin: 8px 0 0; font: 400 clamp(24px,3vw,35px)/1.35 var(--serif); }
+    .writings-chapter-count { margin: 5px 0 22px; color: #aab9bd; font: 12px/1.6 var(--sans); }
+    .writings-entry { margin: 8px 0; color: #17283a; background: #eeeae1; }
+    .writings-entry[hidden],.writings-chapter[hidden] { display: none; }
+    .writings-entry-summary { display: grid; grid-template-columns: 30px 1fr 18px; align-items: center; gap: 16px; min-height: 58px; padding: 14px 20px; cursor: pointer; list-style: none; }
+    .writings-entry-summary::-webkit-details-marker { display: none; }
+    .writings-entry-summary:hover { background: #f8f5ee; }
+    .writings-entry-summary:focus-visible,.writings-topics button:focus-visible,.writings-tools button:focus-visible { outline: 2px solid #b38f52; outline-offset: 2px; }
+    .writings-entry-number { color: #987e5a; font: 11px var(--sans); }
+    .writings-entry-title { font: 400 clamp(16px,1.7vw,20px)/1.6 var(--serif); }
+    .writings-entry-icon { color: #987e5a; font: 22px/1 var(--serif); }
+    .writings-entry[open] .writings-entry-icon { transform: rotate(45deg); }
+    .writings-entry-body { padding: 8px clamp(20px,5vw,66px) 30px; border-top: 1px solid rgba(23,40,58,.16); }
+    .writings-entry-body p { max-width: 72ch; margin: 22px auto 0; color: #27394a; font: 400 clamp(15px,1.4vw,17px)/2 var(--serif); overflow-wrap: anywhere; }
+    .writings-entry-body .writings-divider { color: #987e5a; text-align: center; }
+    .writings-series { display: block; max-width: 72ch; margin: 12px auto 0; color: #987e5a; font: 11px/1.5 var(--sans); letter-spacing: .18em; }
 
     .source-catalog { margin-top: 28px; border-top: 1px solid rgba(16,28,44,.2); }
     .source-catalog > summary { display: flex; justify-content: space-between; gap: 20px; padding: 20px 0; color: #31495d; cursor: pointer; font: 400 18px/1.5 var(--serif); list-style: none; }
@@ -474,8 +487,9 @@
       .words-section { min-height: 62vh; }
       .writings-reader { padding: 18px; }
       .writings-heading { align-items: start; flex-direction: column; gap: 6px; }
-      .writings-toolbar { align-items: start; flex-direction: column; }
       .writings-topics button { min-height: 44px; }
+      .writings-entry-summary { grid-template-columns: 22px 1fr 16px; gap: 10px; padding-inline: 15px; }
+      .writings-entry-body { padding-inline: 18px; }
       .word-card { min-height: 125px; font-size: 22px; }
       .source-list,.archive-credits { grid-template-columns: 1fr; gap: 0; }
       .archive-credits { gap: 16px; margin-top: 31px; }
@@ -1175,12 +1189,12 @@
       <button class="word-next" id="word-next" type="button">换一则短笺&nbsp; ↗</button>
       <p class="words-note">这里收录的是原创听后感，不摘录歌曲歌词。你也可以把自己的演出记录与聆听记忆整理进来。</p>
       <div class="writings-reader" id="writings-reader" aria-labelledby="writings-title">
-        <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>30 页 · 图文整理</span></div>
-        <p class="writings-intro">关于音乐、书籍、同行者与电影的文字，按原图顺序编排。选择主题可跳至对应页；点开图片可放大阅读。</p>
+        <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>书籍 · 音乐 · 影像</span></div>
+        <p class="writings-intro">李健为书籍、影视与音乐所写的文字，按主题整理为四卷。选择篇目展开正文，也可搜索人名、作品或词句。</p>
         <div class="writings-topics" id="writings-topics" role="group" aria-label="按主题跳转阅读"></div>
-        <div class="writings-toolbar"><strong id="writings-page-title" aria-live="polite">卷首 · 音乐与文字</strong><label for="writings-page-select">页码 <select id="writings-page-select" aria-label="选择阅读页码"></select></label></div>
-        <a class="writings-page" id="writings-page-link" href="assets/writings/01.jpg" target="_blank" rel="noopener noreferrer" aria-label="放大阅读第 1 页"><img id="writings-page-image" src="assets/writings/01.jpg" alt="李健文字整理图，第 1 页，卷首" width="1080" height="1800" loading="lazy" decoding="async"></a>
-        <div class="writings-controls"><button id="writings-prev" type="button" disabled>← 上一页</button><span id="writings-counter" aria-live="polite">01 / 30</span><button id="writings-next" type="button">下一页 →</button></div>
+        <div class="writings-tools"><input class="writings-search" id="writings-search" type="search" placeholder="搜索篇目、人物或正文" aria-label="搜索李健的文字"><button id="writings-expand" type="button">展开结果</button><button id="writings-collapse" type="button">收起全部</button></div>
+        <p class="writings-status" id="writings-status" role="status">正在载入文字……</p>
+        <div id="writings-contents"></div>
       </div>
     </section>
 
@@ -1232,9 +1246,9 @@
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>
-        <p><strong>水流润万生老师 · 数据与图文整理支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理；巡演页同步使用其中的巡回演唱会歌单。荧屏页的“资料补编”依据其四张统计图选录清晰可辨的内容，原图标注统计截止 2026.07.04。文字页的 30 张“李健写的文字”整理图亦由其个人收集和编排，网站按用户提供的编号顺序展示，并据图片可辨识的主题制作导航；正文以原图为准。粉丝统计和图片文字识别可能不完整，不作为官方公告或校勘本。</p>
+        <p><strong>水流润万生老师 · 数据与文字整理支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理；巡演页同步使用其中的巡回演唱会歌单。荧屏页的“资料补编”依据其四张统计图选录清晰可辨的内容，原图标注统计截止 2026.07.04。文字页的篇目由水流润万生老师收集、编排，网站采用创建者提供的分类转录文字排版；部分字句可能有识别误差，尚未逐字校对，不作为校勘本。</p>
         <p><strong>人物札记与近期作品</strong><br>人物札记整理于 2026.09.24，为公开访谈和机构记录的摘要。较早的回忆与观点保留当时语境，不自动视为今天的状态。近期单曲的发行日、节目播出日及视频上传日分别记录，具体出处均可在上方目录查看。</p>
-        <p><strong>图像与文字许可</strong><br>新加入的 30 张整理图保留原有署名和平台标记，属于用户提供的第三方内容，不纳入本站代码的 MIT 许可；图中李健文字和相关照片的权利仍归原权利人。省界数据使用 China-GeoData 的 MIT 许可；唱片静物照片为 Mink Mingle 经 Wikimedia Commons 提供的 CC0 1.0 素材。</p>
+        <p><strong>图像与文字许可</strong><br>文字页的转录正文属于第三方内容，不纳入本站代码的 MIT 许可；相关文字权利仍归原权利人。省界数据使用 China-GeoData 的 MIT 许可；唱片静物照片为 Mink Mingle 经 Wikimedia Commons 提供的 CC0 1.0 素材。</p>
         <p><strong>非官方网站</strong><br>本页为听众整理的个人档案，与李健本人、经纪团队、唱片公司或主办方无隶属关系。音乐播放请前往正规平台。</p>
       </div>
     </section>

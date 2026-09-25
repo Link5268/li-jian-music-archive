@@ -2,75 +2,122 @@
   const reader = document.getElementById("writings-reader");
   if (!reader) return;
 
-  const topics = [
-    { start: 1, label: "合唱与音乐" },
-    { start: 4, label: "书与画" },
-    { start: 6, label: "同行的人" },
-    { start: 10, label: "诗歌与阅读" },
-    { start: 16, label: "文字与唱片" },
-    { start: 22, label: "歌曲与寄语" },
-    { start: 26, label: "毛不易" },
-    { start: 29, label: "电影与影像" }
-  ];
-  const total = 30;
-  const topicButtons = reader.querySelector("#writings-topics");
-  const pageSelect = reader.querySelector("#writings-page-select");
-  const title = reader.querySelector("#writings-page-title");
-  const pageLink = reader.querySelector("#writings-page-link");
-  const pageImage = reader.querySelector("#writings-page-image");
-  const counter = reader.querySelector("#writings-counter");
-  const previous = reader.querySelector("#writings-prev");
-  const next = reader.querySelector("#writings-next");
+  const contents = reader.querySelector("#writings-contents");
+  const topics = reader.querySelector("#writings-topics");
+  const search = reader.querySelector("#writings-search");
+  const status = reader.querySelector("#writings-status");
+  const expand = reader.querySelector("#writings-expand");
+  const collapse = reader.querySelector("#writings-collapse");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let page = 1;
+  const make = (tag, className, value) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (value) node.textContent = value;
+    return node;
+  };
 
-  const pad = number => String(number).padStart(2, "0");
-  const imagePath = number => `assets/writings/${pad(number)}.jpg`;
-  const topicAt = number => [...topics].reverse().find(topic => topic.start <= number) || topics[0];
+  function parseMarkdown(source) {
+    const chapters = [];
+    let chapter = null;
+    let entry = null;
+    let series = "";
 
-  for (let number = 1; number <= total; number += 1) {
-    const option = document.createElement("option");
-    option.value = String(number);
-    option.textContent = `${pad(number)} / ${topicAt(number).label}`;
-    pageSelect.append(option);
+    for (const rawLine of source.replace(/\r\n/g, "\n").split("\n")) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith("# ")) continue;
+      if (line.startsWith("## ")) {
+        chapter = { title: line.slice(3), entries: [] };
+        chapters.push(chapter);
+        entry = null;
+        series = "";
+      } else if (line.startsWith("### ")) {
+        if (!chapter) continue;
+        const heading = line.slice(4);
+        if (heading === "毛不易") {
+          series = heading;
+          entry = null;
+        } else {
+          series = "";
+          entry = { heading, series, paragraphs: [] };
+          chapter.entries.push(entry);
+        }
+      } else if (line.startsWith("#### ")) {
+        if (!chapter) continue;
+        entry = { heading: line.slice(5), series, paragraphs: [] };
+        chapter.entries.push(entry);
+      } else if (entry) {
+        entry.paragraphs.push(line);
+      }
+    }
+    return chapters;
   }
 
-  for (const topic of topics) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.dataset.start = String(topic.start);
-    button.textContent = topic.label;
-    button.addEventListener("click", () => showPage(topic.start, true));
-    topicButtons.append(button);
-  }
+  function render(chapters) {
+    let entryCount = 0;
+    chapters.forEach((chapter, chapterIndex) => {
+      const chapterId = `writings-chapter-${chapterIndex + 1}`;
+      const chapterNode = make("section", "writings-chapter");
+      chapterNode.id = chapterId;
+      chapterNode.append(make("span", "writings-chapter-number", String(chapterIndex + 1).padStart(2, "0")));
+      chapterNode.append(make("h4", "writings-chapter-title", chapter.title));
+      chapterNode.append(make("p", "writings-chapter-count", `${chapter.entries.length} 篇文字`));
 
-  function showPage(number, scrollToPage = false) {
-    page = Math.min(total, Math.max(1, Number(number) || 1));
-    const topic = topicAt(page);
-    const source = imagePath(page);
-    pageImage.src = source;
-    pageImage.alt = `李健文字整理图，第 ${page} 页，${topic.label}。点开可放大阅读原图。`;
-    pageLink.href = source;
-    pageLink.setAttribute("aria-label", `放大阅读第 ${page} 页原图`);
-    title.textContent = `${topic.label} · 第 ${pad(page)} 页`;
-    counter.textContent = `${pad(page)} / ${total}`;
-    pageSelect.value = String(page);
-    previous.disabled = page === 1;
-    next.disabled = page === total;
-    topicButtons.querySelectorAll("button").forEach(button => {
-      button.setAttribute("aria-pressed", String(Number(button.dataset.start) === topic.start));
+      const topic = make("button", "", chapter.title);
+      topic.type = "button";
+      topic.addEventListener("click", () => {
+        chapterNode.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
+      });
+      topics.append(topic);
+
+      chapter.entries.forEach((item, index) => {
+        const details = make("details", "writings-entry");
+        details.dataset.search = `${chapter.title} ${item.heading} ${item.paragraphs.join(" ")}`.toLocaleLowerCase();
+        if (chapterIndex === 0 && index === 0) details.open = true;
+        const summary = make("summary", "writings-entry-summary");
+        const title = make("span", "writings-entry-title", item.heading);
+        const number = make("span", "writings-entry-number", String(++entryCount).padStart(2, "0"));
+        summary.append(number, title, make("span", "writings-entry-icon", "+"));
+        details.append(summary);
+        const body = make("div", "writings-entry-body");
+        if (item.series) body.append(make("span", "writings-series", item.series));
+        item.paragraphs.forEach(paragraph => {
+          body.append(make("p", paragraph === "〇" ? "writings-divider" : "", paragraph));
+        });
+        details.append(body);
+        chapterNode.append(details);
+      });
+      contents.append(chapterNode);
     });
-    if (page < total) {
-      const preload = new Image();
-      preload.src = imagePath(page + 1);
+
+    const entries = [...contents.querySelectorAll(".writings-entry")];
+    function filter() {
+      const query = search.value.trim().toLocaleLowerCase();
+      let visible = 0;
+      contents.querySelectorAll(".writings-chapter").forEach(chapter => {
+        let chapterVisible = 0;
+        chapter.querySelectorAll(".writings-entry").forEach(entry => {
+          const matches = !query || entry.dataset.search.includes(query);
+          entry.hidden = !matches;
+          if (matches) chapterVisible += 1;
+        });
+        chapter.hidden = chapterVisible === 0;
+        visible += chapterVisible;
+      });
+      status.textContent = query ? `找到 ${visible} / ${entries.length} 篇文字` : `共 ${entries.length} 篇文字 · 选择标题展开阅读`;
     }
-    if (scrollToPage) {
-      pageLink.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
-    }
+    search.addEventListener("input", filter);
+    expand.addEventListener("click", () => entries.filter(entry => !entry.hidden).forEach(entry => { entry.open = true; }));
+    collapse.addEventListener("click", () => entries.forEach(entry => { entry.open = false; }));
+    filter();
   }
 
-  pageSelect.addEventListener("change", () => showPage(pageSelect.value, true));
-  previous.addEventListener("click", () => showPage(page - 1, true));
-  next.addEventListener("click", () => showPage(page + 1, true));
-  showPage(1);
+  fetch("content/li-jian-writings.md")
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.text();
+    })
+    .then(text => render(parseMarkdown(text)))
+    .catch(() => {
+      status.textContent = "正文暂时无法载入，请刷新页面后重试。";
+    });
 })();

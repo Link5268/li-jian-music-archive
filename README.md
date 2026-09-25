@@ -9,7 +9,7 @@
 - 粉丝整理的演出歌单与歌曲用于影视、舞台、机构项目的记录，可按类型和关键词检索
 - 四张巡演主题视觉、城市地图、场次筛选、同城多场及歌单
 - 「万物安生时」前 26 场按场次排序的摄影档案
-- 「文字」栏目的 30 页李健文字图文阅读室，支持主题跳转、选页、逐页浏览和放大原图
+- 「文字」栏目收录李健为书籍、影视与音乐所写的文字，支持主题跳转、正文搜索与按篇展开阅读
 - 页面资料来源和素材说明统一收录在底部「出处与收藏」
 
 ## 技术与目录
@@ -22,7 +22,8 @@ site/
   fan-music.js               # 音乐资料筛选与展示
   fan-research.js            # 粉丝整理资料展示
   song-links.js              # 曲目检索与 QQ 音乐搜索链接
-  writings-reader.js         # 文字阅读室的翻页与主题导航
+  writings-reader.js         # 文字阅读室的分类、搜索与展开阅读
+  content/li-jian-writings.md # 水流润万生老师整理的分类转录文字
   guestbook.js               # 留言功能
   assets/                    # 网页用的压缩图片、MP3、地图与许可证
     fan-music-data.js        # 水流润万生老师提供的数据整理结果
@@ -80,7 +81,7 @@ https://YOUR_USERNAME.github.io/li-jian-music-archive/
 音乐页新增的粉丝统计数据保存在 `site/assets/fan-music-data.js`，展示与筛选逻辑在 `site/fan-music.js`。更新时保留底部「出处与收藏」中的“水流润万生老师”署名，并区分粉丝统计与已核实的官方发行资料。修改后通过 GitHub Desktop 提交并推送到 `main`；本仓库的 GitHub Actions 会自动重新发布网站。
 曲目检索和 QQ 音乐外链由 `site/song-links.js` 生成。检索结果合并显示歌曲所在的专辑、现场歌单和影视使用记录，可跳到对应资料并继续查看更多曲目。QQ 音乐外链指向搜索结果，供访客选择版本，不代表本站核实了特定录音的上架或可播放状态。
 影像页使用 `site/assets/wanwu-live-01.jpg` 至 `wanwu-live-26.jpg`，分别对应巡演清单的第 1—26 场；增补或替换时应核对城市与日期。旧影像已从网页移除，保留的人物肖像展示在「人物札记」。
-文字阅读室的 30 张原图位于 `site/assets/writings/01.jpg` 至 `30.jpg`，页面顺序与文件编号一致；主题跳转位置在 `site/writings-reader.js` 中维护。图中文字识别可能有误，编辑时请以原图核对。所有来源链接和素材说明集中放在 `site/index.html` 底部的 `archive` 章节。
+文字阅读室的正文位于 `site/content/li-jian-writings.md`，用二级标题划分主题、三级标题划分篇目，毛不易部分用四级标题；页面由 `site/writings-reader.js` 展示。文字可能有识别误差，编辑时请核对原始材料。所有来源与素材说明集中放在 `site/index.html` 底部的 `archive` 章节。
 网页使用 `site/assets/backgroundmusic.mp3` 播放背景音乐；原始 FLAC 留在 `source-media/backgroundmusic.flac`。更换音乐时请替换网页 MP3，并核对页面与 `THIRD_PARTY_NOTICES.md` 中的曲目信息。原图留在 `source-media/images/`，网页显示的 WebP 可用 `scripts/optimize_images.py` 重新生成。
 新增条目注明来源、事件日期、发布日期；没有资料的字段留空。不要把推测的新专辑、传闻或节目上传日写成发行事实。
 

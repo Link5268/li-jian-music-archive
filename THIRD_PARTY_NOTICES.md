@@ -23,7 +23,7 @@ site/assets/china-province-map.svg 基于 Supeset/China-GeoData 的省界数据�
 - lijian-portrait-glasses-user.jpg、lijian-portrait-user.jpg、lijian-tour-arena-user.jpg：用户提供的肖像及现场照片；戴眼镜肖像现展示在「人物札记」。
 - site/assets/wanwu-live-01.jpg 至 wanwu-live-26.jpg：网站创建者提供的《万物安生时》前 26 场现场照片，按武汉至合肥的场次顺序展示在「影像」。
 - site/assets/fan-research-01.jpg 至 fan-research-04.jpg：网站创建者提供的四张“水流润万生”粉丝个人统计图，用于「资料补编」原图对照；网站对图中文字作分类选录，保留原图署名与 2026.07.04 统计截止标记。这些图片不纳入 MIT 许可。
-- site/assets/writings/01.jpg 至 30.jpg：网站创建者提供的“李健写的文字”图文整理，共 30 页，由水流润万生老师个人收集、编排；本站保留原图署名和平台标记，仅依据可辨识标题制作主题导航，阅读内容以原图为准。这些图片及所含文字、照片不纳入 MIT 许可。
+- site/content/li-jian-writings.md：网站创建者提供的“李健为书籍、影视、音乐所写的文字”分类转录稿，原始材料由水流润万生老师个人收集、编排。转录文字可能有识别误差，尚未逐字校对；正文及整理成果不纳入本站代码的 MIT 许可。原 30 张阅读图片已从网站项目移除。
 - wanwu-tour-emblem.jpg、wanwu-tour-wordmark.jpg：巡演标志与主题字样。
 - source-media/images/tour-poster-*.png 与 site/assets/tour-poster-*.webp：用户提供的四张主题图，经图像编辑清理指定文字或标记后用于巡演主题展示；网页版本另作压缩。`tour-poster-xiangwang.png` 的原图是 2022 年线上音乐会视觉，不是 2011 年巡演原始海报。
 - source-media/backgroundmusic.flac 与 site/assets/backgroundmusic.mp3：创建者提供的李健《一切刚刚好》录音；MP3 是网页播放副本，不纳入代码 MIT 许可。

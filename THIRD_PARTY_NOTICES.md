@@ -18,7 +18,8 @@ site/assets/china-province-map.svg 基于 Supeset/China-GeoData 的省界数据�
 
 ## 用户提供的素材（不纳入 MIT）
 
-- source-media/images/lijian-intro-cover.png 与 site/assets/lijian-intro-cover.webp：用户提供原图，用户已声明拥有原图或获得去水印授权；网页版本经过旋转、处理及压缩。本项目未另行核实授权是否涵盖向所有公众再分发。
+- site/assets/lijian-intro-cutout.png：基于网站创建者提供的人像制作的透明背景展示图，用于序章；创建者已声明拥有原图或获得使用授权。
+- source-media/images/lijian-intro-cover.png 与 site/assets/lijian-intro-cover.webp：旧版序章素材，已由透明背景人物图取代，当前网页不再引用；原素材由用户提供，用户已声明拥有原图或获得去水印授权。本项目未另行核实授权是否涵盖向所有公众再分发。
 - lijian-about-close.jpg：用户提供的人物近照，原图有 BAZAAR MEN 标识。
 - lijian-portrait-glasses-user.jpg、lijian-portrait-user.jpg、lijian-tour-arena-user.jpg：用户提供的肖像及现场照片；戴眼镜肖像现展示在「人物札记」。
 - site/assets/wanwu-live-01.jpg 至 wanwu-live-26.jpg：网站创建者提供的《万物安生时》前 26 场现场照片，按武汉至合肥的场次顺序展示在「影像」。

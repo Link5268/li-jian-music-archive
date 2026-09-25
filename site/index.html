@@ -212,6 +212,15 @@
     .setlist-number { color: #9a8660; font: 11px/1.55 var(--serif); }
     .tour-source { display: inline-block; width: fit-content; margin-top: 16px; color: #31495d; font-size: 11px; text-underline-offset: 4px; }
     .tour-note { max-width: 430px; margin: 16px 0 0; color: #68747a; font-size: 11px; line-height: 1.75; }
+    .tour-upcoming { margin-top: 42px; padding: 24px clamp(20px, 3vw, 38px); border: 1px solid rgba(16,28,44,.2); background: rgba(248,246,240,.42); }
+    .tour-upcoming h3 { margin: 0 0 8px; font: 400 clamp(21px,2.5vw,29px)/1.3 var(--serif); }
+    .tour-upcoming p { margin: 0 0 18px; color: #5a6972; font-size: 12px; line-height: 1.8; }
+    .tour-upcoming ul { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; background: rgba(16,28,44,.18); }
+    .tour-upcoming li { display: grid; gap: 6px; padding: 18px; background: #e9eae3; }
+    .tour-upcoming time { color: #796c54; font-size: 11px; letter-spacing: .09em; }
+    .tour-upcoming strong { font: 400 21px/1.2 var(--serif); }
+    .tour-upcoming li span { color: #65747a; font-size: 11px; }
+    @media (max-width: 620px) { .tour-upcoming ul { grid-template-columns: 1fr; } }
     .map-overseas { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin: 4px auto 0; padding: 10px 13px; border-top: 1px solid rgba(16,28,44,.14); color: #68747a; }
     .map-overseas[hidden] { display: none; }
     .map-overseas-label { display: flex; flex-direction: column; gap: 4px; margin-right: auto; font-size: 9px; letter-spacing: .14em; }
@@ -632,7 +641,7 @@
             <li><time>2015—2016</time><div><strong>《我是歌手》与「看见李健」</strong><span>《我是歌手》第三季获年度亚军；开启「看见李健」巡演，并在纽约林肯中心举行个人演唱会。</span></div></li>
             <li><time>2017—2020</time><div><strong>节目导师与巡演</strong><span>参加《歌手2017》，担任《中国好声音》导师，展开「不止，是李健」巡演。</span></div></li>
             <li><time>2021—2022</time><div><strong>《无时无刻》与线上现场</strong><span>发行《无时无刻》；参与《声生不息·港乐季》，并将多场现场免费在线播出。</span></div></li>
-            <li><time>2023—2026</time><div><strong>「万物安生时」</strong><span>巡演于 2023 年开启；本档案的 35 场场次依照创建者提供的清单整理至 2026 年 9 月。</span></div></li>
+            <li><time>2023—2026</time><div><strong>「万物安生时」</strong><span>巡演于 2023 年开启；本档案收录 35 场已举行演出及 4 场已公布的后续 Encore 演出。</span></div></li>
           </ol>
         </div>
       </div>
@@ -795,11 +804,11 @@
       <div class="section-head">
         <div><span class="section-kicker">04 / TOUR ARCHIVE</span><h2 id="tour-title">万物安生时</h2></div>
         <div class="tour-head-side">
-          <span class="section-index" id="tour-count-label">2023—2026 · 35 场档案</span>
+          <span class="section-index" id="tour-count-label">2023—2026 · 39 场档案</span>
         </div>
       </div>
       <div class="tour-themes" role="group" aria-label="选择巡演主题">
-        <button class="tour-theme" type="button" data-tour-theme="万物安生时" aria-pressed="true"><strong>万物安生时</strong><small>2023—2026 · 35 场</small></button>
+        <button class="tour-theme" type="button" data-tour-theme="万物安生时" aria-pressed="true"><strong>万物安生时</strong><small>2023—2026 · 39 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="不止，是李健" aria-pressed="false"><strong>不止，是李健</strong><small>2018—2020 · 19 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="看见李健" aria-pressed="false"><strong>看见李健</strong><small>2015—2016 · 18 场</small></button>
         <button class="tour-theme" type="button" data-tour-theme="向往·2011" aria-pressed="false"><strong>向往 · 2011</strong><small>2011 · 9 场</small></button>
@@ -815,7 +824,7 @@
           <h3 id="tour-poster-title" aria-live="polite">万物安生时</h3>
           <p class="tour-poster-period" id="tour-poster-period">2023—2026</p>
           <p class="tour-poster-description" id="tour-poster-description">以城市为序，把日期、场馆、特别曲目和现场歌单收进同一份巡演档案。</p>
-          <div class="tour-poster-stats"><span><strong id="tour-poster-stops">35</strong>已收录场次</span><span><strong id="tour-poster-cities">24</strong>城市</span></div>
+          <div class="tour-poster-stats"><span><strong id="tour-poster-stops">39</strong>已收录场次</span><span><strong id="tour-poster-cities">24</strong>城市</span></div>
           <a class="tour-poster-link" href="#tour-map">查看城市与场次 ↓</a>
         </div>
       </div>
@@ -837,14 +846,14 @@
           <h3 id="city-name">上海</h3>
           <p class="tour-cn" id="city-caption">选择城市，查看同城场次档案。</p>
           <div class="city-stops" id="city-stops" aria-live="polite"></div>
-          <p class="tour-note">「万物安生时」按你提供的 35 场清单编目，历史巡演按中文维基百科条目收录；未注明的特别曲目与城市备注留空。地图标注中国城市中心，海外城市另列经纬度。</p>
+          <p class="tour-note">「万物安生时」按网站创建者提供的场次资料编目；音乐页“巡回演唱会”歌单已同步至单场详情，数据支持：水流润万生老师。未公布的特别曲目和歌单留空。地图标注城市中心，海外城市单列。</p>
         </div>
       </div>
       <details class="tour-register">
         <summary class="tour-index-summary"><h3>场次索引</h3><span>展开筛选与完整记录</span></summary>
         <div class="tour-register-content">
         <div class="tour-register-head">
-          <p id="tour-register-caption">35 STOPS · 24 CITIES · 2023—2026</p>
+          <p id="tour-register-caption">39 STOPS · 24 CITIES · 2023—2026</p>
         </div>
         <div class="tour-toolbar" aria-label="筛选巡演记录">
           <div class="tour-filters" role="group" aria-label="按巡演阶段筛选">
@@ -856,13 +865,18 @@
           <label class="tour-city-filter"><span class="sr-only">按城市筛选</span><select id="tour-city-filter"><option value="">全部城市</option></select></label>
           <button class="tour-clear-filter" id="tour-clear-filter" type="button" hidden>清除筛选</button>
         </div>
-        <p class="tour-results" id="tour-results" aria-live="polite">显示 35 / 35 场</p>
+        <p class="tour-results" id="tour-results" aria-live="polite">显示 39 / 39 场</p>
         <div class="tour-list" role="group" aria-label="李健万物安生时巡演场次">
           <div class="tour-list-head" aria-hidden="true"><span>NO.</span><span>DATE / STAGE</span><span>CITY</span><span>VENUE</span><span>SPECIAL SONG / CITY NOTE</span></div>
           <div id="tour-records"></div>
         </div>
         </div>
       </details>
+      <div class="tour-upcoming" aria-label="日期或场馆待公布的 Encore 城市">
+        <h3>后续城市 · 待公布</h3>
+        <p>以下为创建者提供的计划档期，具体日期、场馆和歌单待公布，因此暂不计入场次索引。</p>
+        <ul><li><time>2026.12</time><strong>宁波</strong><span>具体日期与场馆待公布</span></li><li><time>2027.01</time><strong>深圳</strong><span>具体日期与场馆待公布</span></li><li><time>2027.01</time><strong>北京</strong><span>具体日期与场馆待公布</span></li></ul>
+      </div>
       <details class="tour-register">
         <summary class="tour-index-summary"><h3>单场演唱会</h3><span>展开查看 1998—2014 年记录</span></summary>
         <div class="tour-register-content">
@@ -904,7 +918,7 @@
         <article class="time-entry reveal"><time>2021—2022</time><div><h3>《无时无刻》与线上音乐会</h3><p>发行原创专辑《无时无刻》，参与《声生不息·港乐季》；多场音乐会在线上免费播出。</p></div></article>
         <article class="time-entry reveal"><time>2023</time><div><h3>「万物安生时」开启</h3><p>新一轮世界巡演从武汉启程；巡演中的城市、曲目和现场片段继续扩展这份档案。</p></div></article>
         <article class="time-entry reveal"><time>2025</time><div><h3>《万物安生时》新篇</h3><p>官方频道以深圳站记录 2024 年巡演收官，并开启 2025 年的新篇。</p></div></article>
-        <article class="time-entry reveal"><time>2026</time><div><h3>Encore · 城市继续相逢</h3><p>截至 2026.09.19，个人巡演档案收录 35 场、24 座城市；Encore 场继续留下新的现场记录。</p></div></article>
+        <article class="time-entry reveal"><time>2026</time><div><h3>Encore · 城市继续相逢</h3><p>截至 2026.09.19，档案收录 35 场已举行演出；另列成都、杭州、合肥 4 场已公布的后续演出。</p></div></article>
       </div>
     </section>
 
@@ -1160,6 +1174,8 @@
         <a href="https://www.motianlun.cn/show-detail/show-detail?showId=6a604556fe96c700014ece66" target="_blank" rel="noreferrer"><span>摩天轮票务 · 南京站演出信息</span><span>2026.09.05 ↗</span></a>
         <a href="https://weibo.com/2/detail/5332897166790464" target="_blank" rel="noreferrer"><span>桔子密码 · 西安站观演信息</span><span>2026.09.19 ↗</span></a>
         <a href="https://www.sina.cn/news/detail/5332498927325735.html" target="_blank" rel="noreferrer"><span>李健工作室公告转载 · 成都站</span><span>2026.10.03 / 10.05 ↗</span></a>
+        <a href="https://www.sina.cn/news/detail/5277754233978933.html" target="_blank" rel="noreferrer"><span>杭州站演出信息 · 杭州交通 918 转载</span><span>2026.11.07 ↗</span></a>
+        <a href="https://m.hf.bendibao.com/xiuxian/105156.shtm" target="_blank" rel="noreferrer"><span>合肥站演出信息 · 合肥本地宝</span><span>2026.11.28 ↗</span></a>
         <a href="https://commons.wikimedia.org/wiki/File:China_blank_province_map.svg" target="_blank" rel="noreferrer"><span>Wikimedia Commons · 中国省级边界底图</span><span>公有领域 ↗</span></a>
       </div>
       <div class="archive-credits">
@@ -1168,13 +1184,14 @@
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>
-        <p><strong>水流润万生老师 · 数据支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理。原资料标注为不完全统计；页面保留原表曲目记法、用途描述及表格位置，方便后续校订。</p>
+        <p><strong>水流润万生老师 · 数据支持</strong><br>音乐页的演出歌单与影视、机构使用记录依据其粉丝个人统计的两份表格整理；巡演页同步使用其中的巡回演唱会歌单。荧屏页的“资料补编”依据其四张统计图选录清晰可辨的内容，原图保留供核对，统计截止 2026.07.04。粉丝统计可能不完整，不作为官方公告。</p>
         <p><strong>非官方网站</strong><br>本页为听众整理的个人档案，与李健本人、经纪团队、唱片公司或主办方无隶属关系。音乐播放请前往正规平台。</p>
       </div>
     </section>
   </main>
   <footer class="site-footer"><span>LI JIAN · MUSIC · TIME · LANDSCAPE</span><span>非官方网站 · Fan-made archive · <a href="#home">回到首页 ↑</a></span></footer>
 
+  <script src="assets/fan-music-data.js"></script>
   <script>
     document.documentElement.classList.add("js");
 const title = document.querySelector(".hero-title-text");
@@ -1297,6 +1314,10 @@ movingWord.style.opacity = String(1 - release);
       ["2026-08-08", "厦门", "凤凰体育馆", "Angel/八月照相馆", "鹭岛夜，乐声起", "encore"],
       ["2026-09-05", "南京", "南京梦之蓝青奥体育公园体育馆", "在遥远的天空地下思念是一种病", "万物安生时，金陵夜回响", "encore"],
       ["2026-09-19", "西安", "西安奥体中心体育馆", "世界上不存在的歌/云上的日子", "长安夜色，乐起星河", "encore"],
+      ["2026-10-03", "成都", "五粮液文化体育中心综合体育馆", "", "待演出 · 特别曲目待补", "encore"],
+      ["2026-10-05", "成都", "五粮液文化体育中心综合体育馆", "", "待演出 · 特别曲目待补", "encore"],
+      ["2026-11-07", "杭州", "杭州奥体中心体育馆", "", "待演出 · 特别曲目待补", "encore"],
+      ["2026-11-28", "合肥", "合肥少荃体育中心体育馆", "", "待演出 · 特别曲目待补", "encore"],
       ["2011-04-15", "成都", "锦城艺术宫", "", "", "main", "向往·2011"],
       ["2011-04-22", "广州", "星海音乐厅", "", "", "main", "向往·2011"],
       ["2011-04-23", "深圳", "深圳市民中心", "", "", "main", "向往·2011"],
@@ -1376,6 +1397,10 @@ movingWord.style.opacity = String(1 - release);
       "2026-06-20": ["万物安生", "一切刚刚好", "深海之寻", "风吹麦浪", "梅雨", "璀璨", "在水一方", "不期而遇", "给你", "假如爱有天意", "车站", "迷雾", "异乡人", "雨后初晴", "当你老了", "父亲写的散文诗", "水流众生", "传奇", "无论风往何处吹", "山中行", "枫桥夜泊", "夜晚眺望金桥", "爱的箴言", "贝加尔湖畔"],
       "2026-06-27": ["万物安生", "一切刚刚好", "深海之寻", "风吹麦浪", "美若黎明", "月半弯", "沧海轻舟", "不期而遇", "给你", "假如爱有天意", "车站", "迷雾", "门", "风吹黄昏", "父亲写的散文诗", "蓝色夜曲", "水流众生", "传奇", "从黄昏到午夜", "山中行", "人间共鸣", "夜晚眺望金桥", "今宵多珍重", "贝加尔湖畔"]
     };
+    const fanSetlistKey = (date, theme) => date + "|" + theme.replace(/[，,\s]/g, "").replace(/Encore$/i, "");
+    const fanTourSetlists = new Map((window.LI_JIAN_FAN_MUSIC_DATA?.performances || [])
+      .filter((item) => item.category === "巡回演唱会" && Array.isArray(item.songs))
+      .map((item) => [fanSetlistKey(item.date, item.theme), item.songs]));
     const themeRecordCounters = {};
     const tourRecords = tourRows.map((row) => {
       const theme = row[6] || "万物安生时";
@@ -1389,7 +1414,8 @@ movingWord.style.opacity = String(1 - release);
         note: row[4],
         phase: row[5],
         stage: row[5] === "encore" ? theme + " Encore" : theme,
-        setlist: tourSetlists[row[0]] || [],
+        setlist: fanTourSetlists.get(fanSetlistKey(row[0], theme)) || tourSetlists[row[0]] || [],
+        setlistSource: fanTourSetlists.has(fanSetlistKey(row[0], theme)) ? "水流润万生老师 · 粉丝个人统计" : "网站创建者提供",
         theme
       };
     });
@@ -1543,7 +1569,7 @@ movingWord.style.opacity = String(1 - release);
           const setlist = document.createElement("details");
           setlist.className = "postmark-setlist";
           const summary = document.createElement("summary");
-          summary.textContent = "SETLIST · " + record.setlist.length + " 首";
+          summary.textContent = "SETLIST · " + record.setlist.length + " 首 · " + record.setlistSource;
           const songs = document.createElement("ol");
           record.setlist.forEach((title, index) => {
             const item = document.createElement("li");
@@ -1890,8 +1916,8 @@ movingWord.style.opacity = String(1 - release);
       watchedSections.forEach((section) => navObserver.observe(section));
     }
   </script>
-<script src="assets/fan-music-data.js" defer></script>
 <script src="fan-music.js" defer></script>
+<script src="fan-research.js" defer></script>
 <script src="song-links.js" defer></script>
 <script src="guestbook.js" defer></script>
 </body>

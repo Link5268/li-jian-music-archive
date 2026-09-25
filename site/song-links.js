@@ -44,21 +44,21 @@
     .qq-song-link:hover, .qq-song-link:focus-visible { color: #d5c49a; border-bottom-color: currentColor; }
     #tour .qq-song-link:hover, #tour .qq-song-link:focus-visible { color: #806238; }
     .song-finder { max-width: 820px; margin: 28px 0 42px; padding: 23px 26px; border: 1px solid rgba(236,232,223,.27); }
-    .song-finder label { display: block; margin-bottom: 10px; color: #d5c49a; font: 12px/1.5 var(--sans, sans-serif); letter-spacing: .13em; }
-    .song-finder input { width: 100%; min-height: 46px; padding: 9px 13px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline-offset: 3px; background: #1b2d41; color: #ece8df; font: 14px/1.5 var(--sans, sans-serif); }
+    .song-finder label { display: block; margin-bottom: 10px; color: #d5c49a; font: 13px/1.5 var(--sans, sans-serif); letter-spacing: .13em; }
+    .song-finder input { width: 100%; min-height: 46px; padding: 9px 13px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline-offset: 3px; background: #1b2d41; color: #ece8df; font: 15px/1.5 var(--sans, sans-serif); }
     .song-finder input::placeholder { color: #a5b4b8; }
-    .song-finder-note, .song-finder-status { margin: 11px 0 0; color: #b7c3c4; font: 12px/1.65 var(--sans, sans-serif); }
+    .song-finder-note, .song-finder-status { margin: 11px 0 0; color: #b7c3c4; font: 13px/1.65 var(--sans, sans-serif); }
     .song-finder-results:empty { display: none; }
     .song-finder-results { display: grid; margin: 15px 0 0; padding: 0; list-style: none; }
     .song-finder-results li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 7px 15px; padding: 14px 0; border-top: 1px solid rgba(236,232,223,.14); color: #ece8df; overflow-wrap: anywhere; }
     .song-result-title { width: fit-content; font: 400 18px/1.45 var(--serif, serif); }
-    .song-result-external { align-self: center; color: #b7c3c4; font: 12px/1.5 var(--sans, sans-serif); white-space: nowrap; }
+    .song-result-external { align-self: center; color: #b7c3c4; font: 13px/1.5 var(--sans, sans-serif); white-space: nowrap; }
     .song-result-contexts { display: flex; grid-column: 1 / -1; flex-wrap: wrap; gap: 7px; }
-    .song-result-contexts button { min-height: 35px; padding: 6px 10px; border: 1px solid rgba(185,154,100,.4); color: #d5c49a; background: transparent; cursor: pointer; font: 12px/1.4 var(--sans, sans-serif); }
+    .song-result-contexts button { min-height: 35px; padding: 6px 10px; border: 1px solid rgba(185,154,100,.4); color: #d5c49a; background: transparent; cursor: pointer; font: 13px/1.4 var(--sans, sans-serif); }
     .song-result-contexts button:hover, .song-result-contexts button:focus-visible { color: #101c2c; background: #d5c49a; }
-    .song-finder-more { width: 100%; min-height: 44px; margin-top: 12px; padding: 9px 14px; border: 1px solid rgba(185,154,100,.5); color: #d5c49a; background: transparent; cursor: pointer; font: 13px/1.5 var(--sans, sans-serif); }
+    .song-finder-more { width: 100%; min-height: 44px; margin-top: 12px; padding: 9px 14px; border: 1px solid rgba(185,154,100,.5); color: #d5c49a; background: transparent; cursor: pointer; font: 14px/1.5 var(--sans, sans-serif); }
     .song-finder-more[hidden] { display: none; }
-    @media (max-width: 600px) { .song-finder { padding: 18px; } .song-finder input { font-size: 16px; } .song-result-title { font-size: 17px; } .song-result-contexts button { min-height: 42px; } }
+    @media (max-width: 600px) { .song-finder { padding: 18px; } .song-finder input { font-size: 17px; } .song-result-title { font-size: 17px; } .song-result-contexts button { min-height: 42px; } }
   `;
   document.head.append(style);
 

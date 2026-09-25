@@ -11,11 +11,11 @@
   style.textContent = `
     .guestbook { width: min(100%, 1080px); margin: 84px auto 0; text-align: left; }
     .guestbook-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding-bottom: 17px; border-bottom: 1px solid rgba(236,232,223,.24); }
-    .guestbook-kicker { display: block; margin-bottom: 9px; color: #b99a64; font: 11px/1.5 var(--sans, sans-serif); letter-spacing: .22em; }
+    .guestbook-kicker { display: block; margin-bottom: 9px; color: #b99a64; font: 12px/1.5 var(--sans, sans-serif); letter-spacing: .22em; }
     .guestbook-heading h3 { margin: 0; color: #ece8df; font: 400 clamp(24px,3vw,38px)/1.3 var(--serif, serif); }
     .guestbook-heading-side { display: flex; align-items: center; gap: 16px; }
-    .guestbook-hint { margin: 0; color: #aebbc3; font: 12px/1.6 var(--sans, sans-serif); }
-    .guestbook-toggle { flex: 0 0 auto; padding: 8px 12px; border: 1px solid rgba(205,187,150,.45); color: #d8c49b; background: transparent; cursor: pointer; font: 11px/1.4 var(--sans, sans-serif); }
+    .guestbook-hint { margin: 0; color: #aebbc3; font: 13px/1.6 var(--sans, sans-serif); }
+    .guestbook-toggle { flex: 0 0 auto; padding: 8px 12px; border: 1px solid rgba(205,187,150,.45); color: #d8c49b; background: transparent; cursor: pointer; font: 12px/1.4 var(--sans, sans-serif); }
     .guestbook-toggle:hover { border-color: #cdbb96; color: #f4f1ea; }
     .guestbook-window { position: relative; overflow-x: auto; overflow-y: hidden; margin-top: 26px; padding-bottom: 10px; overscroll-behavior-x: contain; scroll-behavior: auto; scrollbar-color: rgba(205,187,150,.6) rgba(255,255,255,.08); scrollbar-width: thin; cursor: grab; }
     .guestbook-window:focus-visible { outline: 1px solid rgba(205,187,150,.65); outline-offset: 4px; }
@@ -24,18 +24,18 @@
     .guestbook-group { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, minmax(172px, auto)); grid-auto-columns: 270px; gap: 16px; }
     .guestbook-card { box-sizing: border-box; display: flex; min-width: 0; flex-direction: column; min-height: 172px; padding: 22px 24px; border: 1px solid rgba(185,154,100,.28); background: rgba(255,255,255,.035); }
     .guestbook-card-head { display: flex; justify-content: space-between; gap: 15px; align-items: baseline; margin-bottom: 18px; }
-    .guestbook-card-name { color: #d8c49b; font: 15px/1.4 var(--serif, serif); }
-    .guestbook-card-date { flex: 0 0 auto; color: #91a1aa; font: 10px/1.4 var(--sans, sans-serif); }
-    .guestbook-card-message { margin: 0; color: #ece8df; font: 15px/1.75 var(--serif, serif); overflow-wrap: anywhere; white-space: pre-wrap; }
-    .guestbook-empty { width: 100%; padding: 28px 0; color: #aebbc3; text-align: center; font: 13px/1.7 var(--sans, sans-serif); }
+    .guestbook-card-name { color: #d8c49b; font: 16px/1.4 var(--serif, serif); }
+    .guestbook-card-date { flex: 0 0 auto; color: #91a1aa; font: 12px/1.4 var(--sans, sans-serif); }
+    .guestbook-card-message { margin: 0; color: #ece8df; font: 16px/1.75 var(--serif, serif); overflow-wrap: anywhere; white-space: pre-wrap; }
+    .guestbook-empty { width: 100%; padding: 28px 0; color: #aebbc3; text-align: center; font: 14px/1.7 var(--sans, sans-serif); }
     .guestbook-form { display: grid; grid-template-columns: minmax(140px,1fr) minmax(220px,2.6fr) auto; gap: 12px; align-items: start; margin-top: 44px; }
-    .guestbook-form label { display: grid; gap: 9px; color: #bdc8ca; font: 11px/1.5 var(--sans, sans-serif); letter-spacing: .12em; }
-    .guestbook-form input, .guestbook-form textarea { box-sizing: border-box; width: 100%; min-height: 48px; padding: 13px 14px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline: none; color: #ece8df; background: rgba(255,255,255,.04); font: 14px/1.5 var(--sans, sans-serif); letter-spacing: 0; }
+    .guestbook-form label { display: grid; gap: 9px; color: #bdc8ca; font: 12px/1.5 var(--sans, sans-serif); letter-spacing: .12em; }
+    .guestbook-form input, .guestbook-form textarea { box-sizing: border-box; width: 100%; min-height: 48px; padding: 13px 14px; border: 1px solid rgba(236,232,223,.3); border-radius: 0; outline: none; color: #ece8df; background: rgba(255,255,255,.04); font: 15px/1.5 var(--sans, sans-serif); letter-spacing: 0; }
     .guestbook-form textarea { height: 48px; resize: vertical; }
     .guestbook-form input:focus, .guestbook-form textarea:focus { border-color: #b99a64; }
-    .guestbook-submit { align-self: end; min-height: 48px; padding: 0 22px; border: 1px solid #b99a64; border-radius: 0; color: #101c2c; background: #cdbb96; cursor: pointer; font: 12px/1.4 var(--sans, sans-serif); }
+    .guestbook-submit { align-self: end; min-height: 48px; padding: 0 22px; border: 1px solid #b99a64; border-radius: 0; color: #101c2c; background: #cdbb96; cursor: pointer; font: 13px/1.4 var(--sans, sans-serif); }
     .guestbook-submit:disabled { opacity: .55; cursor: wait; }
-    .guestbook-status { min-height: 23px; margin: 10px 0 0; color: #d8c49b; font: 12px/1.7 var(--sans, sans-serif); }
+    .guestbook-status { min-height: 23px; margin: 10px 0 0; color: #d8c49b; font: 13px/1.7 var(--sans, sans-serif); }
     @media (max-width: 720px) {
       .guestbook { margin-top: 62px; }
       .guestbook-heading { display: block; }
@@ -45,10 +45,10 @@
       .guestbook-form { grid-template-columns: 1fr; }
       .guestbook-submit { width: 100%; }
       .guestbook-group { grid-auto-columns: min(78vw, 280px); }
-      .guestbook-kicker,.guestbook-card-date,.guestbook-form label,.guestbook-status { font-size: 12px; }
-      .guestbook-hint { font-size: 13px; }
-      .guestbook-form input,.guestbook-form textarea { font-size: 16px; }
-      .guestbook-submit { font-size: 14px; }
+      .guestbook-kicker,.guestbook-card-date,.guestbook-form label,.guestbook-status { font-size: 13px; }
+      .guestbook-hint { font-size: 14px; }
+      .guestbook-form input,.guestbook-form textarea { font-size: 17px; }
+      .guestbook-submit { font-size: 15px; }
     }
     @media (max-width: 720px) {
       .guestbook-window::-webkit-scrollbar { height: 5px; }

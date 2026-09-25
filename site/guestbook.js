@@ -178,7 +178,7 @@
         previousTime = time;
         const isPaused = userPaused || interacting || time < resumeAfter || document.hidden;
         if (!isPaused) {
-          guestbookWindow.scrollLeft += elapsed * 0.018;
+          guestbookWindow.scrollLeft += elapsed * 0.028;
           if (guestbookWindow.scrollLeft >= cycleWidth) {
             guestbookWindow.scrollLeft -= cycleWidth;
           }
@@ -224,13 +224,11 @@
         resumeAfter = performance.now() + 1800;
       }
     });
-    if (typeof ResizeObserver === "function") {
-      const observer = new ResizeObserver(configure);
-      observer.observe(guestbookWindow);
-      observer.observe(firstGroup);
-    } else {
-      window.addEventListener("resize", configure);
-    }
+    let resizeTimer = 0;
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(configure, 120);
+    }, { passive: true });
     updateAutoplayButton();
     configure();
   }

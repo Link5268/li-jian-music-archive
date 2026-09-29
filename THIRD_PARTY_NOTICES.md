@@ -23,6 +23,7 @@ site/assets/china-province-map.svg 基于 Supeset/China-GeoData 的省界数据�
 - lijian-about-close.jpg：用户提供的人物近照，原图有 BAZAAR MEN 标识。
 - lijian-portrait-glasses-user.jpg、lijian-portrait-user.jpg、lijian-tour-arena-user.jpg：用户提供的肖像及现场照片；戴眼镜肖像现展示在「人物札记」。
 - site/assets/wanwu-live-01.jpg 至 wanwu-live-26.jpg：网站创建者提供的《万物安生时》前 26 场现场照片，按武汉至合肥的场次顺序展示在「影像」。
+- site/assets/archive-raw-3439.webp、archive-stage-panorama.webp、archive-blue-portrait.webp、archive-xian-portrait.webp、archive-stage-walk.webp、archive-mountain-linework.webp：由网站创建者本次提供的 RAW 照片、现场照片、视觉作品及线稿转换为网页用 WebP，分别点缀音乐、台前、人物、时间和文字章节；不改变「影像」原有 01—26 场的排序。原始文件未随网站仓库新增分发。
 - site/assets/fan-research-01.jpg 至 fan-research-04.jpg：网站创建者提供的四张“水流润万生”粉丝个人统计图，用于「资料补编」原图对照；网站对图中文字作分类选录，保留原图署名与 2026.07.04 统计截止标记。这些图片不纳入 MIT 许可。
 - site/content/li-jian-writings.md：网站创建者提供的“李健为书籍、影视、音乐所写的文字”分类转录稿，原始材料由水流润万生老师个人收集、编排。转录文字可能有识别误差，尚未逐字校对；正文及整理成果不纳入本站代码的 MIT 许可。原 30 张阅读图片已从网站项目移除。
 - wanwu-tour-emblem.jpg、wanwu-tour-wordmark.jpg：巡演标志与主题字样。

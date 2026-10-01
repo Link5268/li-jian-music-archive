@@ -336,10 +336,18 @@
 
     .notebook-opening { display: grid; grid-template-columns: minmax(0,1fr) minmax(180px,280px); gap: clamp(28px,6vw,90px); align-items: start; margin-bottom: 38px; }
     .notebook-opening .section-intro { margin-top: 0; }
+    .notebook-desk { width: min(66%,240px); margin: 28px 0 0; }
+    .notebook-desk img { width: 100%; height: auto; }
+    .notebook-desk figcaption { margin-top: 10px; color: #68757b; font: 12px/1.6 var(--serif); }
     .notebook-portrait { margin: -20px 0 0; }
     .notebook-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; object-position: center 22%; }
     .notebook-portrait figcaption { margin-top: 10px; color: #68757b; font: 12px/1.6 var(--serif); }
     .moments-intro { max-width: 650px; margin: -32px 0 60px; color: #52616d; font: 300 17px/1.9 var(--serif); }
+    .moments-opening { display: grid; grid-template-columns: minmax(0,1fr) 150px; gap: 36px; align-items: center; margin: -28px 0 48px; }
+    .moments-opening .moments-intro { margin: 0; }
+    .moments-prelude { margin: 0; }
+    .moments-prelude img { width: 100%; height: auto; }
+    .moments-prelude figcaption { margin-top: 10px; color: #68757b; font: 12px/1.6 var(--serif); }
     .moments-head-actions { display: grid; justify-items: end; gap: 12px; flex: 0 0 auto; }
     .moments-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 42px; padding: 8px 14px; border: 1px solid rgba(16,28,44,.28); color: #344653; background: transparent; cursor: pointer; font: 13px/1.4 var(--sans); letter-spacing: .06em; transition: color .2s ease, background .2s ease, border-color .2s ease; }
     .moments-toggle::after { content: "−"; color: #a88c59; font: 18px/1 var(--serif); }
@@ -366,7 +374,13 @@
     .words-floral { position: absolute; top: 110px; right: max(-35px,-2.5vw); width: min(33vw,410px); height: auto; opacity: .25; mix-blend-mode: screen; pointer-events: none; }
     .words-section > :not(.words-floral) { position: relative; z-index: 1; }
     .words-section .section-kicker { color: #d0bd91; }
-    .words-section h2 { margin: 16px 0 38px; font: 400 clamp(36px,6vw,74px)/1 var(--serif); }
+    .words-section h2 { margin: 16px 0 38px; color: var(--white); font: 400 clamp(36px,6vw,74px)/1 var(--serif); }
+    .words-opening { width: min(100%,1120px); display: grid; grid-template-columns: minmax(160px,230px) minmax(0,1fr); gap: clamp(32px,5vw,70px); align-items: center; text-align: left; }
+    .words-portrait { margin: 0; }
+    .words-portrait img { width: 100%; height: auto; }
+    .words-portrait figcaption { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(213,196,154,.25); color: #aab9bd; font: 12px/1.6 var(--serif); }
+    .words-opening-copy { min-width: 0; }
+    .words-opening .word-card { text-wrap: balance; }
     .word-card { max-width: 780px; min-height: 106px; margin: 0; color: #f2eee3; font: 300 clamp(21px,3vw,34px)/1.65 var(--serif); letter-spacing: .04em; }
     .word-author { margin: 21px 0 35px; color: #aab9bd; font-size: 12px; letter-spacing: .22em; }
     .word-next { padding: 12px 2px; color: #d5c49a; border: 0; border-bottom: 1px solid rgba(213,196,154,.6); background: transparent; cursor: pointer; font-size: 12px; letter-spacing: .16em; }
@@ -548,15 +562,19 @@
       .stage-visuals .stage-visual-wide img { aspect-ratio: 16/9; object-fit: cover; }
       .stage-visuals .stage-visual-portrait { width: min(62%,280px); margin-left: auto; }
       .stage-visuals .stage-visual-portrait img { aspect-ratio: 4/5; object-fit: cover; }
-      .notebook-opening { grid-template-columns: 1fr; margin-bottom: 30px; }
+      .notebook-opening { grid-template-columns: minmax(0,1fr) minmax(100px,.65fr); gap: 20px; margin-bottom: 30px; }
       .notebook-portrait { max-width: 235px; margin: 0; }
+      .notebook-desk { width: min(100%,200px); margin-top: 20px; }
       .moments-intro { margin: -16px 0 35px; }
+      .moments-opening { grid-template-columns: minmax(0,1fr) 96px; gap: 22px; margin: -12px 0 36px; }
       .moments-head-actions { gap: 8px; }
       .moments-toggle { min-height: 38px; padding: 6px 10px; font-size: 12px; }
       .moments-grid { grid-template-columns: 1fr; gap: 33px; }
       .moment:nth-child(n) { margin-top: 0; }
       .moment img { max-height: 78vh; object-fit: contain; object-position: left center; }
       .words-section { min-height: 62vh; }
+      .words-opening { grid-template-columns: 1fr; gap: 30px; }
+      .words-portrait { width: min(48%,180px); }
       .words-floral { top: 80px; right: -35px; width: min(59vw,300px); opacity: .15; }
       .writings-reader { padding: 18px; }
       .writings-heading { align-items: start; flex-direction: column; gap: 6px; }
@@ -1171,7 +1189,13 @@
 <section class="archive-section section-paper" id="notebook" aria-labelledby="notebook-title">
 <div class="section-head"><div><span class="section-kicker">READING ROOM / BIOGRAPHICAL NOTES</span><h2 id="notebook-title">人物札记</h2></div><span class="section-index">18 则有出处的侧记</span></div>
 <div class="notebook-opening">
+  <div class="notebook-lead">
   <p class="section-intro">从学琴、阅读到一首歌的诞生。这里收录公开访谈和机构记录中的细节。</p>
+  <figure class="notebook-desk reveal">
+    <img src="assets/archive-desk-moment.webp" alt="李健身着白衣坐在桌前，手边放着电脑与茶杯" width="720" height="1080" loading="lazy" decoding="async">
+    <figcaption>日常 / 片刻停留</figcaption>
+  </figure>
+  </div>
   <figure class="notebook-portrait reveal">
     <img src="assets/lijian-portrait-glasses-user.jpg" alt="李健戴眼镜的肖像" width="1352" height="1800" loading="lazy" decoding="async">
   </figure>
@@ -1186,7 +1210,13 @@
           <button class="moments-toggle" id="moments-toggle" type="button" aria-expanded="true" aria-controls="moments-gallery">收起照片</button>
         </div>
       </div>
-      <p class="moments-intro">从武汉到合肥，依照巡演场次收藏每一站的现场瞬间。</p>
+      <div class="moments-opening">
+        <p class="moments-intro">从武汉到合肥，依照巡演场次收藏每一站的现场瞬间。</p>
+        <figure class="moments-prelude reveal">
+          <img src="assets/archive-blue-confetti.webp" alt="李健在蓝色灯光与飘落的纸片间演唱" width="960" height="1440" loading="lazy" decoding="async">
+          <figcaption>现场选帧 / 光与回声</figcaption>
+        </figure>
+      </div>
       <div class="moments-gallery" id="moments-gallery">
       <div class="moments-year">
         <div class="moments-year-heading"><h3>2023</h3><span>04 STOPS / 2023 年巡演</span></div>
@@ -1312,12 +1342,20 @@
 
     <section class="archive-section words-section" id="words" aria-labelledby="words-title">
       <img class="words-floral" src="assets/archive-mountain-linework.webp" alt="" aria-hidden="true" width="3920" height="4405" loading="lazy" decoding="async">
+      <div class="words-opening">
+      <figure class="words-portrait reveal">
+        <img src="assets/archive-seated-song.webp" alt="李健身着黑衣坐在舞台上，闭眼握着话筒演唱" width="1000" height="1500" loading="lazy" decoding="async">
+        <figcaption>声音的片刻 / 舞台侧记</figcaption>
+      </figure>
+      <div class="words-opening-copy">
       <span class="section-kicker">08 / WORDS · ORIGINAL NOTES</span>
       <h2 id="words-title">短笺</h2>
       <p class="word-card" id="word-card" aria-live="polite">远行的人会记得，某个夜晚有一段声音陪他回家。</p>
       <p class="word-author">LISTENING NOTES · 档案馆原创文字</p>
       <button class="word-next" id="word-next" type="button">换一则短笺&nbsp; ↗</button>
       <p class="words-note">这里收录的是原创听后感，不摘录歌曲歌词。你也可以把自己的演出记录与聆听记忆整理进来。</p>
+      </div>
+      </div>
       <div class="writings-reader" id="writings-reader" aria-labelledby="writings-title">
         <div class="writings-heading"><div><span class="section-kicker">READING ROOM / 李健的文字</span><h3 id="writings-title">文字，也值得读一读</h3></div><span>书籍 · 音乐 · 影像</span></div>
         <p class="writings-intro">李健为书籍、影视与音乐所写的文字，按主题整理为四卷。</p>
@@ -1372,7 +1410,7 @@
       </details>
       <div class="archive-credits">
         <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
-        <p><strong>用户提供照片与视觉</strong><br>序章人物图、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；本次新增的舞台全景、RAW 现场照、蓝色肖像视觉、西安肖像、行走舞台照及山中行线稿亦由网站创建者提供。序章使用透明背景版本，影像按提供的 01—26 编号与巡演场次对应；新增视觉另置于相关章节。</p>
+        <p><strong>用户提供照片与视觉</strong><br>序章人物图、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；本次新增的舞台全景、RAW 现场照、蓝色肖像视觉、西安肖像、行走舞台照及山中行线稿亦由网站创建者提供；另选用创建者提供的蓝色纸片现场照、黑衣坐姿演唱照和白衣桌前照，分别作为影像引页、短笺与人物札记的配图，保留原有标记，不推断场次。序章使用透明背景版本，影像按提供的 01—26 编号与巡演场次对应；新增视觉另置于相关章节。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>

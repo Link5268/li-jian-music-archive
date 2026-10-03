@@ -150,7 +150,7 @@
     summary.append(date, title, total);
     const body = make("div", "fan-performance-body");
     if (item.detail) body.append(make("p", "fan-performance-place", item.detail));
-    if (item.songFlags) body.append(make("p", "fan-song-legend", "原表标记：变更＝与上一场曲目不同；本轮仅有＝仅见于本轮；首唱＝原表加粗标记。"));
+    if (item.songFlags) body.append(make("p", "fan-song-legend", item.songFlagLegend || "原表标记：变更＝与上一场曲目不同；本轮仅有＝仅见于本轮；首唱＝原表加粗标记。"));
     const songs = make("ol");
     item.songs.forEach((song, index) => {
       const row = make("li");

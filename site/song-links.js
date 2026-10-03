@@ -19,6 +19,7 @@
       .replace(/^[^·]{1,24} · /, "")
       .replace(/[《》]/g, "")
       .replace(/（&[^）]*）/g, "")
+      .replace(/（(?:变更|本轮仅有|cover\s*[^）]*)）/gi, "")
       .replace(/\s+/g, " ")
       .trim();
   }

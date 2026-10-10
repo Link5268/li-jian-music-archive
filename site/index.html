@@ -109,12 +109,8 @@
     .section-night .section-intro { color: #c7d0d0; }
 
     .about-grid { display: grid; grid-template-columns: minmax(250px,.86fr) minmax(320px,1.14fr); gap: clamp(36px,8vw,128px); align-items: start; }
-    .about-photo-stack { display: grid; gap: clamp(30px,4vw,54px); }
     .about-photo { margin: 0; }
     .about-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: 100% 45%; background: #d3d0c8; }
-    .about-editorial { width: min(71%,310px); margin: 0 0 0 auto; }
-    .about-editorial img { width: 100%; height: auto; border: 1px solid rgba(16,28,44,.12); }
-    .about-editorial figcaption { margin-top: 10px; color: #65717a; font: 12px/1.6 var(--serif); text-align: right; }
     .about-photo figcaption, .moment figcaption { margin-top: 13px; color: #5f6b70; font-size: 12px; line-height: 1.7; }
     .about-copy h3 { margin: 0 0 20px; font: 400 clamp(25px,3vw,38px)/1.3 var(--serif); }
     .about-copy > p { margin: 0 0 31px; color: #4e5d67; font: 300 17px/2 var(--serif); }
@@ -503,9 +499,7 @@
       .section-head h2 { font-size: clamp(34px,10vw,50px); }
       .section-index { font-size: 12px; }
       .about-grid,.music-layout,.tour-layout { grid-template-columns: 1fr; gap: 34px; }
-      .about-photo-stack { grid-template-columns: 1.15fr .85fr; gap: 12px; align-items: end; }
-      .about-photo { max-width: none; }
-      .about-editorial { width: 100%; }
+      .about-photo { width: 100%; max-width: 380px; }
       .about-copy h3 { font-size: 27px; }
       .life-timeline li { grid-template-columns: 56px 1fr; gap: 13px; }
       .vinyl-frame { width: min(76vw,340px); }
@@ -770,15 +764,9 @@
         <span class="section-index">哈尔滨 → 远方</span>
       </div>
       <div class="about-grid">
-        <div class="about-photo-stack">
         <figure class="about-photo reveal">
           <img src="assets/lijian-about-close.jpg" alt="李健面部近景肖像" width="1278" height="960" loading="lazy">
         </figure>
-        <figure class="about-editorial reveal">
-          <img src="assets/archive-blue-portrait.webp" alt="蓝色舞台肖像与 LI JIAN 字样组成的视觉作品" width="1200" height="1800" loading="lazy" decoding="async">
-          <figcaption>舞台肖像 / BLUE STUDY</figcaption>
-        </figure>
-        </div>
         <div class="about-copy reveal">
           <span class="section-kicker">LI JIAN · SINGER / SONGWRITER</span>
           <h3>从校园民谣出发，<br>把歌写成一段段旅程。</h3>
@@ -1405,7 +1393,7 @@
       </details>
       <div class="archive-credits">
         <p><strong>巡演主题视觉</strong><br>「不止，是李健」「看见李健」「向往」「万物安生时」四张图片由网站创建者提供。图像处理版本用于主题切换展示；《向往》图源自 2022 年线上音乐会，不作为 2011 年巡演原始海报的证明。</p>
-        <p><strong>用户提供照片与视觉</strong><br>序章人物图、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；本次新增的舞台全景、蓝色肖像视觉、西安肖像、行走舞台照及山中行线稿亦由网站创建者提供；另选用创建者提供的蓝色纸片现场照、黑衣坐姿演唱照和白衣桌前照，分别作为影像引页、短笺与人物札记的配图，保留原有标记，不推断场次。序章使用透明背景版本，影像按提供的 01—26 编号与巡演场次对应；新增视觉另置于相关章节。</p>
+        <p><strong>用户提供照片与视觉</strong><br>序章人物图、人物页肖像、人物札记肖像、巡演标识与「万物安生时」前 26 场现场照片均由网站创建者提供；本次新增的舞台全景、西安肖像、行走舞台照及山中行线稿亦由网站创建者提供；另选用创建者提供的蓝色纸片现场照、黑衣坐姿演唱照和白衣桌前照，分别作为影像引页、短笺与人物札记的配图，保留原有标记，不推断场次。序章使用透明背景版本，影像按提供的 01—26 编号与巡演场次对应；新增视觉另置于相关章节。</p>
         <p><strong>黑胶静物照片</strong><br>Mink Mingle · Wikimedia Commons · CC0 1.0。仅作唱片视觉意象，不表示照片中的设备或唱片属于李健。</p>
         <p><strong>背景音乐</strong><br>李健《一切刚刚好》由网站创建者提供，仅在访客主动点击后循环播放；网页使用压缩音频版本，原始文件保存在项目资料中。录音不属于本站代码的 MIT 许可范围。</p>
         <p><strong>维基百科资料</strong><br>生平、作品、单曲、合作、综艺、奖项与历史巡演按中文维基百科相关条目整理，查阅日期：2026.09.24。条目提示部分内容仍需校对，本页保留原条目链接以便核查；「万物安生时」2023—2026 场次以网站创建者提供的清单为准。基于维基百科文字整理的内容依 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> 标注来源。</p>

@@ -1,0 +1,435 @@
+/* ============================================================
+   V11 Stage model / tour archive feature
+   ============================================================ */
+
+.stage-model-feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  margin: 26px 0 clamp(38px, 5vw, 64px);
+  overflow: hidden;
+  color: var(--white);
+  background:
+    radial-gradient(ellipse at 18% 20%, rgba(64, 154, 189, 0.13), transparent 40%),
+    linear-gradient(135deg, #0c1724 0%, #101c2c 48%, #08121d 100%);
+  border: 1px solid rgba(185, 154, 100, 0.28);
+  box-shadow: 0 28px 64px rgba(16, 28, 44, 0.16);
+}
+
+.stage-model-feature::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 116px;
+  height: 1px;
+  background: linear-gradient(90deg, #d5c49a, transparent);
+}
+
+.stage-model-media {
+  position: relative;
+  min-height: 470px;
+  margin: 0;
+  overflow: hidden;
+  background: #050b12;
+}
+
+.stage-model-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 72%, rgba(10, 20, 32, 0.5) 100%),
+    linear-gradient(0deg, rgba(5, 11, 18, 0.82) 0%, transparent 34%);
+}
+
+.stage-model-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 470px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: saturate(0.94) contrast(1.02);
+  transition: transform 0.9s cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+.stage-model-feature:hover .stage-model-media img {
+  transform: scale(1.018);
+}
+
+.stage-model-media figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 22px;
+  bottom: 18px;
+  left: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(201, 222, 230, 0.62);
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.stage-model-media figcaption span:last-child {
+  color: rgba(213, 196, 154, 0.7);
+  text-align: right;
+}
+
+.stage-model-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 58px);
+}
+
+.stage-model-copy .section-kicker {
+  color: #c7b68c;
+}
+
+.stage-model-copy h3 {
+  max-width: 430px;
+  margin: 17px 0 19px;
+  color: #f4f1ea;
+  font: 400 clamp(35px, 4.2vw, 60px) / 1.04 var(--serif);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.stage-model-copy > p {
+  max-width: 460px;
+  margin: 0;
+  color: rgba(225, 233, 233, 0.7);
+  font: 300 14px / 1.95 var(--serif);
+  letter-spacing: 0.02em;
+}
+
+.stage-model-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px 34px;
+  margin: 26px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid rgba(213, 196, 154, 0.17);
+}
+
+.stage-model-metrics span {
+  display: grid;
+  gap: 4px;
+  color: rgba(195, 208, 210, 0.64);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.stage-model-metrics strong {
+  color: #f4f1ea;
+  font: 400 28px / 1 var(--serif);
+  letter-spacing: 0;
+}
+
+.stage-model-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 13px 21px;
+  margin-top: 27px;
+}
+
+.stage-model-launch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 0 22px;
+  color: #0c1724;
+  background: #d5c49a;
+  border: 1px solid #d5c49a;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.25s, background 0.25s, border-color 0.25s;
+}
+
+.stage-model-launch span {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.stage-model-launch:hover {
+  background: #e5c995;
+  border-color: #e5c995;
+}
+
+.stage-model-launch:hover span {
+  transform: translate(2px, -2px);
+}
+
+.stage-model-newtab {
+  color: #d5c49a;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-underline-offset: 4px;
+}
+
+.stage-model-newtab:hover {
+  color: #f0ddb6;
+}
+
+.stage-model-note {
+  margin: 17px 0 0 !important;
+  color: rgba(183, 194, 194, 0.46) !important;
+  font: 10px / 1.7 var(--sans) !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* ------------------------------------------------------------
+   Fullscreen 3D layer
+   ------------------------------------------------------------ */
+
+.stage-model-dialog[hidden] {
+  display: none;
+}
+
+.stage-model-dialog {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  background: #03080d;
+}
+
+.stage-model-dialog-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #03080d;
+}
+
+.stage-model-dialog-bar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex: 0 0 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 18px 0 22px;
+  color: #e8f2fa;
+  background: linear-gradient(180deg, #0b1723, #07111a);
+  border-bottom: 1px solid rgba(100, 228, 255, 0.14);
+}
+
+.stage-model-dialog-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stage-model-dialog-title b {
+  color: #64e4ff;
+  font-family: "Bahnschrift", "Aptos", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.stage-model-dialog-title span {
+  overflow: hidden;
+  color: rgba(209, 226, 237, 0.58);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stage-model-dialog-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.stage-model-dialog-actions a,
+.stage-model-dialog-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 0 11px;
+  color: rgba(209, 226, 237, 0.74);
+  background: transparent;
+  border: 1px solid rgba(139, 189, 216, 0.16);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.stage-model-dialog-actions a:hover,
+.stage-model-dialog-actions button:hover {
+  color: #e8f2fa;
+  border-color: rgba(100, 228, 255, 0.38);
+  background: rgba(100, 228, 255, 0.06);
+}
+
+.stage-model-dialog-actions kbd {
+  padding: 1px 4px;
+  color: rgba(209, 226, 237, 0.5);
+  border: 1px solid rgba(139, 189, 216, 0.2);
+  font: 8px/1.5 var(--sans);
+}
+
+.stage-model-dialog-body {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #03080d;
+}
+
+.stage-model-dialog-body iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #03080d;
+}
+
+.stage-model-dialog-loading {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  color: rgba(188, 214, 227, 0.7);
+  background: #03080d;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.stage-model-dialog-loading.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.stage-model-dialog-loading i {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(100, 228, 255, 0.16);
+  border-top-color: #64e4ff;
+  border-radius: 50%;
+  animation: stage-model-spin 1s linear infinite;
+}
+
+@keyframes stage-model-spin {
+  to { transform: rotate(360deg); }
+}
+
+body.stage-model-open {
+  overflow: hidden;
+}
+
+body.stage-model-open .music-dock {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .stage-model-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-model-media {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .stage-model-media img {
+    min-height: 0;
+  }
+
+  .stage-model-copy {
+    padding: 28px 24px 32px;
+  }
+
+  .stage-model-copy h3 {
+    margin-top: 13px;
+    font-size: clamp(32px, 9vw, 44px);
+  }
+
+  .stage-model-dialog-bar {
+    flex-basis: 50px;
+    padding: 0 10px 0 13px;
+  }
+
+  .stage-model-dialog-title {
+    gap: 8px;
+  }
+
+  .stage-model-dialog-title span {
+    max-width: 150px;
+  }
+
+  .stage-model-dialog-actions a {
+    display: none;
+  }
+
+  .stage-model-dialog-actions kbd {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .stage-model-media figcaption {
+    right: 14px;
+    bottom: 12px;
+    left: 14px;
+    font-size: 7px;
+  }
+
+  .stage-model-copy h3 {
+    font-size: clamp(30px, 10vw, 38px);
+  }
+
+  .stage-model-metrics {
+    gap: 18px 26px;
+  }
+
+  .stage-model-metrics strong {
+    font-size: 24px;
+  }
+
+  .stage-model-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .stage-model-launch {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-model-media img,
+  .stage-model-launch,
+  .stage-model-launch span {
+    transition: none;
+  }
+}

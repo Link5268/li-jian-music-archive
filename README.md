@@ -8,6 +8,7 @@
 - 专辑曲目、单曲、合作作品、节目与荣誉记录
 - 粉丝整理的演出歌单与歌曲用于影视、舞台、机构项目的记录，可按类型和关键词检索
 - 四张巡演主题视觉、城市地图、场次筛选、同城多场及歌单
+- 巡演页「V11 不锈钢舞台」实时 3D 拆解模型：461 个构件、9 个装配层级，可点击部件查看名称、数量、材料与装配参数
 - 「万物安生时」前 26 场按场次排序的摄影档案
 - 分散于人物、音乐、时间、台前和文字章节的用户提供影像与线稿点缀；独立于 26 场摄影档案
 - 「文字」栏目收录李健为书籍、影视与音乐所写的文字，支持主题跳转、正文搜索与按篇展开阅读
@@ -26,6 +27,13 @@ site/
   writings-reader.js         # 文字阅读室的分类、搜索与展开阅读
   content/li-jian-writings.md # 水流润万生老师整理的分类转录文字
   guestbook.js               # 留言功能
+  stage-model.css            # 巡演页 3D 舞台卡片与全屏查看器样式
+  stage-model.js             # 3D 舞台全屏入口、键盘关闭与焦点管理
+  stage-model/               # V11 不锈钢舞台 Three.js 查看器（静态子页面）
+    index.html
+    js/                      # 场景、拆解、标注与参数数据
+    vendor/                  # 本地 Three.js r180
+    assets/stage-v11.glb     # 实际总装模型
   assets/                    # 网页用的压缩图片、MP3、地图与许可证
     fan-music-data.js        # 水流润万生老师提供的数据整理结果
 .github/workflows/pages.yml  # GitHub Pages 发布
@@ -73,6 +81,18 @@ https://YOUR_USERNAME.github.io/li-jian-music-archive/
 官方说明：https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
 
 此项目使用相对资源路径，适用于上述子目录网址。网站无需原 Sites 平台配置；本包未包含 .git 历史、.openai 配置或访问凭据。
+
+## 舞台模型 / 3D 拆解
+
+巡演页在巡演主视觉与城市地图之间加入「V11 不锈钢舞台」卡片：
+
+- 卡片只在进入视口时加载封面；点击「进入 3D 拆解」后才载入 iframe，避免影响首屏。
+- 3D 查看器位于 `site/stage-model/`，包含 461 个构件、9 个装配层级、45 种加工件与 325 件紧固件参数。
+- 支持轨道旋转、缩放、点击部件拆解、全量爆炸、零件检索、发光标注与移动端适配。
+- 也可直接打开 `https://link5268.github.io/li-jian-music-archive/stage-model/`。
+- 更新模型时替换 `site/stage-model/assets/stage-v11.glb`；部件说明在 `site/stage-model/js/data.js`。
+
+3D 查看器不需要构建步骤，GitHub Pages 工作流会随 `site/` 一并发布；新增资源约 7.9 MB。
 
 ## 修改内容
 

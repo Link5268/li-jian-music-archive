@@ -669,6 +669,7 @@
   }
 }
 </style>
+  <link rel="stylesheet" href="stage-model.css?v=20261023-1">
 </head>
 <body>
 <div class="music-dock">
@@ -976,6 +977,27 @@
           <a class="tour-poster-link" href="#tour-map">查看城市与场次 ↓</a>
         </div>
       </div>
+      <article class="stage-model-feature reveal" id="stage-model" aria-labelledby="stage-model-title">
+        <figure class="stage-model-media">
+          <img src="assets/stage-v11-poster.webp" alt="V11 不锈钢舞台三维模型总装渲染，带装配层标注" width="1200" height="900" loading="lazy" decoding="async">
+          <figcaption><span>THREE.JS / REAL-TIME</span><span>304 STAINLESS · 461 PARTS</span></figcaption>
+        </figure>
+        <div class="stage-model-copy">
+          <span class="section-kicker">STAGE MODEL / 数字舞台</span>
+          <h3 id="stage-model-title">把一座舞台，拆开来看</h3>
+          <p>以 V11 不锈钢舞台总装模型为底稿的实时 3D 档案。461 个构件按装配层级展开，从底座、边缘立柱与顶部骨架，一路看到八块双面屏和中央圆屏。</p>
+          <div class="stage-model-metrics" aria-label="模型数据">
+            <span><strong>461</strong>构件总数</span>
+            <span><strong>9</strong>装配层级</span>
+            <span><strong>55</strong>零件类型</span>
+          </div>
+          <div class="stage-model-actions">
+            <button class="stage-model-launch" type="button" data-stage-model-open>进入 3D 拆解 <span>↗</span></button>
+            <a class="stage-model-newtab" href="stage-model/" target="_blank" rel="noopener noreferrer">新窗口打开 ↗</a>
+          </div>
+          <p class="stage-model-note">拖动旋转 · 滚轮缩放 · 点击任意构件查看名称、数量、材料与装配参数</p>
+        </div>
+      </article>
       <div class="tour-layout">
         <figure class="map-card reveal">
           <div class="map-stage" id="tour-map" aria-label="巡演城市地图，按城市中心标记">
@@ -1410,6 +1432,27 @@
   <span>非官方网站 · Fan-made archive · <a href="#home">回到首页 ↑</a></span>
   <span>联系邮箱：<a href="mailto:hhj5268@outlook.com">hhj5268@outlook.com</a></span>
 </footer>
+
+<div class="stage-model-dialog" id="stage-model-dialog" hidden aria-hidden="true">
+  <div class="stage-model-dialog-shell" role="dialog" aria-modal="true" aria-labelledby="stage-model-dialog-title">
+    <div class="stage-model-dialog-bar">
+      <div class="stage-model-dialog-title" id="stage-model-dialog-title">
+        <b>V11</b><span>不锈钢舞台 · 实时拆解档案</span>
+      </div>
+      <div class="stage-model-dialog-actions">
+        <a id="stage-model-new-window" href="stage-model/" target="_blank" rel="noopener noreferrer">新窗口打开 ↗</a>
+        <button id="stage-model-close" type="button" aria-label="关闭 3D 舞台模型">关闭 <kbd>Esc</kbd></button>
+      </div>
+    </div>
+    <div class="stage-model-dialog-body">
+      <div class="stage-model-dialog-loading" id="stage-model-loading">
+        <i aria-hidden="true"></i>
+        <span>正在载入 461 个构件</span>
+      </div>
+      <iframe id="stage-model-frame" title="V11 不锈钢舞台 3D 拆解" data-src="stage-model/" loading="lazy" allow="fullscreen; autoplay"></iframe>
+    </div>
+  </div>
+</div>
   <script src="assets/fan-music-data.js"></script>
   <script>
     document.documentElement.classList.add("js");
@@ -2158,6 +2201,7 @@ movingWord.style.color = `rgb(${fromColor.map((value, index) => Math.round(value
 <script src="song-links.js" defer></script>
 <script src="writings-reader.js?v=20260925-2" defer></script>
 <script src="guestbook.js?v=20260925-4" defer></script>
+<script src="stage-model.js?v=20261023-1" defer></script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"d9b406f1c57349b495964bd02b894041"}'></script>
 <!-- End Cloudflare Web Analytics -->

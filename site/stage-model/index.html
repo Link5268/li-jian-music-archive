@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#050a10" />
+  <meta name="description" content="V11 不锈钢舞台 · Three.js 交互式数字拆解系统" />
+  <title>V11 STAGE / 不锈钢舞台数字拆解</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23050b12%27/%3E%3Cpath d=%27M8 8h48v36L44 56H8z%27 fill=%27none%27 stroke=%27%2364e4ff%27 stroke-opacity=%27.65%27/%3E%3Ctext x=%2732%27 y=%2740%27 text-anchor=%27middle%27 fill=%27%2364e4ff%27 font-family=%27Arial,sans-serif%27 font-size=%2720%27%3EV11%3C/text%3E%3C/svg%3E" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.js",
+        "three/addons/": "./vendor/addons/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main id="app" class="app">
+    <div class="backdrop" aria-hidden="true">
+      <div class="backdrop-core"></div>
+      <div class="backdrop-grid"></div>
+      <div class="backdrop-haze"></div>
+      <div class="backdrop-noise"></div>
+    </div>
+
+    <canvas id="viewport" aria-label="V11 不锈钢舞台三维模型"></canvas>
+
+    <div class="frame-corners" aria-hidden="true">
+      <i class="fc tl"></i><i class="fc tr"></i><i class="fc bl"></i><i class="fc br"></i>
+    </div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">
+          <span class="brand-mark-line"></span>
+          <span class="brand-mark-text">V11</span>
+        </div>
+        <div class="brand-copy">
+          <h1>STAGE<span>/</span>SYSTEM</h1>
+          <p>不锈钢舞台 · 数字拆解档案</p>
+        </div>
+      </div>
+
+      <div class="top-telemetry" aria-hidden="true">
+        <div class="telemetry-item"><span>SPAN</span><b>241.82</b><i>mm</i></div>
+        <div class="telemetry-divider"></div>
+        <div class="telemetry-item"><span>HEIGHT</span><b>142.60</b><i>mm</i></div>
+        <div class="telemetry-divider"></div>
+        <div class="telemetry-item"><span>PARTS</span><b id="telemetryParts">461</b><i>pcs</i></div>
+        <div class="live-dot"><span></span>LIVE MODEL</div>
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-btn is-active" id="btnLabels" type="button" aria-label="显示或隐藏部件标注" title="标注 (L)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h10.5M4 12h7M4 17.5h5M15 13.5l3 2-3 2M18.5 5.5h1.5v5M15.5 9.5h6" /></svg>
+        </button>
+        <button class="icon-btn" id="btnParts" type="button" aria-label="打开部件清单" title="部件清单">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14M5 12h14M5 18.5h14M2.5 5.5h.01M2.5 12h.01M2.5 18.5h.01" /></svg>
+        </button>
+        <button class="icon-btn" id="btnHelp" type="button" aria-label="打开操作指南" title="操作指南">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.1a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1.1.9-1.1 1.8M12 17h.01"/></svg>
+        </button>
+        <button class="icon-btn" id="btnFullscreen" type="button" aria-label="切换全屏" title="全屏">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 3.5h-5v5M15.5 3.5h5v5M20.5 15.5v5h-5M3.5 15.5v5h5"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <aside class="side-panel parts-panel" id="partsPanel" aria-label="部件清单面板">
+      <div class="panel-head">
+        <div class="eyebrow">
+          <span>ASSEMBLY / INDEX</span>
+          <span class="rule"></span>
+          <b>09</b>
+        </div>
+        <div class="view-tabs" role="tablist" aria-label="清单视图">
+          <button class="view-tab is-active" id="tabGroups" type="button" role="tab" aria-selected="true">装配分层</button>
+          <button class="view-tab" id="tabParts" type="button" role="tab" aria-selected="false">零件清单<em>55</em></button>
+        </div>
+        <button class="panel-close" id="partsClose" type="button" aria-label="关闭部件清单">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="panel-body">
+        <section class="view-pane is-active" id="groupsPane" role="tabpanel">
+          <div class="groups-list" id="groupsList"></div>
+          <div class="panel-callout">
+            <span class="callout-index">A–Z</span>
+            <p>选择任一装配层，触发该层的拆解路径。再次点击三维构件可查看单件参数。</p>
+          </div>
+        </section>
+
+        <section class="view-pane" id="partsPane" role="tabpanel" hidden>
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></svg>
+            <input id="partSearch" type="search" placeholder="搜索编号 / 名称 / 规格" autocomplete="off" spellcheck="false" />
+            <kbd>/</kbd>
+          </div>
+          <div class="filter-row" id="filterRow"></div>
+          <div class="parts-list" id="partsList"></div>
+        </section>
+      </div>
+
+      <div class="panel-foot">
+        <div class="guide-mini">
+          <span><i>01</i>拖拽旋转</span>
+          <span><i>02</i>滚轮缩放</span>
+          <span><i>03</i>点击拆解</span>
+        </div>
+        <button class="text-btn" id="btnGuide" type="button">完整指南 <span>↗</span></button>
+      </div>
+    </aside>
+
+    <aside class="side-panel info-panel" id="infoPanel" aria-label="部件详情面板">
+      <div class="info-topline">
+        <span id="infoEyebrow">SYSTEM / OVERVIEW</span>
+        <div class="info-top-actions">
+          <span class="status-pill" id="infoStatus"><i></i>READY</span>
+          <button class="plain-btn" id="infoClose" type="button" aria-label="关闭详情" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="info-scroll">
+        <div id="infoContent" class="info-content"></div>
+      </div>
+
+      <div class="info-actions" id="infoActions" hidden>
+        <button class="action-btn primary" id="btnFocus" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+          聚焦
+        </button>
+        <button class="action-btn" id="btnIsolate" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+          <span>隔离</span>
+        </button>
+        <button class="action-btn danger" id="btnCollapse" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v7M9 7l3 3 3-3M12 21v-7M9 17l3-3 3 3M3 12h7M7 9l3 3-3 3M21 12h-7M17 9l-3 3 3 3"/></svg>
+          复位
+        </button>
+      </div>
+    </aside>
+
+    <div class="label-layer" id="labelLayer" aria-live="polite"></div>
+    <svg class="leader-layer" id="leaderLayer" aria-hidden="true"></svg>
+
+    <div class="model-readout" aria-hidden="true">
+      <span class="readout-label">MODEL SPACE</span>
+      <span><i>Ø</i> 241.82</span>
+      <span><i>H</i> 142.60</span>
+      <span><i>U</i> mm</span>
+    </div>
+
+    <div class="bottom-dock" id="bottomDock">
+      <div class="explode-readout">
+        <span>EXPLODE</span>
+        <div class="readout-number"><b id="explodePct">00</b><i>%</i></div>
+        <div class="explode-track"><i id="explodeBar"></i></div>
+      </div>
+      <div class="dock-sep"></div>
+      <button class="dock-btn" id="btnReset" type="button" title="复位全部 (R)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 .7 6M4 4v6h6"/></svg>
+        <span>复位</span>
+      </button>
+      <button class="dock-btn explode-btn" id="btnExplode" type="button" title="全量拆解 (E)">
+        <span class="explode-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span id="explodeLabel">全量拆解</span>
+        <kbd>E</kbd>
+      </button>
+      <button class="dock-btn" id="btnAuto" type="button" title="自动巡航 (Space)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 8.5A7 7 0 0 1 19 9.5M17.9 15.5A7 7 0 0 1 5 14.5"/></svg>
+        <span>巡航</span>
+      </button>
+    </div>
+
+    <div class="toast" id="toast" role="status">
+      <span class="toast-icon"></span>
+      <span id="toastText">已载入模型</span>
+    </div>
+
+    <div class="modal" id="helpModal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="modal-head">
+          <div>
+            <span class="eyebrow">INTERACTION / MANUAL</span>
+            <h2 id="helpTitle">操作指南</h2>
+          </div>
+          <button class="modal-close" id="btnHelpClose" type="button" aria-label="关闭操作指南">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+          </button>
+        </div>
+        <div class="manual-grid">
+          <div class="manual-item">
+            <span class="manual-no">01</span>
+            <div><b>旋转视角</b><p>按住鼠标左键拖拽，围绕舞台自由环绕观察。</p></div>
+          </div>
+          <div class="manual-item">
+            <span class="manual-no">02</span>
+            <div><b>缩放 / 平移</b><p>滚轮缩放；右键拖拽平移视点。触屏双指缩放。</p></div>
+          </div>
+          <div class="manual-item">
+            <span class="manual-no">03</span>
+            <div><b>点击拆解</b><p>点击任意构件，该装配层自动展开，并显示发光轮廓。</p></div>
+          </div>
+          <div class="manual-item">
+            <span class="manual-no">04</span>
+            <div><b>查看参数</b><p>右侧面板显示名称、数量、板厚、工艺与装配定位。</p></div>
+          </div>
+          <div class="manual-item">
+            <span class="manual-no">05</span>
+            <div><b>零件检索</b><p>在左侧「零件清单」中按编号或名称搜索 55 种零件。</p></div>
+          </div>
+          <div class="manual-item">
+            <span class="manual-no">06</span>
+            <div><b>全量爆炸</b><p>点击「全量拆解」展开全部 9 个装配层，观察装配关系。</p></div>
+          </div>
+        </div>
+        <div class="shortcut-row">
+          <span><kbd>R</kbd> 复位</span>
+          <span><kbd>E</kbd> 全量拆解</span>
+          <span><kbd>L</kbd> 标注</span>
+          <span><kbd>Space</kbd> 巡航</span>
+          <span><kbd>Esc</kbd> 取消选择</span>
+        </div>
+        <div class="modal-note">
+          模型基于 V11 不锈钢总装 GLB 原样加载，尺寸单位毫米。螺纹采用名义包络，实物加工前需复核紧固件与接口小样。
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-grid" aria-hidden="true"></div>
+      <div class="loader">
+        <div class="loader-kicker"><span></span>DIGITAL ASSEMBLY / V11</div>
+        <div class="loader-mark">V11</div>
+        <div class="loader-title">STAINLESS STAGE</div>
+        <div class="loader-sub">正在解算 461 个构件</div>
+        <div class="loader-track"><i id="loadBar"></i></div>
+        <div class="loader-meta">
+          <span id="loadPct">00%</span>
+          <span id="loadStatus">LOADING MODEL / GLB</span>
+        </div>
+      </div>
+      <div class="loader-footer">
+        <span>THREE.JS / REAL-TIME</span>
+        <span>304 STAINLESS · Ø241.82 mm</span>
+      </div>
+    </div>
+
+    <div class="mobile-bar">
+      <button id="btnMobileParts" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16"/></svg>
+        部件
+      </button>
+      <button id="btnMobileInfo" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg>
+        详情
+      </button>
+    </div>
+
+    <noscript>
+      <div class="noscript">此页面需要启用 JavaScript 与 WebGL。</div>
+    </noscript>
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

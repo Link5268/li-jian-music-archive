@@ -90,6 +90,7 @@ https://YOUR_USERNAME.github.io/li-jian-music-archive/
 - 卡片只在进入视口时加载封面；点击「进入 3D 拆解」后才载入 iframe，避免影响首屏。
 - 3D 查看器位于 `site/stage-model/`，包含 461 个构件、9 个装配层级、45 种加工件与 325 件紧固件参数。
 - 支持轨道旋转、缩放、点击部件拆解、全量爆炸、零件检索、发光标注与移动端适配。
+- 在巡演页 iframe 中使用 `stage-model/?embed=1`：隐藏查看器自身的品牌顶栏，由档案馆弹窗提供唯一顶栏；「完整界面」会打开不带 embed 参数的全功能版本。
 - 也可直接打开 `https://link5268.github.io/li-jian-music-archive/stage-model/`。
 - 更新模型时替换 `site/stage-model/assets/stage-v11.glb`；部件说明在 `site/stage-model/js/data.js`。
 

@@ -2472,3 +2472,30 @@ kbd {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ------------------------------------------------------------
+   Embedded in the archive: parent dialog owns the top chrome
+   ------------------------------------------------------------ */
+
+html.embed-mode .topbar {
+  display: none;
+}
+
+@media (min-width: 921px) {
+  html.embed-mode .parts-panel {
+    top: 16px;
+    bottom: 98px;
+  }
+
+  html.embed-mode .info-panel {
+    top: 16px;
+    max-height: calc(100vh - 132px);
+  }
+}
+
+@media (max-width: 920px) {
+  html.embed-mode .frame-corners {
+    inset: 8px;
+  }
+}

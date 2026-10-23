@@ -6,7 +6,12 @@
   <meta name="theme-color" content="#050a10" />
   <meta name="description" content="V11 不锈钢舞台 · Three.js 交互式数字拆解系统" />
   <title>V11 STAGE / 不锈钢舞台数字拆解</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <script>
+    if (new URLSearchParams(window.location.search).get("embed") === "1") {
+      document.documentElement.classList.add("embed-mode");
+    }
+  </script>
+  <link rel="stylesheet" href="./styles.css?v=20261023-2" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23050b12%27/%3E%3Cpath d=%27M8 8h48v36L44 56H8z%27 fill=%27none%27 stroke=%27%2364e4ff%27 stroke-opacity=%27.65%27/%3E%3Ctext x=%2732%27 y=%2740%27 text-anchor=%27middle%27 fill=%27%2364e4ff%27 font-family=%27Arial,sans-serif%27 font-size=%2720%27%3EV11%3C/text%3E%3C/svg%3E" />
   <script type="importmap">
     {

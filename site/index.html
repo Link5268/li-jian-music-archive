@@ -636,6 +636,13 @@
       border-color: rgba(229,201,149,.65);
       background: rgba(229,201,149,.06);
     }
+    .topline nav .music-toggle[aria-busy="true"] {
+      cursor: wait;
+      opacity: .72;
+    }
+    .topline nav .music-toggle:disabled {
+      cursor: wait;
+    }
     .music-icon {
       font-size: 14px;
       line-height: 1;
@@ -2188,6 +2195,10 @@ movingWord.style.color = `rgb(${fromColor.map((value, index) => Math.round(value
 
   toggle.addEventListener("click", async () => {
     if (music.paused) {
+      toggle.disabled = true;
+      toggle.setAttribute("aria-busy", "true");
+      label.textContent = "载入中…";
+      toggle.setAttribute("aria-label", "正在载入背景音乐");
       try {
         await music.play();
         icon.textContent = "Ⅱ";
@@ -2198,6 +2209,9 @@ movingWord.style.color = `rgb(${fromColor.map((value, index) => Math.round(value
         label.textContent = "无法播放";
         toggle.setAttribute("aria-label", "背景音乐暂时无法播放");
         toggle.setAttribute("aria-pressed", "false");
+      } finally {
+        toggle.disabled = false;
+        toggle.removeAttribute("aria-busy");
       }
     } else {
       music.pause();

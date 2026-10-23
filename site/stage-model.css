@@ -344,12 +344,6 @@ body.stage-model-open {
   overflow: hidden;
 }
 
-body.stage-model-open .music-dock {
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
 @media (max-width: 900px) {
   .stage-model-feature {
     grid-template-columns: 1fr;

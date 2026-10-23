@@ -13,8 +13,7 @@
   const pageRegions = [
     document.querySelector("main"),
     document.querySelector("footer"),
-    document.querySelector(".topline"),
-    document.querySelector(".music-dock")
+    document.querySelector(".topline")
   ].filter(Boolean);
 
   function openDialog() {
